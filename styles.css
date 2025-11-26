@@ -489,11 +489,59 @@ details[open] > .job-summary::after {
   :root {
     font-size: 14px;
   }
+  
+  /* Header Fixes */
+  .header-content {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .logo {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .main-nav a {
+    margin-left: 0;
+  }
+
+  /* Hero & General Fixes */
   .hero-title {
     font-size: 2.5rem;
   }
   
-  .skills-grid {
-      grid-template-columns: 1fr; /* Stack skills on mobile */
+  .main-wrapper {
+    padding: 2rem 1rem; /* Reduce side padding to prevent overflow feeling */
+    overflow-x: hidden;
+  }
+
+  /* Grid Stacking */
+  .skills-grid, .preview-grid {
+      grid-template-columns: 1fr; /* Force single column stack */
+  }
+  
+  .preview-card {
+      width: 100%; /* Ensure card takes full width of container */
+  }
+
+  /* Contact Fixes */
+  .contact-minimal-list {
+      padding-left: 0;
+      margin-left: 0;
+      align-items: flex-start; /* Align to left */
+  }
+  
+  .contact-minimal-item {
+      width: 100%; /* Allow item to take full width if needed */
   }
 }
