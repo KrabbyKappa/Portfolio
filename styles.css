@@ -277,6 +277,11 @@ summary::-webkit-details-marker {
   display: none;
 }
 
+summary:focus, summary:active {
+    outline: none;
+    background: transparent;
+}
+
 .job-summary {
     cursor: pointer;
     outline: none;
@@ -288,6 +293,33 @@ summary::-webkit-details-marker {
     padding: var(--spacing-sm) 0;
     padding-right: 2rem; /* Make space for the absolute arrow */
     position: relative; /* Context for absolute positioning */
+    width: 100%; /* Ensure click target spans full width */
+    -webkit-tap-highlight-color: transparent; /* Remove grey tap highlight on mobile */
+}
+
+/* Move meta to new line on mobile */
+@media (max-width: 768px) {
+    .job-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 2rem; /* Keep space for arrow */
+    }
+    
+    .job-meta {
+        text-align: left;
+        margin-left: 0;
+        width: 100%;
+        margin-top: 0.25rem;
+    }
+    
+    .job-summary::after {
+        top: 1.5rem; /* Adjust arrow position for taller summary */
+        transform: none;
+    }
+    
+    details[open] > .job-summary::after {
+        transform: rotate(180deg);
+    }
 }
 
 .job-title {
@@ -521,7 +553,7 @@ details[open] > .job-summary::after {
   }
   
   .main-wrapper {
-    padding: 6rem 1rem 2rem; /* Increased top padding to 6rem to clear fixed header */
+    padding: 9rem 1rem 2rem; /* Increased top padding to 9rem to securely clear fixed header */
     overflow-x: hidden;
   }
 
