@@ -524,64 +524,119 @@ details[open] > .job-summary::after {
   font-size: 0.875rem;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== RESPONSIVE DESIGN (Mobile Optimization) ===== */
 @media (max-width: 768px) {
   :root {
-    font-size: 14px;
+    font-size: 15px; /* Slightly larger base text for readability */
   }
   
-  /* Header Fixes */
+  /* 1. Header Optimization: Save space */
+  .site-header {
+      backdrop-filter: blur(10px); /* Ensure readability */
+      background: rgba(255, 255, 255, 0.95);
+  }
+
   .header-content {
-    padding: 0.75rem 1rem;
-    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
     justify-content: center;
-    gap: 0.5rem;
   }
   
   .logo {
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
+    display: none; /* Remove name as requested to save space */
   }
 
   .main-nav {
-    display: flex;
-    gap: 0.75rem;
-    font-size: 0.9rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between; /* Spread links evenly */
+    gap: 0.25rem;
+    font-size: 0.85rem;
   }
   
   .main-nav a {
-    margin-left: 0;
+    margin: 0;
+    padding: 0.5rem 0.25rem; /* Larger touch targets */
   }
 
-  /* Hero & General Fixes */
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
+  /* 2. Main Layout: Wider cards, correct top spacing */
   .main-wrapper {
-    padding: 9rem 1rem 2rem; /* Increased top padding to 9rem to securely clear fixed header */
+    padding: 5rem 1rem 2rem; /* 5rem top is enough since logo is hidden */
+    width: 100%;
     overflow-x: hidden;
   }
 
-  /* Grid Stacking */
-  .skills-grid, .preview-grid {
-      grid-template-columns: 1fr; /* Force single column stack */
-  }
-  
-  .preview-card {
-      width: 100%; /* Ensure card takes full width of container */
+  .hero-section {
+      padding-top: 6rem; /* Adjust hero specific spacing */
   }
 
-  /* Contact Fixes */
-  .contact-minimal-list {
-      padding-left: 0;
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  /* 3. Cards (Experience/Projects): Wider, rectangular, proper alignment */
+  .experience-item, .project-card, .preview-card {
+      margin-left: -0.5rem; /* Hack to make cards visually wider on small screens */
+      margin-right: -0.5rem;
+      width: calc(100% + 1rem);
+      border-radius: 0; /* Optional: flatter look on mobile? or keep small radius */
+      padding: 1.25rem;
+  }
+
+  /* 4. Job Summary (The Clickable Header) */
+  .job-summary {
+      flex-direction: column; /* Stack vertically */
+      align-items: flex-start; /* Align everything left */
+      width: 100%;
+      padding-right: 2rem; /* Space for arrow */
+  }
+
+  .job-title {
+      font-size: 1.1rem;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+  }
+
+  .job-meta {
+      width: 100%;
+      text-align: left; /* Force Left Align */
       margin-left: 0;
-      align-items: flex-start; /* Align to left */
+      font-size: 0.9rem;
+      display: block;
+      color: var(--color-text-secondary);
+      margin-top: 0.25rem;
+  }
+
+  /* Fix the arrow position */
+  .job-summary::after {
+      top: 1rem; /* Anchor to top right near title */
+      right: 0;
+      transform: none;
+  }
+
+  /* 5. Contact Section Cleanup */
+  .contact-minimal-list {
+      margin-left: 0;
+      padding-left: 0;
+      width: 100%;
   }
   
   .contact-minimal-item {
-      width: 100%; /* Allow item to take full width if needed */
+      width: 100%;
+      justify-content: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border); /* Separators for clarity */
+  }
+  
+  .contact-minimal-item:last-child {
+      border-bottom: none;
+  }
+
+  .contact-icon-small {
+      flex-shrink: 0; /* Prevent squishing */
+      margin-right: 0.75rem;
+  }
+
+  /* 6. Global Grid Stacking */
+  .skills-grid, .preview-grid {
+      grid-template-columns: 1fr;
   }
 }
