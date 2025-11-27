@@ -28,6 +28,11 @@
   <header class="site-header">
     <div class="header-content">
       <a href="index.html" class="logo">Luca Kosowski</a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="main-nav">
         <a href="index.html#experience">Experience</a>
         <a href="index.html#education">Education</a>
@@ -171,6 +176,27 @@
   <footer class="site-footer">
     <p>Luca Kosowski</p>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const siteHeader = document.querySelector('.site-header');
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            siteHeader.classList.toggle('nav-open');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                siteHeader.classList.remove('nav-open');
+            });
+        });
+    }
+  </script>
 
 </body>
 </html>

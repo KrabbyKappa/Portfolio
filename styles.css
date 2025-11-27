@@ -89,6 +89,14 @@ body {
   color: var(--color-accent);
 }
 
+.menu-toggle {
+    display: none; /* Hidden by default (Desktop) */
+}
+
+.main-nav {
+    display: flex; /* Ensure flex on desktop */
+}
+
 .main-nav a {
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -415,7 +423,7 @@ details[open] > .job-summary::after {
 /* ===== Preview Section ===== */
 .preview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced min-width to fit 3 cols in 960px container */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Reduced to 240px to guarantee 3 columns fit in 960px container */
     gap: var(--spacing-lg);
 }
 
@@ -534,56 +542,117 @@ details[open] > .job-summary::after {
     font-size: 15px; /* Slightly larger base text for readability */
   }
   
-  /* 1. Header Optimization: Elegant Minimal Nav */
+/* ===== RESPONSIVE DESIGN (Mobile Optimization) ===== */
+@media (max-width: 768px) {
+  :root {
+    font-size: 15px;
+  }
+  
+  /* 1. Header Optimization: Burger Menu */
   .site-header {
       backdrop-filter: blur(15px);
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.98);
+      height: 60px; /* Fixed height for stability */
+      display: flex;
+      align-items: center;
   }
 
   .header-content {
-    padding: 0.75rem 0.5rem;
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 0 1.5rem;
+    flex-direction: row;
+    justify-content: flex-end; /* Place burger on right */
+    align-items: center;
+    width: 100%;
+    height: 100%;
   }
   
   .logo {
     display: none;
   }
 
+  /* Burger Button */
+  .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      z-index: 1001;
+  }
+  
+  .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-text-primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+  }
+  
+  /* Animate Burger to X when open */
+  .nav-open .menu-toggle span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+  }
+  .nav-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+  }
+  .nav-open .menu-toggle span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay */
   .main-nav {
+    position: fixed;
+    top: 60px; /* Below header */
+    left: 0;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center align the links */
-    gap: 0.5rem 1rem; /* Row gap / Col gap */
-    padding: 0;
-    overflow: visible;
+    height: calc(100vh - 60px); /* Full screen height minus header */
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    justify-content: flex-start; /* Start from top */
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    
+    /* Hidden State */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  /* Visible State */
+  .nav-open .main-nav {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
   }
   
   .main-nav a {
     margin: 0;
-    text-align: center;
-    padding: 0.25rem 0; /* Text only padding */
-    background: transparent; /* Remove button blockiness */
-    border-radius: 0;
-    font-size: 0.8rem;
+    font-size: 1.2rem; /* Large text */
     font-weight: 500;
-    color: var(--color-text-secondary); /* Subtle default color */
-    text-transform: uppercase; /* Elegant touch */
-    letter-spacing: 0.05em;
-    border-bottom: 2px solid transparent; /* For hover/active state */
+    color: var(--color-text-primary);
+    padding: 0.5rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.03); /* Subtle separators */
   }
   
-  .main-nav a:hover, .main-nav a:active {
-      background: transparent;
-      color: var(--color-accent);
-      border-bottom-color: var(--color-accent); /* Elegant underline interaction */
+  .main-nav a:last-child {
+      border-bottom: none;
   }
 
   /* 2. Main Layout */
   .main-wrapper {
-    padding: 6.5rem 0.5rem 2rem; /* Adjusted for 2-row text header */
+    padding: 6rem 0.5rem 2rem; /* Adjusted for fixed header height */
     width: 100%;
     overflow-x: hidden;
   }
