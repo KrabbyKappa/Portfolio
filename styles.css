@@ -415,7 +415,7 @@ details[open] > .job-summary::after {
 /* ===== Preview Section ===== */
 .preview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced min-width to fit 3 cols in 960px container */
     gap: var(--spacing-lg);
 }
 
@@ -517,11 +517,15 @@ details[open] > .job-summary::after {
 /* ===== FOOTER ===== */
 .site-footer {
   text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: 1rem 0; /* Reduced from 3rem to 1rem for tighter look */
   background: var(--color-surface);
   border-top: 1px solid var(--color-border);
   color: var(--color-text-tertiary);
   font-size: 0.875rem;
+}
+
+.site-footer p {
+    margin: 0; /* Remove paragraph margins */
 }
 
 /* ===== RESPONSIVE DESIGN (Mobile Optimization) ===== */
@@ -530,17 +534,17 @@ details[open] > .job-summary::after {
     font-size: 15px; /* Slightly larger base text for readability */
   }
   
-  /* 1. Header Optimization: 3-Column Grid Nav */
+  /* 1. Header Optimization: Elegant Minimal Nav */
   .site-header {
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.98);
-      /* Keep fixed to ensure access, grid is compact enough */
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
   }
 
   .header-content {
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     flex-direction: column;
-    gap: 0;
+    gap: 0.5rem;
   }
   
   .logo {
@@ -549,9 +553,10 @@ details[open] > .job-summary::after {
 
   .main-nav {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 Columns */
-    gap: 0.5rem; /* Spacing between buttons */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align the links */
+    gap: 0.5rem 1rem; /* Row gap / Col gap */
     padding: 0;
     overflow: visible;
   }
@@ -559,26 +564,26 @@ details[open] > .job-summary::after {
   .main-nav a {
     margin: 0;
     text-align: center;
-    padding: 0.6rem 0.25rem;
-    background: rgba(0,0,0,0.03); /* Subtle button look */
-    border-radius: 6px;
+    padding: 0.25rem 0; /* Text only padding */
+    background: transparent; /* Remove button blockiness */
+    border-radius: 0;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.1;
+    font-weight: 500;
+    color: var(--color-text-secondary); /* Subtle default color */
+    text-transform: uppercase; /* Elegant touch */
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid transparent; /* For hover/active state */
   }
   
   .main-nav a:hover, .main-nav a:active {
-      background: rgba(0,0,0,0.06);
+      background: transparent;
       color: var(--color-accent);
+      border-bottom-color: var(--color-accent); /* Elegant underline interaction */
   }
 
   /* 2. Main Layout */
   .main-wrapper {
-    padding: 7.5rem 0.5rem 2rem; /* Adjusted for 2-row grid header */
+    padding: 6.5rem 0.5rem 2rem; /* Adjusted for 2-row text header */
     width: 100%;
     overflow-x: hidden;
   }
@@ -601,9 +606,9 @@ details[open] > .job-summary::after {
       white-space: nowrap;
   }
 
-  /* Footer Compact */
+  /* Footer Compact (Mobile) */
   .site-footer {
-      padding: 0.5rem 1rem 1.5rem; /* Minimal padding */
+      padding: 1rem 1rem 2rem; /* Minimal padding */
   }
   
   .site-footer p {
