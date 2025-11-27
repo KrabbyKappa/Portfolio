@@ -271,6 +271,9 @@ a:hover {
 
 summary {
   list-style: none;
+  cursor: pointer;
+  width: 100%; /* Ensure click target spans full width */
+  -webkit-tap-highlight-color: transparent; /* Remove grey tap highlight on mobile */
 }
 
 summary::-webkit-details-marker {
@@ -294,7 +297,6 @@ summary:focus, summary:active {
     padding-right: 2rem; /* Make space for the absolute arrow */
     position: relative; /* Context for absolute positioning */
     width: 100%; /* Ensure click target spans full width */
-    -webkit-tap-highlight-color: transparent; /* Remove grey tap highlight on mobile */
 }
 
 /* Move meta to new line on mobile */
@@ -310,6 +312,7 @@ summary:focus, summary:active {
         margin-left: 0;
         width: 100%;
         margin-top: 0.25rem;
+        display: block; /* Ensure it breaks to new line */
     }
     
     .job-summary::after {
@@ -319,6 +322,11 @@ summary:focus, summary:active {
     
     details[open] > .job-summary::after {
         transform: rotate(180deg);
+    }
+    
+    /* Increase top padding significantly for mobile header clearance */
+    .main-wrapper {
+        padding-top: 12rem; 
     }
 }
 
