@@ -521,7 +521,7 @@ details[open] > .job-summary::after {
   }
   
   .main-wrapper {
-    padding: 2rem 1rem; /* Reduce side padding to prevent overflow feeling */
+    padding: 6rem 1rem 2rem; /* Increased top padding to 6rem to clear fixed header */
     overflow-x: hidden;
   }
 
