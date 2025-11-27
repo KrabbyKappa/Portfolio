@@ -39,8 +39,8 @@
   --spacing-3xl: 6rem;
 
   /* Layout */
-  --max-width-content: 760px;
-  --max-width-wide: 1200px;
+  --max-width-content: 720px;
+  --max-width-wide: 960px; /* Reduced from 1200px to fix "too elongated" look */
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -188,7 +188,7 @@ body {
 .main-wrapper {
   max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: var(--spacing-3xl) var(--spacing-lg);
+  padding: var(--spacing-3xl) var(--spacing-lg); /* Keep generous padding on desktop */
 }
 
 /* ===== CONTENT AREA ===== */
@@ -530,16 +530,16 @@ details[open] > .job-summary::after {
     font-size: 15px; /* Slightly larger base text for readability */
   }
   
-  /* 1. Header Optimization: Swipeable Nav */
+  /* 1. Header Optimization: 3-Column Grid Nav */
   .site-header {
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.98);
+      /* Keep fixed to ensure access, grid is compact enough */
   }
 
   .header-content {
-    padding: 0.5rem 0; /* Remove side padding to allow edge-to-edge scroll */
+    padding: 0.5rem;
     flex-direction: column;
-    align-items: stretch;
     gap: 0;
   }
   
@@ -549,30 +549,36 @@ details[open] > .job-summary::after {
 
   .main-nav {
     width: 100%;
-    justify-content: flex-start; /* Start from left */
-    gap: 1.5rem; /* Space between links */
-    font-size: 0.95rem;
-    flex-wrap: nowrap; /* No wrapping */
-    overflow-x: auto; /* Scrollable */
-    -webkit-overflow-scrolling: touch;
-    padding: 0.75rem 1.5rem; /* Padding for scroll area */
-    scrollbar-width: none; /* Firefox */
-  }
-  
-  .main-nav::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+    gap: 0.5rem; /* Spacing between buttons */
+    padding: 0;
+    overflow: visible;
   }
   
   .main-nav a {
     margin: 0;
-    white-space: nowrap; /* Keep link text on one line */
+    text-align: center;
+    padding: 0.6rem 0.25rem;
+    background: rgba(0,0,0,0.03); /* Subtle button look */
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
     color: var(--color-text-primary);
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+  }
+  
+  .main-nav a:hover, .main-nav a:active {
+      background: rgba(0,0,0,0.06);
+      color: var(--color-accent);
   }
 
   /* 2. Main Layout */
   .main-wrapper {
-    padding: 4.5rem 0.5rem 2rem; /* Adjusted for header */
+    padding: 7.5rem 0.5rem 2rem; /* Adjusted for 2-row grid header */
     width: 100%;
     overflow-x: hidden;
   }
@@ -597,13 +603,13 @@ details[open] > .job-summary::after {
 
   /* Footer Compact */
   .site-footer {
-      padding: 1rem 1rem 2rem; /* Extra bottom padding for mobile browsers */
+      padding: 0.5rem 1rem 1.5rem; /* Minimal padding */
   }
   
   .site-footer p {
-      margin-bottom: 0;
-      margin-top: -0.5rem; /* Pull name up */
-      font-size: 0.8rem;
+      margin: 0;
+      font-size: 0.75rem;
+      opacity: 0.7;
   }
 }
 
