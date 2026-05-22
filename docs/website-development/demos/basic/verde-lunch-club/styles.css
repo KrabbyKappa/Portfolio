@@ -1,0 +1,107 @@
+/* UNIQUE_STYLE: food-menu-market */
+:root {
+  --leaf: #184f33;
+  --mint: #dfead0;
+  --cream: #fff8e8;
+  --paper: #fffdf4;
+  --ink: #203226;
+  --muted: #64705c;
+  --tomato: #c95b3c;
+  --gold: #c99238;
+  --line: rgba(42, 77, 48, .18);
+  --shadow: rgba(31, 64, 38, .18);
+  --max: 1160px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "DM Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  line-height: 1.58;
+  background:
+    radial-gradient(circle at 15% 7%, rgba(201, 146, 56, .20), transparent 20rem),
+    radial-gradient(circle at 84% 4%, rgba(24, 79, 51, .20), transparent 22rem),
+    linear-gradient(180deg, #f7f4df, #e7efd9 45%, #fdf7e8);
+}
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--tomato); outline-offset: 4px; box-shadow: 0 0 0 6px rgba(201, 91, 60, .16); }
+.verde-header {
+  position: sticky; top: 0; z-index: 10; width: calc(100% - 28px); max-width: calc(var(--max) + 36px); margin: 16px auto 0;
+  display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 14px 18px;
+  border-radius: 999px; background: rgba(255, 253, 244, .88); border: 1px solid var(--line); backdrop-filter: blur(16px); box-shadow: 0 16px 40px var(--shadow);
+}
+.verde-brand { text-decoration: none; display: inline-flex; gap: 8px; align-items: baseline; }
+.verde-brand span { color: var(--leaf); font-family: Georgia, serif; font-size: 1.5rem; font-weight: 800; }
+.verde-brand strong { color: var(--tomato); }
+nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+nav a { text-decoration: none; color: var(--muted); font-weight: 800; padding: 8px 10px; border-radius: 999px; }
+nav a:hover { background: rgba(24,79,51,.09); color: var(--leaf); }
+main { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+section { margin: clamp(58px, 8vw, 100px) 0; }
+.menu-board {
+  min-height: calc(100svh - 96px);
+  position: relative;
+  display: grid;
+  align-items: end;
+  border-radius: 38px;
+  overflow: hidden;
+  padding: clamp(28px, 6vw, 70px);
+  box-shadow: 0 30px 80px var(--shadow);
+}
+.hero-photo, .hero-veil { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-photo { object-fit: cover; object-position: center; }
+.hero-veil { background: linear-gradient(90deg, rgba(12,47,29,.78), rgba(12,47,29,.44) 45%, rgba(12,47,29,.10)); }
+.hero-content { position: relative; z-index: 1; color: #fffdf4; max-width: 760px; }
+.verde-kicker { margin: 0 0 12px; color: var(--tomato); text-transform: uppercase; letter-spacing: .13em; font-weight: 900; font-size: .74rem; }
+.hero-content .verde-kicker { color: #f4d18b; }
+h1, h2, h3 { line-height: 1.03; }
+h1 { margin: 0; max-width: 13ch; font-family: Georgia, serif; font-size: clamp(3.2rem, 9vw, 7.5rem); letter-spacing: -.08em; }
+h2 { margin: 0 0 14px; max-width: 13ch; font-family: Georgia, serif; color: var(--leaf); font-size: clamp(2.05rem, 4.5vw, 4.1rem); letter-spacing: -.06em; }
+h3 { margin: 0 0 8px; color: var(--leaf); }
+.hero-content p { max-width: 58ch; font-size: 1.13rem; }
+.verde-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.verde-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: 13px 18px; border-radius: 999px; text-decoration: none; background: var(--tomato); color: #fffdf4; font-weight: 900; box-shadow: 0 16px 34px rgba(201,91,60,.26); }
+.verde-button.secondary { background: rgba(255,253,244,.92); color: var(--leaf); box-shadow: none; }
+.hours-card { position: absolute; right: 24px; bottom: 24px; z-index: 2; width: min(330px, calc(100% - 48px)); padding: 18px; border-radius: 24px; background: rgba(255,253,244,.92); color: var(--ink); box-shadow: 0 18px 46px rgba(0,0,0,.18); }
+.hours-card span { color: var(--tomato); font-weight: 900; text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; }
+.hours-card strong { display: block; margin: 6px 0; color: var(--leaf); }
+.hours-card p { margin: 0; color: var(--muted); }
+.section-heading { max-width: 800px; }
+.ingredient-tape, .owner-note, .patio-proof, .market-proof article, .visit-panel, .scope-card, .close-cta { background: rgba(255,253,244,.9); border: 1px solid var(--line); box-shadow: 0 22px 62px var(--shadow); }
+.ingredient-tape { padding: clamp(24px, 4vw, 42px); border-radius: 34px; }
+.dish-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+.dish-card { overflow: hidden; border-radius: 26px; background: var(--paper); border: 1px solid var(--line); }
+.dish-photo { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; }
+.dish-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.dish-card:hover .dish-photo img { transform: scale(1.035); }
+.dish-copy { padding: 18px; }
+.dish-meta { margin: 0 0 8px; color: var(--tomato); font-weight: 900; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
+.dish-copy p:not(.dish-meta) { color: var(--muted); }
+.dish-copy strong { color: var(--leaf); }
+.owner-note, .patio-proof, .visit-panel, .close-cta { border-radius: 32px; padding: clamp(24px, 4vw, 42px); }
+.owner-note, .patio-proof, .visit-panel, .close-cta { display: grid; grid-template-columns: .85fr 1.15fr; gap: 28px; align-items: center; }
+.patio-proof { align-items: start; }
+.map-copy ul { color: var(--muted); }
+.table-scene { margin: 0; border-radius: 26px; overflow: hidden; background: var(--paper); border: 1px solid var(--line); }
+.google-map-snapshot { display: block; width: 100%; height: 300px; object-fit: cover; object-position: center; border-bottom: 1px solid var(--line); }
+.map-embed-details { border-bottom: 1px solid var(--line); background: #f3f8ed; }
+.map-embed-details summary { min-height: 46px; display: flex; align-items: center; padding: 12px 16px; color: var(--leaf); font-weight: 900; cursor: pointer; }
+.google-map-frame { display: block; width: 100%; min-height: 260px; border: 0; background: #dfe8c9; }
+.table-scene figcaption, .map-fallback { padding: 12px 16px; margin: 0; color: var(--muted); font-size: .9rem; }
+.map-fallback { padding-top: 0; }
+.market-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.market-proof .section-heading { grid-column: 1 / -1; }
+.market-proof article { border-radius: 24px; padding: 22px; }
+.market-proof span { color: var(--tomato); font-weight: 900; }
+.market-proof p, .owner-note p, .visit-panel dd, .scope-card p, .close-cta p { color: var(--muted); }
+.visit-panel dl { margin: 0; display: grid; gap: 12px; }
+.visit-panel div:has(dt) { padding: 14px; background: #fffaf0; border: 1px solid var(--line); border-radius: 18px; }
+.visit-panel dt { color: var(--tomato); font-weight: 900; }
+.visit-panel dd { margin: 4px 0 0; }
+.scope-card { padding: clamp(24px, 4vw, 42px); border-radius: 32px; }
+footer { width: min(var(--max), calc(100% - 32px)); margin: 60px auto 28px; display: flex; justify-content: space-between; gap: 16px; color: var(--muted); }
+footer a { color: var(--leaf); font-weight: 900; }
+@media (max-width: 940px) { .dish-grid, .market-proof, .owner-note, .patio-proof, .visit-panel, .close-cta { grid-template-columns: 1fr; } .hours-card { position: relative; right: auto; bottom: auto; margin-top: 28px; } .menu-board { align-items: center; } }
+@media (max-width: 600px) { .verde-header, footer { flex-direction: column; align-items: flex-start; border-radius: 24px; } nav { justify-content: flex-start; } main { width: calc(100% - 22px); } section { margin: 48px 0; } .menu-board { padding: 26px 18px; border-radius: 26px; min-height: 720px; } .hero-veil { background: linear-gradient(180deg, rgba(12,47,29,.68), rgba(12,47,29,.78)); } h1 { font-size: clamp(3rem, 18vw, 4.7rem); } .verde-actions, .verde-button { width: 100%; } .google-map-frame { min-height: 300px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
