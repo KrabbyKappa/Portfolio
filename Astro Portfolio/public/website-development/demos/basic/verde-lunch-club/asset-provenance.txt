@@ -1,0 +1,6 @@
+local_file | source | source_url | downloaded_at | usage
+verde-garden-hero.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1558473399-6773c890474c | 2026-05-20 | outdoor garden cafe hero photo with tables and greenery
+verde-seasonal-lunch.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1504674900247-0877df9cc836 | 2026-05-20 | lunch menu photo
+verde-green-salad.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1546069901-ba9599a7e63c | 2026-05-20 | salad menu photo
+verde-market-produce.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1488459716781-31db52582fe9 | 2026-05-20 | produce/ingredient photo
+verde-google-map-preview.png | Google Maps screenshot | https://www.google.com/maps/search/?api=1&query=New%20York%20Stock%20Exchange%2C%20New%20York%2C%20NY | 2026-05-20 | static screenshot fallback paired with live Google Maps iframe

@@ -1,0 +1,4 @@
+local_file | source | source_url | downloaded_at | usage
+atlas-community-roundtable.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1522202176988-66273c2fd55f | 2026-05-20 | hero community meeting photo
+atlas-local-program.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1559027615-cd4628902d4a | 2026-05-20 | local program/focus card photo
+atlas-grantee-workshop.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1593113598332-cd288d649433 | 2026-05-20 | grantee/community story photo

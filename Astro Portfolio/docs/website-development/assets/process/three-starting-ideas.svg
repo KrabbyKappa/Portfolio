@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 1200">
+  <!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 136)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+
+      .st0, .st1, .st2, .st3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 7px;
+      }
+
+      .st1 {
+        fill: #ff5559;
+      }
+
+      .st2 {
+        fill: #89ee7f;
+      }
+
+      .st3 {
+        fill: #7fdcff;
+      }
+    </style>
+  </defs>
+  <g id="Graphic_Element">
+    <rect class="st1" x="-104.05" y="649.54" width="607.61" height="372.54" rx="58" ry="58" transform="translate(-636.05 1035.57) rotate(-90)"/>
+    <polygon class="st0" points="66.8 589.81 81.6 636.89 51.73 668.26 105.18 669.08 126.58 712.51 139.66 658.51 193.12 642.82 151.45 620.47 144.42 570.92 114.24 602.61 66.8 589.81"/>
+    <polygon class="st0" points="212.44 1007.96 282.01 1111.79 337.15 999.62 212.44 1007.96"/>
+    <circle class="st0" cx="240.81" cy="835.81" r="58.66"/>
+  </g>
+  <g id="Graphic_Element1" data-name="Graphic_Element">
+    <rect class="st3" x="296.19" y="649.54" width="607.61" height="372.54" rx="58" ry="58" transform="translate(-235.81 1435.81) rotate(-90)"/>
+    <polygon class="st0" points="531.84 735.16 549.59 791.63 513.77 829.26 577.87 830.24 603.54 882.33 619.24 817.57 683.36 798.74 633.38 771.94 624.94 712.51 588.75 750.51 531.84 735.16"/>
+    <polygon class="st0" points="558.65 992.04 628.22 1095.87 683.36 983.71 558.65 992.04"/>
+  </g>
+  <g id="Graphic_Element2" data-name="Graphic_Element">
+    <rect class="st2" x="696.44" y="649.54" width="607.61" height="372.54" rx="58" ry="58" transform="translate(164.43 1836.05) rotate(-90)"/>
+    <circle class="st0" cx="951.08" cy="999.62" r="58.66"/>
+  </g>
+  <polygon class="st0" points="728.58 599.01 672.68 580.85 638.13 628.4 654.49 650.92 672.68 675.95 728.58 657.79 728.58 599.01"/>
+  <polygon class="st0" points="1137.63 791.17 1052.72 763.59 1000.24 835.81 1025.09 870.02 1052.72 908.04 1137.63 880.45 1137.63 791.17"/>
+  <polygon class="st0" points="1037.34 584.71 929.18 631.02 1024.61 698.72 1037.34 584.71"/>
+</svg>

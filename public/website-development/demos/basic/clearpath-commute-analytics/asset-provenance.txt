@@ -1,0 +1,4 @@
+local_file | source | source_url | downloaded_at | usage
+clearpath-transit-platform.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1518391846015-55a9cc003b25 | 2026-05-20 | transit/city hero context
+clearpath-bus-corridor.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1544620347-c4fd4a3d5957 | 2026-05-20 | bus corridor context
+clearpath-planning-table.jpg | Unsplash image CDN | https://images.unsplash.com/photo-1494515843206-f3117d3f51b7 | 2026-05-20 | operations/planning context

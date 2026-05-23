@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 560" role="img" aria-labelledby="title desc">
+  <title id="title">Garden patio lunch tables</title>
+  <desc id="desc">Outdoor cafe tables surrounded by greenery beside a small market counter.</desc>
+  <rect width="880" height="560" fill="#f8edcf"/>
+  <rect x="0" y="338" width="880" height="222" fill="#dfe8c9"/>
+  <rect x="88" y="126" width="704" height="248" rx="28" fill="#fffaf0" stroke="#d2c6a5" stroke-width="4"/>
+  <rect x="134" y="174" width="248" height="152" rx="18" fill="#203126"/>
+  <rect x="162" y="204" width="192" height="20" fill="#f1c766"/><rect x="162" y="242" width="150" height="14" fill="#fff8e8" opacity=".65"/><rect x="162" y="270" width="170" height="14" fill="#fff8e8" opacity=".65"/>
+  <circle cx="550" cy="254" r="66" fill="#637b3d"/><circle cx="612" cy="226" r="52" fill="#174d33"/><circle cx="498" cy="214" r="46" fill="#86a85b"/>
+  <rect x="536" y="274" width="22" height="88" fill="#7d4f2c"/>
+  <circle cx="218" cy="414" r="44" fill="#fffaf0" stroke="#bf3d2f" stroke-width="6"/><rect x="206" y="414" width="24" height="74" fill="#8b673a"/>
+  <circle cx="420" cy="424" r="52" fill="#fffaf0" stroke="#637b3d" stroke-width="6"/><rect x="407" y="424" width="26" height="80" fill="#8b673a"/>
+  <circle cx="652" cy="414" r="44" fill="#fffaf0" stroke="#f1c766" stroke-width="6"/><rect x="640" y="414" width="24" height="74" fill="#8b673a"/>
+  <path d="M80 340c80-64 134-63 204 0s122 63 190 0 132-64 232 0" fill="none" stroke="#174d33" stroke-width="12" stroke-linecap="round" opacity=".42"/>
+  <text x="440" y="88" text-anchor="middle" font-family="Georgia,serif" font-size="38" fill="#174d33">Verde garden counter</text>
+</svg>

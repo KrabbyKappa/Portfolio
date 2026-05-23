@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 560" role="img" aria-labelledby="title desc">
+  <title id="title">Market Lane static map card</title>
+  <desc id="desc">Illustrated location map with Market Lane, garden steps, tram stop, and Verde Lunch Club.</desc>
+  <rect width="880" height="560" fill="#f4e6c7"/>
+  <rect x="70" y="80" width="740" height="400" rx="28" fill="#fffaf0" stroke="#d1bd91" stroke-width="4"/>
+  <path d="M110 380 C240 320 322 320 446 250 S640 176 770 122" fill="none" stroke="#bf3d2f" stroke-width="34" stroke-linecap="round" opacity=".82"/>
+  <path d="M124 390 C248 334 328 328 454 260 S646 190 764 136" fill="none" stroke="#fff5dc" stroke-width="10" stroke-dasharray="20 18" stroke-linecap="round"/>
+  <rect x="130" y="122" width="210" height="132" rx="20" fill="#dfe8c9"/><text x="235" y="195" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="#174d33" font-weight="700">Garden</text>
+  <rect x="560" y="314" width="170" height="96" rx="18" fill="#203126"/><text x="645" y="369" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#f1c766" font-weight="700">Tram stop</text>
+  <circle cx="430" cy="276" r="50" fill="#174d33" stroke="#fffaf0" stroke-width="10"/><text x="430" y="286" text-anchor="middle" font-family="Georgia,serif" font-size="42" fill="#fffaf0">V</text>
+  <rect x="370" y="344" width="120" height="38" rx="19" fill="#174d33"/><text x="430" y="369" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#fffaf0" font-weight="700">18 Market Lane</text>
+  <text x="170" y="438" font-family="Arial,sans-serif" font-size="22" fill="#68715f" font-weight="700">2 minute walk from corner</text>
+  <text x="440" y="534" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#68715f">Static map-style artwork · live map is an add-on</text>
+</svg>

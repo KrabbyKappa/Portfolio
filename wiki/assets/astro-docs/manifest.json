@@ -1,0 +1,1056 @@
+{
+  "fetched_at_utc": "2026-05-20T17:03:27Z",
+  "selected_count": 19,
+  "raw_mdx_ok": 19,
+  "docs": [
+    {
+      "url": "https://docs.astro.build/en/getting-started/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/getting-started.mdx",
+      "fetch": "raw-mdx",
+      "title": "Astro Docs",
+      "description": "Guides, resources, and API references to help you build with Astro \u2014 the web framework for content-driven websites.",
+      "headings": [],
+      "bytes": 2630
+    },
+    {
+      "url": "https://docs.astro.build/en/install-and-setup/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/install-and-setup.mdx",
+      "fetch": "raw-mdx",
+      "title": "Install Astro",
+      "description": "'How to install Astro and start a new project.'",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Prerequisites"
+        },
+        {
+          "level": 2,
+          "text": "Browser compatibility"
+        },
+        {
+          "level": 2,
+          "text": "Install from the CLI wizard"
+        },
+        {
+          "level": 2,
+          "text": "CLI installation flags"
+        },
+        {
+          "level": 3,
+          "text": "Add integrations"
+        },
+        {
+          "level": 3,
+          "text": "Use a theme or starter template"
+        },
+        {
+          "level": 2,
+          "text": "Manual Setup"
+        }
+      ],
+      "bytes": 12474
+    },
+    {
+      "url": "https://docs.astro.build/en/basics/project-structure/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/basics/project-structure.mdx",
+      "fetch": "raw-mdx",
+      "title": "Project structure",
+      "description": "An introduction to the basic file structure of an Astro project.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Directories and Files"
+        },
+        {
+          "level": 3,
+          "text": "Example Project Tree"
+        },
+        {
+          "level": 3,
+          "text": "`src/`"
+        },
+        {
+          "level": 3,
+          "text": "`src/pages`"
+        },
+        {
+          "level": 3,
+          "text": "`src/components`"
+        },
+        {
+          "level": 3,
+          "text": "`src/layouts`"
+        },
+        {
+          "level": 3,
+          "text": "`src/styles`"
+        },
+        {
+          "level": 3,
+          "text": "`public/`"
+        },
+        {
+          "level": 3,
+          "text": "`package.json`"
+        },
+        {
+          "level": 3,
+          "text": "`astro.config.mjs`"
+        },
+        {
+          "level": 3,
+          "text": "`tsconfig.json`"
+        }
+      ],
+      "bytes": 6479
+    },
+    {
+      "url": "https://docs.astro.build/en/basics/astro-pages/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/basics/astro-pages.mdx",
+      "fetch": "raw-mdx",
+      "title": "Pages",
+      "description": "An introduction to Astro pages.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Supported page files"
+        },
+        {
+          "level": 2,
+          "text": "File-based routing"
+        },
+        {
+          "level": 3,
+          "text": "Link between pages"
+        },
+        {
+          "level": 2,
+          "text": "Astro Pages"
+        },
+        {
+          "level": 2,
+          "text": "Markdown/MDX Pages"
+        },
+        {
+          "level": 2,
+          "text": "HTML Pages"
+        },
+        {
+          "level": 2,
+          "text": "Custom 404 Error Page"
+        },
+        {
+          "level": 2,
+          "text": "Custom 500 Error Page"
+        },
+        {
+          "level": 3,
+          "text": "`error`"
+        },
+        {
+          "level": 2,
+          "text": "Page Partials"
+        },
+        {
+          "level": 3,
+          "text": "Using with a library"
+        }
+      ],
+      "bytes": 8844
+    },
+    {
+      "url": "https://docs.astro.build/en/basics/astro-components/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/basics/astro-components.mdx",
+      "fetch": "raw-mdx",
+      "title": "Components",
+      "description": "An introduction to Astro components.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Component Structure"
+        },
+        {
+          "level": 3,
+          "text": "The Component Script"
+        },
+        {
+          "level": 3,
+          "text": "The Component Template"
+        },
+        {
+          "level": 2,
+          "text": "Component-based design"
+        },
+        {
+          "level": 2,
+          "text": "Component Props"
+        },
+        {
+          "level": 2,
+          "text": "Slots"
+        },
+        {
+          "level": 3,
+          "text": "Named Slots"
+        },
+        {
+          "level": 3,
+          "text": "Fallback Content for Slots"
+        },
+        {
+          "level": 3,
+          "text": "Transferring slots"
+        },
+        {
+          "level": 2,
+          "text": "HTML Components"
+        },
+        {
+          "level": 2,
+          "text": "Next Steps"
+        }
+      ],
+      "bytes": 16157
+    },
+    {
+      "url": "https://docs.astro.build/en/basics/layouts/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/basics/layouts.mdx",
+      "fetch": "raw-mdx",
+      "title": "Layouts",
+      "description": "An introduction to layouts in Astro.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Sample Layout"
+        },
+        {
+          "level": 2,
+          "text": "Using TypeScript with layouts"
+        },
+        {
+          "level": 2,
+          "text": "Markdown Layouts"
+        },
+        {
+          "level": 3,
+          "text": "Markdown Layout Props"
+        },
+        {
+          "level": 3,
+          "text": "Importing Layouts Manually (MDX)"
+        },
+        {
+          "level": 2,
+          "text": "Nesting Layouts"
+        }
+      ],
+      "bytes": 10580
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/routing/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/routing.mdx",
+      "fetch": "raw-mdx",
+      "title": "Routing",
+      "description": "An intro to routing with Astro.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Navigating between pages"
+        },
+        {
+          "level": 2,
+          "text": "Static routes"
+        },
+        {
+          "level": 2,
+          "text": "Dynamic routes"
+        },
+        {
+          "level": 3,
+          "text": "Static (SSG) Mode"
+        },
+        {
+          "level": 3,
+          "text": "On-demand dynamic routes"
+        },
+        {
+          "level": 2,
+          "text": "Redirects"
+        },
+        {
+          "level": 3,
+          "text": "Configured Redirects"
+        },
+        {
+          "level": 3,
+          "text": "Dynamic redirects"
+        },
+        {
+          "level": 2,
+          "text": "Rewrites"
+        },
+        {
+          "level": 2,
+          "text": "Route Priority Order"
+        },
+        {
+          "level": 3,
+          "text": "Reserved routes"
+        },
+        {
+          "level": 2,
+          "text": "Pagination"
+        },
+        {
+          "level": 3,
+          "text": "The `page` prop"
+        },
+        {
+          "level": 3,
+          "text": "Nested Pagination"
+        },
+        {
+          "level": 2,
+          "text": "Excluding pages"
+        }
+      ],
+      "bytes": 23012
+    },
+    {
+      "url": "https://docs.astro.build/en/recipes/i18n/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/recipes/i18n.mdx",
+      "fetch": "raw-mdx",
+      "title": "Add i18n features",
+      "description": "Use dynamic routing and content collections to add internationalization support to your Astro site.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Recipe"
+        },
+        {
+          "level": 3,
+          "text": "Set up pages for each language"
+        },
+        {
+          "level": 3,
+          "text": "Use collections for translated content"
+        },
+        {
+          "level": 3,
+          "text": "Translate UI strings"
+        },
+        {
+          "level": 3,
+          "text": "Let users switch between languages"
+        },
+        {
+          "level": 3,
+          "text": "Hide default language in the URL"
+        },
+        {
+          "level": 3,
+          "text": "Translate Routes"
+        },
+        {
+          "level": 2,
+          "text": "Resources"
+        },
+        {
+          "level": 2,
+          "text": "Community libraries"
+        }
+      ],
+      "bytes": 16519
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/content-collections/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/content-collections.mdx",
+      "fetch": "raw-mdx",
+      "title": "Content collections",
+      "description": ">-",
+      "headings": [
+        {
+          "level": 2,
+          "text": "What are Content Collections?"
+        },
+        {
+          "level": 3,
+          "text": "Types of collections"
+        },
+        {
+          "level": 3,
+          "text": "When to create a collection"
+        },
+        {
+          "level": 3,
+          "text": "When not to create a collection"
+        },
+        {
+          "level": 2,
+          "text": "TypeScript configuration for collections"
+        },
+        {
+          "level": 2,
+          "text": "Defining build-time content collections"
+        },
+        {
+          "level": 2,
+          "text": "Build-time collection loaders"
+        },
+        {
+          "level": 3,
+          "text": "The `glob()` loader"
+        },
+        {
+          "level": 3,
+          "text": "The `file()` loader"
+        },
+        {
+          "level": 3,
+          "text": "Custom build-time loaders"
+        },
+        {
+          "level": 2,
+          "text": "Defining the collection schema"
+        },
+        {
+          "level": 3,
+          "text": "Defining datatypes with Zod"
+        },
+        {
+          "level": 3,
+          "text": "Defining collection references"
+        },
+        {
+          "level": 2,
+          "text": "Querying build-time collections"
+        },
+        {
+          "level": 3,
+          "text": "Using content in Astro templates"
+        },
+        {
+          "level": 3,
+          "text": "Rendering body content"
+        },
+        {
+          "level": 3,
+          "text": "Filtering collection queries"
+        },
+        {
+          "level": 3,
+          "text": "Accessing referenced data"
+        },
+        {
+          "level": 2,
+          "text": "Generating Routes from Content"
+        },
+        {
+          "level": 3,
+          "text": "Building for static output (default)"
+        },
+        {
+          "level": 3,
+          "text": "Building routes on demand at request time"
+        },
+        {
+          "level": 2,
+          "text": "Live content collections"
+        },
+        {
+          "level": 3,
+          "text": "Creating a live loader"
+        },
+        {
+          "level": 3,
+          "text": "Using Zod schemas with live collections"
+        },
+        {
+          "level": 3,
+          "text": "Accessing live data"
+        },
+        {
+          "level": 2,
+          "text": "Using JSON Schema files in your editor"
+        }
+      ],
+      "bytes": 47589
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/client-side-scripts/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/client-side-scripts.mdx",
+      "fetch": "raw-mdx",
+      "title": "Scripts and event handling",
+      "description": ">-",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Client-Side Scripts"
+        },
+        {
+          "level": 2,
+          "text": "Script processing"
+        },
+        {
+          "level": 3,
+          "text": "Unprocessed scripts"
+        },
+        {
+          "level": 3,
+          "text": "Include JavaScript files on your page"
+        },
+        {
+          "level": 2,
+          "text": "Common script patterns"
+        },
+        {
+          "level": 3,
+          "text": "Handle `onclick` and other events"
+        },
+        {
+          "level": 3,
+          "text": "Web components with custom elements"
+        },
+        {
+          "level": 3,
+          "text": "Pass frontmatter variables to scripts"
+        },
+        {
+          "level": 3,
+          "text": "Combining scripts and UI Frameworks"
+        }
+      ],
+      "bytes": 10223
+    },
+    {
+      "url": "https://docs.astro.build/en/concepts/islands/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/concepts/islands.mdx",
+      "fetch": "raw-mdx",
+      "title": "Islands architecture",
+      "description": "Learn about how Astro's islands architecture helps keep sites fast.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "A brief history"
+        },
+        {
+          "level": 2,
+          "text": "What is an island?"
+        },
+        {
+          "level": 2,
+          "text": "Island components"
+        },
+        {
+          "level": 2,
+          "text": "Client Islands"
+        },
+        {
+          "level": 2,
+          "text": "Server islands"
+        }
+      ],
+      "bytes": 9870
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/images/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/images.mdx",
+      "fetch": "raw-mdx",
+      "title": "Images",
+      "description": "Learn how to use images in Astro.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Where to store images"
+        },
+        {
+          "level": 3,
+          "text": "`src/` vs `public/`"
+        },
+        {
+          "level": 3,
+          "text": "Remote images"
+        },
+        {
+          "level": 2,
+          "text": "Images in `.astro` files"
+        },
+        {
+          "level": 2,
+          "text": "Images in Markdown files"
+        },
+        {
+          "level": 2,
+          "text": "Images in MDX files"
+        },
+        {
+          "level": 2,
+          "text": "Images in UI framework components"
+        },
+        {
+          "level": 2,
+          "text": "Astro components for images"
+        },
+        {
+          "level": 3,
+          "text": "``"
+        },
+        {
+          "level": 3,
+          "text": "``"
+        },
+        {
+          "level": 3,
+          "text": "Responsive image behavior"
+        },
+        {
+          "level": 3,
+          "text": "SVG components"
+        },
+        {
+          "level": 3,
+          "text": "Creating custom image components"
+        },
+        {
+          "level": 2,
+          "text": "Display unprocessed images with the HTML `` tag"
+        },
+        {
+          "level": 3,
+          "text": "images in `src/`"
+        },
+        {
+          "level": 3,
+          "text": "Images in `public/`"
+        },
+        {
+          "level": 3,
+          "text": "Remote images"
+        },
+        {
+          "level": 3,
+          "text": "Choosing `` vs ``"
+        },
+        {
+          "level": 2,
+          "text": "Using Images from a CMS or CDN"
+        },
+        {
+          "level": 2,
+          "text": "Authorizing remote images"
+        },
+        {
+          "level": 2,
+          "text": "Images in content collections"
+        },
+        {
+          "level": 2,
+          "text": "Generating images with `getImage()`"
+        },
+        {
+          "level": 2,
+          "text": "Alt Text"
+        },
+        {
+          "level": 2,
+          "text": "Default image service"
+        },
+        {
+          "level": 3,
+          "text": "Configure no-op passthrough service"
+        },
+        {
+          "level": 2,
+          "text": "Asset Caching"
+        },
+        {
+          "level": 3,
+          "text": "Remote Images"
+        },
+        {
+          "level": 2,
+          "text": "Community Integrations"
+        }
+      ],
+      "bytes": 34097
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/integrations-guide/sitemap/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/integrations-guide/sitemap.mdx",
+      "fetch": "raw-mdx",
+      "title": "'@astrojs/sitemap'",
+      "description": "Learn how to use the @astrojs/sitemap integration in your Astro project.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Why Astro Sitemap"
+        },
+        {
+          "level": 2,
+          "text": "Installation"
+        },
+        {
+          "level": 3,
+          "text": "Manual Install"
+        },
+        {
+          "level": 2,
+          "text": "Usage"
+        },
+        {
+          "level": 3,
+          "text": "Sitemap discovery"
+        },
+        {
+          "level": 2,
+          "text": "Configuration"
+        },
+        {
+          "level": 3,
+          "text": "`filter()`"
+        },
+        {
+          "level": 3,
+          "text": "`customPages`"
+        },
+        {
+          "level": 3,
+          "text": "`customSitemaps`"
+        },
+        {
+          "level": 3,
+          "text": "`entryLimit`"
+        },
+        {
+          "level": 3,
+          "text": "`changefreq`, `lastmod`, and `priority`"
+        },
+        {
+          "level": 3,
+          "text": "`serialize()`"
+        },
+        {
+          "level": 3,
+          "text": "`chunks`"
+        },
+        {
+          "level": 3,
+          "text": "`i18n`"
+        },
+        {
+          "level": 3,
+          "text": "`xslURL`"
+        },
+        {
+          "level": 3,
+          "text": "`filenameBase`"
+        },
+        {
+          "level": 3,
+          "text": "`namespaces`"
+        },
+        {
+          "level": 2,
+          "text": "Astro Sitemap utilities reference"
+        },
+        {
+          "level": 3,
+          "text": "`ChangeFreqEnum`"
+        },
+        {
+          "level": 2,
+          "text": "Astro Sitemap types reference"
+        },
+        {
+          "level": 3,
+          "text": "`ChangeFreq`"
+        },
+        {
+          "level": 3,
+          "text": "`LinkItem`"
+        },
+        {
+          "level": 3,
+          "text": "`SitemapItem`"
+        },
+        {
+          "level": 3,
+          "text": "`SitemapOptions`"
+        },
+        {
+          "level": 2,
+          "text": "Examples"
+        }
+      ],
+      "bytes": 22338
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/deploy/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/deploy/index.mdx",
+      "fetch": "raw-mdx",
+      "title": "Deploy your Astro Site",
+      "description": "How to deploy your Astro site to the web.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Deployment Guides"
+        },
+        {
+          "level": 2,
+          "text": "Quick Deploy Options"
+        },
+        {
+          "level": 3,
+          "text": "Website UI"
+        },
+        {
+          "level": 3,
+          "text": "CLI Deployment"
+        },
+        {
+          "level": 2,
+          "text": "Building Your Site Locally"
+        },
+        {
+          "level": 2,
+          "text": "Adding an Adapter for on-demand rendering"
+        }
+      ],
+      "bytes": 5047
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/deploy/github/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/deploy/github.mdx",
+      "fetch": "raw-mdx",
+      "title": "Deploy your Astro Site to GitHub Pages",
+      "description": "How to deploy your Astro site to the web using GitHub Pages.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "How to deploy"
+        },
+        {
+          "level": 2,
+          "text": "Change your GitHub URL to a custom domain"
+        },
+        {
+          "level": 2,
+          "text": "Examples"
+        }
+      ],
+      "bytes": 8047
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/configuring-astro/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/configuring-astro.mdx",
+      "fetch": "raw-mdx",
+      "title": "Configuration overview",
+      "description": "Get to know the ways you can configure and customize your new project and your development experience.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "The Astro config File"
+        },
+        {
+          "level": 2,
+          "text": "The TypeScript config File"
+        },
+        {
+          "level": 2,
+          "text": "Development Experience"
+        },
+        {
+          "level": 2,
+          "text": "Common new project tasks"
+        },
+        {
+          "level": 3,
+          "text": "Add your deployment domain"
+        },
+        {
+          "level": 3,
+          "text": "Add site metadata"
+        }
+      ],
+      "bytes": 6004
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/typescript/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/typescript.mdx",
+      "fetch": "raw-mdx",
+      "title": "TypeScript",
+      "description": "Learn how to use Astro's built-in TypeScript support.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Setup"
+        },
+        {
+          "level": 3,
+          "text": "TSConfig templates"
+        },
+        {
+          "level": 3,
+          "text": "TypeScript editor plugin"
+        },
+        {
+          "level": 3,
+          "text": "UI Frameworks"
+        },
+        {
+          "level": 2,
+          "text": "Type Imports"
+        },
+        {
+          "level": 2,
+          "text": "Import Aliases"
+        },
+        {
+          "level": 2,
+          "text": "Extending global types"
+        },
+        {
+          "level": 3,
+          "text": "`window` and `globalThis`"
+        },
+        {
+          "level": 3,
+          "text": "Add non-standard attributes"
+        },
+        {
+          "level": 3,
+          "text": "Using imports"
+        },
+        {
+          "level": 2,
+          "text": "Component Props"
+        },
+        {
+          "level": 3,
+          "text": "Common prop type patterns"
+        },
+        {
+          "level": 2,
+          "text": "Type Utilities"
+        },
+        {
+          "level": 3,
+          "text": "Built-in HTML attributes"
+        },
+        {
+          "level": 3,
+          "text": "`ComponentProps` type"
+        },
+        {
+          "level": 3,
+          "text": "Polymorphic type"
+        },
+        {
+          "level": 3,
+          "text": "Infer `getStaticPaths()` types"
+        },
+        {
+          "level": 2,
+          "text": "Type checking"
+        },
+        {
+          "level": 2,
+          "text": "Troubleshooting"
+        },
+        {
+          "level": 3,
+          "text": "Errors typing multiple JSX frameworks at the same time"
+        }
+      ],
+      "bytes": 15194
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/environment-variables/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/environment-variables.mdx",
+      "fetch": "raw-mdx",
+      "title": "Using environment variables",
+      "description": "Learn how to use environment variables in an Astro project.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Vite's built-in support"
+        },
+        {
+          "level": 3,
+          "text": "IntelliSense for TypeScript"
+        },
+        {
+          "level": 2,
+          "text": "Default environment variables"
+        },
+        {
+          "level": 2,
+          "text": "Setting environment variables"
+        },
+        {
+          "level": 3,
+          "text": "`.env` files"
+        },
+        {
+          "level": 3,
+          "text": "In the Astro config file"
+        },
+        {
+          "level": 3,
+          "text": "Using the CLI"
+        },
+        {
+          "level": 2,
+          "text": "Getting environment variables"
+        },
+        {
+          "level": 2,
+          "text": "Type safe environment variables"
+        },
+        {
+          "level": 3,
+          "text": "Basic Usage"
+        },
+        {
+          "level": 3,
+          "text": "Variable types"
+        },
+        {
+          "level": 3,
+          "text": "Data types"
+        },
+        {
+          "level": 3,
+          "text": "Retrieving secrets dynamically"
+        },
+        {
+          "level": 3,
+          "text": "Limitations"
+        }
+      ],
+      "bytes": 13455
+    },
+    {
+      "url": "https://docs.astro.build/en/guides/backend/",
+      "raw_url": "https://raw.githubusercontent.com/withastro/docs/main/src/content/docs/en/guides/backend/index.mdx",
+      "fetch": "raw-mdx",
+      "title": "Use a backend service with Astro",
+      "description": "How to use a backend service to add authentication, storage and data",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Backend service guides"
+        },
+        {
+          "level": 2,
+          "text": "What is a backend service?"
+        },
+        {
+          "level": 2,
+          "text": "Why would I use a backend service?"
+        }
+      ],
+      "bytes": 1424
+    }
+  ]
+}

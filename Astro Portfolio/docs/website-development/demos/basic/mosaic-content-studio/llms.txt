@@ -1,0 +1,8 @@
+# Mosaic Content Studio
+
+Fictional Simple Website package demo.
+
+- Business type: Small creative/content agency
+- Package: Simple Website / Basic
+- Scope: one static page, direct contact links, basic metadata, no form backend, no CMS, no login, no payment flow.
+- Source package rules: see wiki/business/website-spec-basic.md in this workspace.
