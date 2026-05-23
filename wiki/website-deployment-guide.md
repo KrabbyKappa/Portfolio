@@ -8,6 +8,32 @@ tags: [website, astro, github-pages, deploy]
 related: [projects/astro-portfolio.md]
 ---
 
+# CRITICAL RULE — .harness/ Must Be Ignored
+
+**Incident (2026-05-23):** The `.harness/` directory contained embedded git worktrees that were accidentally tracked as gitlinks (submodule-like entries). This caused GitHub Actions to fail with:
+
+```
+fatal: No url found for submodule path '.harness/worktrees/package-demo-uniqueness/repo' in .gitmodules
+The process '/usr/bin/git' failed with exit code 128
+```
+
+**Root cause:** `.harness/` was not in `.gitignore`. Git saw the nested `.git` dirs inside `.harness/worktrees/*/` and tried to treat them as submodules.
+
+**Fix (permanent):** `.harness/` is now in repo root `.gitignore`:
+
+```
+node_modules/
+dist/
+.astro/
+.agent-artifacts/
+.DS_Store
+.harness/          ← required — prevents GitHub Actions submodule error
+```
+
+**Never remove `.harness/` from `.gitignore`**, even if other `.gitignore` entries are cleaned up. The `.harness/` directory holds Kanban/worktree state and must never be pushed to the Portfolio repo.
+
+---
+
 # Website Deployment Guide — Astro Portfolio
 
 ## What gets deployed
