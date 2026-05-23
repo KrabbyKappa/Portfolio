@@ -3,3 +3,4 @@ dist/
 .astro/
 .agent-artifacts/
 .DS_Store
+.harness/
