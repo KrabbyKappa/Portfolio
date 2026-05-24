@@ -1,0 +1,14 @@
+---
+import AnswerLayout from '../../../layouts/AnswerLayout.astro';
+import { entityAnswerClusters } from '../../../data/seo/answerClusters';
+
+export function getStaticPaths() {
+  return entityAnswerClusters.map((cluster) => ({
+    params: { slug: cluster.slug },
+    props: { cluster },
+  }));
+}
+
+const { cluster } = Astro.props;
+---
+<AnswerLayout cluster={cluster} />

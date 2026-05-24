@@ -1,11 +1,15 @@
 ---
 import ShowcaseLayout from '../../layouts/ShowcaseLayout.astro';
+import { Image } from 'astro:assets';
+import { serviceFaq } from '../../data/seo/serviceFaq';
 
 const realCaseStudies = [
   {
     name: 'Bizwholistic',
     href: 'https://bizwholistic.com/',
     image: 'assets/site-previews/bizwholistic.jpg',
+    imageWidth: 1440,
+    imageHeight: 980,
     summary: 'Built in Astro for speed and reliability, this professional website adapts Bizwholistic’s logos and branding into clear, trustworthy pages with custom graphics tailored to how the business works.',
   },
 ];
@@ -15,6 +19,8 @@ const selectedDemos = [
     name: 'Mosaic Content Studio',
     slug: 'mosaic-content-studio',
     image: 'assets/site-previews/mosaic-content-studio.jpg',
+    imageWidth: 1440,
+    imageHeight: 980,
     href: 'demos/basic/mosaic-content-studio/',
     cardClass: 'demo-card--creative',
     livePreview: true,
@@ -25,6 +31,8 @@ const selectedDemos = [
     name: 'Verde Lunch Club',
     slug: 'verde-lunch-club',
     image: 'assets/site-previews/verde-lunch-club.jpg',
+    imageWidth: 1440,
+    imageHeight: 980,
     href: 'demos/basic/verde-lunch-club/',
     cardClass: 'demo-card--green',
     summary: 'Garden, menu, map, and visit context for a small lunch and catering brand.',
@@ -34,6 +42,8 @@ const selectedDemos = [
     name: 'Mila Yoga Reset',
     slug: 'mila-yoga-testimonial',
     image: 'assets/site-previews/mila-yoga-testimonial.jpg',
+    imageWidth: 1440,
+    imageHeight: 980,
     href: 'demos/micro/mila-yoga-testimonial/',
     cardClass: 'demo-card--soft',
     summary: 'Soft studio page for a solo wellness service and testimonial-led presence.',
@@ -43,6 +53,8 @@ const selectedDemos = [
     name: 'Harbor Legal Translation',
     slug: 'harbor-legal-translation',
     image: 'assets/site-previews/harbor-legal-translation.jpg',
+    imageWidth: 3024,
+    imageHeight: 1718,
     href: 'demos/basic/harbor-legal-translation/',
     cardClass: 'demo-card--legal',
     summary: 'Certified legal-translation intake page with dossier styling, service boundaries, and direct handoff.',
@@ -52,12 +64,16 @@ const selectedDemos = [
     name: 'City Lab Pop-Up',
     slug: 'city-lab-pop-up',
     image: 'assets/site-previews/city-lab-pop-up.jpg',
+    imageWidth: 1440,
+    imageHeight: 980,
     href: 'demos/micro/city-lab-pop-up/',
     cardClass: 'demo-card--bright',
     summary: 'Fluorescent event-poster direction for a one-page workshop announcement.',
     proof: 'Best for proving a Micro page can be loud, focused, and useful without forms, booking, or backend scope.',
   },
 ];
+
+const websiteAsset = (path) => `/website-development/${path}`;
 
 // Process illustration controls.
 // Edit these values when tuning the three SVGs in the browser:
@@ -85,7 +101,7 @@ const processArtStyle = ({ x = '0rem', y = '0rem', scale = 1, width = '13rem', b
 
 const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) scale(${scale})`;
 ---
-<ShowcaseLayout title="Your Ideal Website – Luca Kosowski" description="A premium showcase of live case-study context and selected showcase sites for Luca Kosowski's Website Development portfolio." ogTitle="Your Ideal Website – Luca Kosowski" ogDescription="Explore a live business case study, polished visual previews, and complete showcase routes for different website directions.">
+<ShowcaseLayout title="Your Ideal Website – Luca Kosowski" description="A premium showcase of live case-study context and selected showcase sites for Luca Kosowski's Website Development portfolio." canonicalPath="/website-development/" ogTitle="Your Ideal Website – Luca Kosowski" ogDescription="Explore a live business case study, polished visual previews, and complete showcase routes for different website directions." faqItems={serviceFaq}>
 <a class="skip-link" href="#strategy">Skip to website process</a>
 
 
@@ -111,7 +127,7 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
             <article class="demo-card demo-card--featured demo-card--case-study" data-case-study="bizwholistic">
               <a class="case-study-link" href={study.href} aria-label={`Open the live ${study.name} website`}>
                 <figure class="site-shot">
-                  <img src={study.image} width="1440" height="980" alt={`${study.name} website screenshot`} decoding="async">
+                  <Image src={websiteAsset(study.image)} width={study.imageWidth} height={study.imageHeight} alt={`${study.name} website screenshot`} loading="eager" decoding="async" />
                 </figure>
                 <h3>{study.name}</h3>
                 <p>{study.summary}</p>
@@ -148,7 +164,7 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
           <article>
             <div class="process-illustration process-illustration--ideas" data-process-art="ideas" style={processArtStyle(processIllustrationControls.ideas)} aria-hidden="true">
               <div class="process-illustration__stage">
-                <img src="assets/process/three-starting-ideas.svg" alt="" loading="lazy" decoding="async">
+                <Image src="/website-development/assets/process/three-starting-ideas.svg" width={150} height={150} alt="" loading="lazy" decoding="async" />
               </div>
             </div>
             <strong>Three starting ideas</strong>
@@ -157,7 +173,7 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
           <article>
             <div class="process-illustration process-illustration--together" data-process-art="together" style={processArtStyle(processIllustrationControls.together)} aria-hidden="true">
               <div class="process-illustration__stage">
-                <img src="assets/process/shape-it-together-two-hands.svg" alt="" loading="lazy" decoding="async">
+                <Image src="/website-development/assets/process/shape-it-together-two-hands.svg" width={150} height={150} alt="" loading="lazy" decoding="async" />
               </div>
             </div>
             <strong>Shape it together</strong>
@@ -166,7 +182,7 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
           <article>
             <div class="process-illustration process-illustration--delivered" data-process-art="delivered" style={processArtStyle(processIllustrationControls.delivered)} aria-hidden="true">
               <div class="process-illustration__stage">
-                <img src="assets/process/final-result.svg" alt="" loading="lazy" decoding="async">
+                <Image src="/website-development/assets/process/final-result.svg" width={150} height={150} alt="" loading="lazy" decoding="async" />
                 <svg class="process-sparkle-layer" viewBox="0 0 180 124" focusable="false">
                   <g data-sparkle="one" transform={sparkleTransform(processSparkleControls.one)}>
                     <path class="process-sparkle process-sparkle--one" d="M0 -16 C2.8 -5.8 5.8 -2.8 16 0 C5.8 2.8 2.8 5.8 0 16 C-2.8 5.8 -5.8 2.8 -16 0 C-5.8 -2.8 -2.8 -5.8 0 -16Z"></path>
@@ -181,7 +197,7 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
               </div>
             </div>
             <strong>Built and delivered</strong>
-            <span>I build and deliver the website. Simple template-like one page websites are usually ready in 3 days.</span>
+            <span>I build and deliver the website. Simple template-like one-page websites are usually ready in 3 days after you provide the content and direction, subject to scope.</span>
           </article>
         </div>
       </div>
@@ -210,16 +226,16 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
                     data-live-demo-preview={demo.slug}
                     src={demo.href}
                     title={`Live animated preview of the ${demo.name} Astro showcase`}
-                    loading="eager"
+                    loading="lazy"
                     referrerpolicy="no-referrer"
                     sandbox="allow-same-origin"
                     scrolling="no"
                     tabindex="-1"
                   ></iframe>
-                  <img class="live-preview-fallback" src={demo.image} width="1440" height="980" alt="" decoding="async" aria-hidden="true">
+                  <Image class="live-preview-fallback" src={websiteAsset(demo.image)} width={demo.imageWidth} height={demo.imageHeight} alt="" loading="lazy" decoding="async" aria-hidden="true" />
                 </div>
               ) : (
-                <img src={demo.image} width="1440" height="980" alt={`Screenshot preview of the ${demo.name} website`} decoding="async">
+                <Image src={websiteAsset(demo.image)} width={demo.imageWidth} height={demo.imageHeight} alt={`Screenshot preview of the ${demo.name} website`} loading="lazy" decoding="async" />
               )}
             </figure>
             <h3>{demo.name}</h3>
@@ -229,6 +245,24 @@ const sparkleTransform = ({ x = 0, y = 0, scale = 1 }) => `translate(${x} ${y}) 
               <span class="demo-action-label">Open full Astro showcase</span>
             </div>
           </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="service-faq" class="scope-note decision-note service-faq" aria-labelledby="service-faq-heading">
+      <p class="eyebrow">Common questions</p>
+      <h2 id="service-faq-heading">Questions before starting a website</h2>
+      <div class="service-faq-list service-faq-list--dropdown" aria-label="Website-development frequently asked questions">
+        {serviceFaq.map((item) => (
+          <details class="service-faq-item" data-service-faq-item={item.question}>
+            <summary data-faq-summary>
+              <span>{item.question}</span>
+              <span class="service-faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="service-faq-answer">
+              <p>{item.answer}</p>
+            </div>
+          </details>
         ))}
       </div>
     </section>

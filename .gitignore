@@ -3,4 +3,10 @@ dist/
 .astro/
 .agent-artifacts/
 .DS_Store
+.claude/
+.impeccable/
 .harness/
+Graphify/
+wiki/
+package-demo-pages/
+verify_*.py

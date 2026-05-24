@@ -1,9 +1,13 @@
 ---
-import { site } from '../data/site';
+import { seoSite } from '../data/seo/site';
+import SeoJsonLd from '../components/SeoJsonLd.astro';
+import { assetUrl, canonicalUrl, routeOrFallback } from '../lib/seo/url';
+import { schemaForRoute } from '../lib/seo/schema';
 
 interface Props {
   title: string;
   description: string;
+  canonicalPath?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
@@ -12,30 +16,46 @@ interface Props {
 const {
   title,
   description,
+  canonicalPath = '/',
   ogTitle = title,
   ogDescription = description,
-  ogImage = '/profile.jpg',
+  ogImage = seoSite.defaultImage,
 } = Astro.props;
+
+const route = routeOrFallback(canonicalPath, { title, description });
+const pageTitle = title || route.title;
+const pageDescription = description || route.description;
+const canonical = canonicalUrl(route.path);
+const ogImageUrl = assetUrl(ogImage);
+const schema = schemaForRoute({ path: route.path, title: pageTitle, description: pageDescription, family: route.family });
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang={route.language}>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content={description}>
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription}>
+  <link rel="canonical" href={canonical}>
 
   <meta property="og:title" content={ogTitle}>
   <meta property="og:description" content={ogDescription}>
-  <meta property="og:image" content={ogImage}>
+  <meta property="og:image" content={ogImageUrl}>
   <meta property="og:type" content="website">
+  <meta property="og:url" content={canonical}>
+  <meta property="og:site_name" content={seoSite.name}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={ogTitle}>
+  <meta name="twitter:description" content={ogDescription}>
+  <meta name="twitter:image" content={ogImageUrl}>
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <script is:inline data-goatcounter={site.goatCounter} async src="https://gc.zgo.at/count.js"></script>
+  <script is:inline data-goatcounter={seoSite.goatCounter} async src="https://gc.zgo.at/count.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <SeoJsonLd data={schema} />
 </head>
 <body>
   <slot />
