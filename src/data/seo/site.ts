@@ -48,7 +48,7 @@ export const seoRoutes: SeoRouteRecord[] = [
   {
     path: '/references.html',
     title: 'References – Luca Kosowski',
-    description: 'Professional reference letters for Luca Kosowski.',
+    description: 'Professional reference letters for Luca Kosowski in English and Italian, with direct PDF access and contact context for recruiters and collaborators.',
     family: 'reference',
     language: 'en',
   },
