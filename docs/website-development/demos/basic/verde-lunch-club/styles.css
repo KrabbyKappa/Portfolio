@@ -105,3 +105,25 @@ footer a { color: var(--leaf); font-weight: 900; }
 @media (max-width: 940px) { .dish-grid, .market-proof, .owner-note, .patio-proof, .visit-panel, .close-cta { grid-template-columns: 1fr; } .hours-card { position: relative; right: auto; bottom: auto; margin-top: 28px; } .menu-board { align-items: center; } }
 @media (max-width: 600px) { .verde-header, footer { flex-direction: column; align-items: flex-start; border-radius: 24px; } nav { justify-content: flex-start; } main { width: calc(100% - 22px); } section { margin: 48px 0; } .menu-board { padding: 26px 18px; border-radius: 26px; min-height: 720px; } .hero-veil { background: linear-gradient(180deg, rgba(12,47,29,.68), rgba(12,47,29,.78)); } h1 { font-size: clamp(3rem, 18vw, 4.7rem); } .verde-actions, .verde-button { width: 100%; } .google-map-frame { min-height: 300px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+
+.demo-back-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.88);
+  color: #111827;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(15,23,42,0.16);
+  backdrop-filter: blur(12px);
+}
+.demo-back-link:focus-visible {
+  outline: 3px solid rgba(47,111,174,0.55);
+  outline-offset: 4px;
+}
