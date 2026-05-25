@@ -19,6 +19,7 @@
   <meta name="twitter:image" content="https://lucakosowski.com/profile.jpg">
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="/profile-660.jpg" imagesrcset="/profile-440.jpg 440w, /profile-660.jpg 660w, /profile.jpg 937w" imagesizes="(max-width: 680px) 160px, 220px" fetchpriority="high">
   <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,8 +50,7 @@
   <main>
     <section id="hero" class="hero-section">
       <div class="hero-content">
-        
-<img src="/profile.jpg" alt="Luca Kosowski" loading="eager" decoding="async" fetchpriority="auto" width="937" height="1020" class="profile-image">
+        <img src="/profile-660.jpg" srcset="/profile-440.jpg 440w, /profile-660.jpg 660w, /profile.jpg 937w" sizes="(max-width: 680px) 160px, 220px" alt="Luca Kosowski" width="660" height="660" class="profile-image" loading="eager" decoding="async" fetchpriority="high">
         <h1 class="hero-title">Luca Kosowski</h1>
         
         <p class="hero-lead">Multilingual professional based in Kuala Lumpur, currently providing Digital and Marketing Services for Bizwholistic Ltd. Formerly, legal operations, diplomatic project coordination, stakeholder liaison, and public-facing digital content.</p>
@@ -285,7 +285,7 @@
               <span class="preview-link">View Project</span>
             </div>
           </a>
-          <a class="preview-card preview-card--showcase preview-card--clickable" href="website-development/" aria-label="Open the Website Development Project showcase">
+          <a class="preview-card preview-card--showcase preview-card--clickable" href="website-development/">
             <div class="showcase-thumb showcase-thumb--trsnparent_wheel-mini showcase-thumb--scroll-mini" data-trsnparent-mini-wheel aria-hidden="true">
               <div class="mini-cylinder-wrap mini-showcase-rail">
                 <figure class="mini-cylinder-item mini-showcase-slide">

@@ -17,6 +17,10 @@
   <meta name="twitter:description" content="Explore a live business case study, polished visual previews, and complete showcase routes for different website directions.">
   <meta name="twitter:image" content="https://lucakosowski.com/website-development/assets/site-previews/bizwholistic.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  
+      <link rel="preload" as="image" href="/website-development/assets/site-previews/mobile/bizwholistic-mobile-v2.jpg" media="(max-width: 720px)" fetchpriority="high">
+      <link rel="preload" as="image" href="/website-development/assets/site-previews/bizwholistic.jpg" media="(min-width: 721px)" fetchpriority="high">
+    
   <link rel="stylesheet" href="/website-development/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -215,6 +219,7 @@
       const lavaLayer = document.querySelector('[data-lava-lamp-bg]');
       const lavaCanvas = lavaLayer?.querySelector('[data-lava-canvas]');
       const lavaMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const lavaMobileQuery = window.matchMedia('(max-width: 720px)');
       const randomBetween = (min, max) => min + Math.random() * (max - min);
       if (lavaCanvas) {
         const ctx = lavaCanvas.getContext('2d', { alpha: true });
@@ -265,16 +270,17 @@
             lavaCanvas.width = lavaWidth;
             lavaCanvas.height = lavaHeight;
           };
+          const shouldAnimateLava = () => !lavaMotionQuery.matches && !lavaMobileQuery.matches && !document.hidden;
           const drawLava = (now, force = false) => {
             if (!force && now - lastLavaFrame < LAVA_FRAME_MS) {
-              requestAnimationFrame(drawLava);
+              if (shouldAnimateLava()) requestAnimationFrame(drawLava);
               return;
             }
             lastLavaFrame = now;
             ctx.clearRect(0, 0, lavaWidth, lavaHeight);
             blobs.forEach((blob) => {
-              if (!lavaMotionQuery.matches && now - blob.startedAt >= blob.duration) retarget(blob, now);
-              const t = lavaMotionQuery.matches ? 0.35 : ease(Math.min(1, Math.max(0, (now - blob.startedAt) / blob.duration)));
+              if (shouldAnimateLava() && now - blob.startedAt >= blob.duration) retarget(blob, now);
+              const t = shouldAnimateLava() ? ease(Math.min(1, Math.max(0, (now - blob.startedAt) / blob.duration))) : 0.35;
               blob.current = {
                 x: mix(blob.start.x, blob.target.x, t),
                 y: mix(blob.start.y, blob.target.y, t),
@@ -297,7 +303,7 @@
               ctx.fill();
               ctx.restore();
             });
-            if (!lavaMotionQuery.matches && !document.hidden) requestAnimationFrame(drawLava);
+            if (shouldAnimateLava()) requestAnimationFrame(drawLava);
           };
           resizeLava();
           drawLava(performance.now(), true);
@@ -314,7 +320,8 @@
             if (!document.hidden && !lavaMotionQuery.matches) requestAnimationFrame(drawLava);
           });
           lavaMotionQuery.addEventListener?.('change', () => drawLava(performance.now(), true));
-          if (!lavaMotionQuery.matches) requestAnimationFrame(drawLava);
+          lavaMobileQuery.addEventListener?.('change', () => drawLava(performance.now(), true));
+          if (shouldAnimateLava()) requestAnimationFrame(drawLava);
         }
       }
 
@@ -361,6 +368,7 @@
       const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       const view = stage.querySelector('[data-cylinder-view]');
       const dragHint = stage.querySelector('[data-carousel-drag-hint]');
+      const mobileCarouselQuery = window.matchMedia('(max-width: 720px)');
       const AUTOPLAY_DEGREES_PER_MS = 360 / (7 * 60 * 1000);
       const HOVER_IDLE_AUTOPLAY_DELAY_MS = 3500;
       const HOVER_MAGNET_MAX_STEP_DEGREES = 0.16;
@@ -428,7 +436,7 @@
       };
 
       const layout = () => {
-        const cardWidth = wrap.getBoundingClientRect().width + 42;
+        const cardWidth = (wrap.offsetWidth || Number.parseFloat(getComputedStyle(wrap).width) || wrap.getBoundingClientRect().width) + 42;
         const naturalRadius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count));
         const mobileMinimumRadius = window.innerWidth < 720 ? 188 : 0;
         radius = Math.max(naturalRadius, mobileMinimumRadius);
@@ -661,6 +669,9 @@
       reduceMotionQuery.addEventListener?.('change', () => {
         manualHoldUntil = reduceMotionQuery.matches ? Number.POSITIVE_INFINITY : 0;
       });
+      mobileCarouselQuery.addEventListener?.('change', () => {
+        if (mobileCarouselQuery.matches) holdAutoplayBriefly();
+      });
 
       const animate = (now) => {
         const delta = Math.min(80, now - lastFrame);
@@ -674,12 +685,17 @@
           targetAngle += magnetAngularVelocity * stepScale;
           magnetAngularVelocity *= window.innerWidth < 720 ? 0.975 : 0.94;
         }
-        const autoplayAllowed = !reduceMotionQuery.matches && !isDragging && !hoverActive && !inertiaActive && now >= manualHoldUntil;
+        const autoplayAllowed = !mobileCarouselQuery.matches && !reduceMotionQuery.matches && !isDragging && !hoverActive && !inertiaActive && now >= manualHoldUntil;
         if (autoplayAllowed) {
           targetAngle -= delta * AUTOPLAY_DEGREES_PER_MS;
         }
-        currentAngle += (targetAngle - currentAngle) * 0.08;
-        wrap.style.transform = `rotateY(${currentAngle}deg)`;
+        const nextAngle = currentAngle + (targetAngle - currentAngle) * 0.08;
+        if (Math.abs(nextAngle - currentAngle) > 0.002) {
+          currentAngle = nextAngle;
+          wrap.style.transform = `rotateY(${currentAngle}deg)`;
+        } else {
+          currentAngle = targetAngle;
+        }
         const active = normalizeIndex();
         if (active !== lastActive) {
           updateFocusable(active);

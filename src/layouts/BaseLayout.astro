@@ -28,6 +28,7 @@ const pageDescription = description || route.description;
 const canonical = canonicalUrl(route.path);
 const ogImageUrl = assetUrl(ogImage);
 const schema = schemaForRoute({ path: route.path, title: pageTitle, description: pageDescription, family: route.family });
+const isHomeRoute = route.path === '/';
 ---
 <!DOCTYPE html>
 <html lang={route.language}>
@@ -50,6 +51,16 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
   <meta name="twitter:image" content={ogImageUrl}>
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  {isHomeRoute && (
+    <link
+      rel="preload"
+      as="image"
+      href="/profile-660.jpg"
+      imagesrcset="/profile-440.jpg 440w, /profile-660.jpg 660w, /profile.jpg 937w"
+      imagesizes="(max-width: 680px) 160px, 220px"
+      fetchpriority="high"
+    />
+  )}
   <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

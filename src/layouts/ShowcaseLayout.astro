@@ -30,6 +30,7 @@ const pageDescription = description || route.description;
 const canonical = canonicalUrl(route.path);
 const ogImageUrl = assetUrl(ogImage);
 const schema = schemaForRoute({ path: route.path, title: pageTitle, description: pageDescription, family: route.family, faqItems });
+const isWebsiteDevelopmentRoute = route.path === '/website-development/';
 ---
 <!DOCTYPE html>
 <html lang={route.language}>
@@ -50,6 +51,12 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
   <meta name="twitter:description" content={ogDescription}>
   <meta name="twitter:image" content={ogImageUrl}>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  {isWebsiteDevelopmentRoute && (
+    <>
+      <link rel="preload" as="image" href="/website-development/assets/site-previews/mobile/bizwholistic-mobile-v2.jpg" media="(max-width: 720px)" fetchpriority="high">
+      <link rel="preload" as="image" href="/website-development/assets/site-previews/bizwholistic.jpg" media="(min-width: 721px)" fetchpriority="high">
+    </>
+  )}
   <link rel="stylesheet" href="/website-development/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

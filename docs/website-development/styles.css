@@ -985,7 +985,7 @@ p {
   overflow: hidden;
   border: 1px solid rgba(36,49,70,0.16);
   border-radius: clamp(16px, 2.2vw, 26px);
-  background: #fff var(--cylinder-image) top center / cover no-repeat;
+  background: #fff;
   box-shadow: 0 22px 44px rgba(31,42,58,0.22), inset 0 1px 0 rgba(255,255,255,0.42);
   color: #fff;
   transform: rotateY(var(--cylinder-angle)) translateZ(420px);
@@ -1133,12 +1133,9 @@ p {
     aspect-ratio: 390 / 844;
   }
 
-  .cylinder-item {
-    background-image: var(--cylinder-mobile-image);
-  }
-
   .cylinder-item img {
     object-fit: contain;
+    transform: translateZ(0);
   }
 
   .cylinder-item:not(.is-active) {
