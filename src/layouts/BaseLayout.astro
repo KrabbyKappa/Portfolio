@@ -97,6 +97,8 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
         let currentAngle = 0;
         let targetAngle = 0;
         let isDragging = false;
+        let dragIntent = 'idle';
+        let dragPointerId = 0;
         let startX = 0;
         let startY = 0;
         let startAngle = 0;
@@ -104,7 +106,7 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
         let frame = 0;
 
         const updateDepth = () => {
-          const width = wrap.getBoundingClientRect().width || 150;
+          const width = wrap.offsetWidth || Number.parseFloat(getComputedStyle(wrap).width) || 150;
           const naturalRadius = Math.round((width / 2) / Math.tan(Math.PI / items.length));
           const radius = Math.max(96, Math.min(naturalRadius + 22, wheel.closest('.showcase-bridge') ? 150 : 124));
           wheel.style.setProperty('--mini-cylinder-depth', `${radius}px`);
@@ -132,19 +134,42 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
         };
         const start = (event) => {
           if (event.button !== undefined && event.button !== 0) return;
+          const isTouchPointer = event.pointerType === 'touch';
           isDragging = true;
+          dragIntent = isTouchPointer ? 'pending' : 'horizontal';
+          dragPointerId = event.pointerId;
           didDrag = false;
           startX = event.clientX;
           startY = event.clientY;
           startAngle = targetAngle;
-          wheel.classList.add('is-dragging');
-          wheel.setPointerCapture?.(event.pointerId);
+          if (!isTouchPointer) {
+            wheel.classList.add('is-dragging');
+            wheel.setPointerCapture?.(event.pointerId);
+          }
         };
         const move = (event) => {
           if (!isDragging) return;
           const dx = event.clientX - startX;
           const dy = event.clientY - startY;
-          if (Math.abs(dx) > 4 && Math.abs(dx) > Math.abs(dy)) {
+          const absX = Math.abs(dx);
+          const absY = Math.abs(dy);
+          if (dragIntent === 'pending') {
+            if (absY > 8 && absY > absX * 1.15) {
+              isDragging = false;
+              dragIntent = 'idle';
+              dragPointerId = 0;
+              wheel.classList.remove('is-dragging');
+              return;
+            }
+            if (absX > 8 && absX > absY * 1.15) {
+              dragIntent = 'horizontal';
+              wheel.classList.add('is-dragging');
+              wheel.setPointerCapture?.(dragPointerId);
+            } else {
+              return;
+            }
+          }
+          if (absX > 4 && absX > absY) {
             event.preventDefault();
             didDrag = true;
             targetAngle = startAngle + dx * 0.34;
@@ -156,6 +181,8 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
         const end = (event) => {
           if (!isDragging) return;
           isDragging = false;
+          dragIntent = 'idle';
+          dragPointerId = 0;
           wheel.classList.remove('is-dragging');
           wheel.releasePointerCapture?.(event.pointerId);
           if (didDrag) snap();

@@ -345,6 +345,9 @@ const cylinderItems = [
       let dragStartAngle = 0;
       let dragStartCenterX = 0;
       let dragGrabOffsetX = 0;
+      let dragIntent = 'idle';
+      let dragPointerId = 0;
+      let startY = 0;
       let dragMoved = false;
       let lastDragX = 0;
       let lastDragTime = 0;
@@ -379,7 +382,8 @@ const cylinderItems = [
       const layout = () => {
         const cardWidth = wrap.getBoundingClientRect().width + 42;
         const naturalRadius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count));
-        radius = naturalRadius;
+        const mobileMinimumRadius = window.innerWidth < 720 ? 188 : 0;
+        radius = Math.max(naturalRadius, mobileMinimumRadius);
         items.forEach((item, index) => {
           item.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
         });
@@ -500,15 +504,19 @@ const cylinderItems = [
 
       const start = (event) => {
         if (event.button !== 0) return;
-        event.preventDefault();
+        const isTouchPointer = event.pointerType === 'touch';
+        if (!isTouchPointer) event.preventDefault();
         holdAutoplayBriefly();
         hideDragHint();
         isDragging = true;
+        dragIntent = isTouchPointer ? 'pending' : 'horizontal';
+        dragPointerId = event.pointerId;
         dragMoved = false;
         magnetAngularVelocity = 0;
         magnetLockedIndex = -1;
         dragAngularVelocity = 0;
         startX = event.clientX;
+        startY = event.clientY;
         lastDragX = event.clientX;
         lastDragTime = performance.now();
         dragStartAngle = targetAngle;
@@ -524,8 +532,10 @@ const cylinderItems = [
         dragStartCenterX = grabbedItem?.centerX || event.clientX;
         dragGrabOffsetX = event.clientX - dragStartCenterX;
 
-        view?.setPointerCapture?.(event.pointerId);
-        view?.classList.add('is-dragging');
+        if (!isTouchPointer) {
+          view?.setPointerCapture?.(event.pointerId);
+          view?.classList.add('is-dragging');
+        }
       };
 
       const move = (event) => {
@@ -533,9 +543,29 @@ const cylinderItems = [
           updateHover(event);
           return;
         }
+        const deltaX = event.clientX - startX;
+        const deltaY = event.clientY - startY;
+        if (dragIntent === 'pending') {
+          const absX = Math.abs(deltaX);
+          const absY = Math.abs(deltaY);
+          if (absY > 8 && absY > absX * 1.15) {
+            isDragging = false;
+            dragIntent = 'idle';
+            dragPointerId = 0;
+            view?.classList.remove('is-dragging');
+            return;
+          }
+          if (absX > 8 && absX > absY * 1.15) {
+            dragIntent = 'horizontal';
+            view?.setPointerCapture?.(dragPointerId);
+            view?.classList.add('is-dragging');
+          } else {
+            return;
+          }
+        }
         event.preventDefault();
         const now = performance.now();
-        const dragDistance = event.clientX - startX;
+        const dragDistance = deltaX;
         const elapsed = Math.max(8, now - lastDragTime);
         dragMoved = dragMoved || Math.abs(dragDistance) > DRAG_CLICK_THRESHOLD_PX;
         dragAngularVelocity = ((event.clientX - lastDragX) * DRAG_DEGREES_PER_PX / elapsed) * 16.67;
@@ -550,6 +580,8 @@ const cylinderItems = [
       const end = (event) => {
         if (!isDragging) return;
         isDragging = false;
+        dragIntent = 'idle';
+        dragPointerId = 0;
         view?.releasePointerCapture?.(event.pointerId);
         view?.classList.remove('is-dragging');
         if (dragMoved) suppressClickUntil = performance.now() + 350;

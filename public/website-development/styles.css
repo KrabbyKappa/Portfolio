@@ -28,6 +28,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg-2);
+  overflow-x: hidden;
   overscroll-behavior: none;
 }
 
@@ -1106,8 +1107,8 @@ p {
 
   .view-home {
     min-height: 460px;
-    overflow: hidden;
-    touch-action: none;
+    overflow: visible;
+    touch-action: pan-y;
   }
 
   .cylinder-wrap {
