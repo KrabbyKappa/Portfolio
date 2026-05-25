@@ -370,6 +370,7 @@
       const HOVER_CENTER_LOCK_MAX_DISTANCE_PX = 48;
       const HOVER_CENTER_LOCK_SWITCH_DISTANCE_PX = 260;
       const DRAG_DEGREES_PER_PX = 0.26;
+      const MOBILE_DRAG_DEGREES_PER_PX = 0.32;
       const DRAG_CLICK_THRESHOLD_PX = 6;
       const MANUAL_RESUME_DELAY_MS = 4200;
       const HINT_INITIAL_DELAY_MS = 1000;
@@ -394,6 +395,7 @@
       let dragIntent = 'idle';
       let dragPointerId = 0;
       let startY = 0;
+      let lastTouchY = 0;
       let dragMoved = false;
       let lastDragX = 0;
       let lastDragTime = 0;
@@ -551,11 +553,12 @@
       const start = (event) => {
         if (event.button !== 0) return;
         const isTouchPointer = event.pointerType === 'touch';
-        if (!isTouchPointer) event.preventDefault();
+        if (isTouchPointer) event.preventDefault();
+        else event.preventDefault();
         holdAutoplayBriefly();
         hideDragHint();
         isDragging = true;
-        dragIntent = isTouchPointer ? 'pending' : 'horizontal';
+        dragIntent = isTouchPointer ? 'touch' : 'horizontal';
         dragPointerId = event.pointerId;
         dragMoved = false;
         magnetAngularVelocity = 0;
@@ -563,6 +566,7 @@
         dragAngularVelocity = 0;
         startX = event.clientX;
         startY = event.clientY;
+        lastTouchY = event.clientY;
         lastDragX = event.clientX;
         lastDragTime = performance.now();
         dragStartAngle = targetAngle;
@@ -578,10 +582,8 @@
         dragStartCenterX = grabbedItem?.centerX || event.clientX;
         dragGrabOffsetX = event.clientX - dragStartCenterX;
 
-        if (!isTouchPointer) {
-          view?.setPointerCapture?.(event.pointerId);
-          view?.classList.add('is-dragging');
-        }
+        view?.setPointerCapture?.(event.pointerId);
+        view?.classList.add('is-dragging');
       };
 
       const move = (event) => {
@@ -590,33 +592,22 @@
           return;
         }
         const deltaX = event.clientX - startX;
-        const deltaY = event.clientY - startY;
-        if (dragIntent === 'pending') {
-          const absX = Math.abs(deltaX);
-          const absY = Math.abs(deltaY);
-          if (absY > 8 && absY > absX * 1.15) {
-            isDragging = false;
-            dragIntent = 'idle';
-            dragPointerId = 0;
-            view?.classList.remove('is-dragging');
-            return;
-          }
-          if (absX > 8 && absX > absY * 1.15) {
-            dragIntent = 'horizontal';
-            view?.setPointerCapture?.(dragPointerId);
-            view?.classList.add('is-dragging');
-          } else {
-            return;
-          }
+        if (event.pointerType === 'touch') {
+          event.preventDefault();
+          const scrollDeltaY = lastTouchY - event.clientY;
+          if (Math.abs(scrollDeltaY) > 0.2) window.scrollBy(0, scrollDeltaY);
+          lastTouchY = event.clientY;
+        } else {
+          event.preventDefault();
         }
-        event.preventDefault();
         const now = performance.now();
         const dragDistance = deltaX;
         const elapsed = Math.max(8, now - lastDragTime);
         dragMoved = dragMoved || Math.abs(dragDistance) > DRAG_CLICK_THRESHOLD_PX;
-        dragAngularVelocity = ((event.clientX - lastDragX) * DRAG_DEGREES_PER_PX / elapsed) * 16.67;
+        const dragDegreesPerPx = window.innerWidth < 720 ? MOBILE_DRAG_DEGREES_PER_PX : DRAG_DEGREES_PER_PX;
+        dragAngularVelocity = ((event.clientX - lastDragX) * dragDegreesPerPx / elapsed) * 16.67;
         const grabbedTargetX = event.clientX - dragGrabOffsetX;
-        targetAngle = dragStartAngle + (grabbedTargetX - dragStartCenterX) * DRAG_DEGREES_PER_PX;
+        targetAngle = dragStartAngle + (grabbedTargetX - dragStartCenterX) * dragDegreesPerPx;
         currentAngle = targetAngle;
         wrap.style.transform = `rotateY(${currentAngle}deg)`;
         lastDragX = event.clientX;
@@ -631,12 +622,10 @@
         view?.releasePointerCapture?.(event.pointerId);
         view?.classList.remove('is-dragging');
         if (dragMoved) suppressClickUntil = performance.now() + 350;
-        if (window.innerWidth < 720) {
-          snap();
-          magnetAngularVelocity = 0;
-        } else {
-          magnetAngularVelocity = Math.max(-5.2, Math.min(5.2, dragAngularVelocity * 0.72));
-        }
+        const mobileRelease = window.innerWidth < 720;
+        const releaseMultiplier = mobileRelease ? 1.24 : 0.72;
+        const releaseLimit = mobileRelease ? 12.5 : 5.2;
+        magnetAngularVelocity = Math.max(-releaseLimit, Math.min(releaseLimit, dragAngularVelocity * releaseMultiplier));
       };
 
       view?.addEventListener('pointerenter', (event) => {
@@ -683,7 +672,7 @@
         const inertiaActive = !isDragging && !hoverActive && Math.abs(magnetAngularVelocity) > 0.015;
         if (inertiaActive) {
           targetAngle += magnetAngularVelocity * stepScale;
-          magnetAngularVelocity *= 0.94;
+          magnetAngularVelocity *= window.innerWidth < 720 ? 0.975 : 0.94;
         }
         const autoplayAllowed = !reduceMotionQuery.matches && !isDragging && !hoverActive && !inertiaActive && now >= manualHoldUntil;
         if (autoplayAllowed) {
