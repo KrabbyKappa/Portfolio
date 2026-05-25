@@ -50,7 +50,6 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
   <meta name="twitter:image" content={ogImageUrl}>
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <script is:inline data-goatcounter={seoSite.goatCounter} async src="https://gc.zgo.at/count.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,5 +58,133 @@ const schema = schemaForRoute({ path: route.path, title: pageTitle, description:
 </head>
 <body>
   <slot />
+  <script is:inline>
+    (() => {
+      const clickableCards = Array.from(document.querySelectorAll('[data-showcase-card-href]'));
+      clickableCards.forEach((card) => {
+        let startX = 0;
+        let startY = 0;
+        let dragged = false;
+        card.addEventListener('pointerdown', (event) => {
+          startX = event.clientX;
+          startY = event.clientY;
+          dragged = false;
+        }, { passive: true });
+        card.addEventListener('pointermove', (event) => {
+          if (Math.hypot(event.clientX - startX, event.clientY - startY) > 8) dragged = true;
+        }, { passive: true });
+        card.addEventListener('click', (event) => {
+          if (event.target.closest('a') || dragged) return;
+          window.location.href = card.dataset.showcaseCardHref;
+        });
+        card.addEventListener('keydown', (event) => {
+          if (event.target.closest('a')) return;
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            window.location.href = card.dataset.showcaseCardHref;
+          }
+        });
+      });
+
+      const wheels = Array.from(document.querySelectorAll('[data-trsnparent-mini-wheel]'));
+      if (!wheels.length) return;
+      const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      wheels.forEach((wheel) => {
+        const wrap = wheel.querySelector('.mini-cylinder-wrap');
+        const items = Array.from(wheel.querySelectorAll('.mini-cylinder-item'));
+        if (!wrap || !items.length) return;
+        const theta = 360 / items.length;
+        let currentAngle = 0;
+        let targetAngle = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let startAngle = 0;
+        let didDrag = false;
+        let frame = 0;
+
+        const updateDepth = () => {
+          const width = wrap.getBoundingClientRect().width || 150;
+          const naturalRadius = Math.round((width / 2) / Math.tan(Math.PI / items.length));
+          const radius = Math.max(96, Math.min(naturalRadius + 22, wheel.closest('.showcase-bridge') ? 150 : 124));
+          wheel.style.setProperty('--mini-cylinder-depth', `${radius}px`);
+        };
+
+        const normalize = (angle) => ((((angle % 360) + 540) % 360) - 180);
+        const paint = () => {
+          currentAngle += (targetAngle - currentAngle) * (reduceMotion ? 1 : 0.18);
+          wrap.style.setProperty('--mini-rotate', `${currentAngle}deg`);
+          items.forEach((item, index) => {
+            const distance = Math.abs(normalize(index * theta + currentAngle));
+            const frontness = Math.max(0, Math.cos(distance * Math.PI / 180));
+            item.style.opacity = String(0.18 + frontness * 0.82);
+            item.style.zIndex = String(Math.round(frontness * 20));
+          });
+          if (Math.abs(targetAngle - currentAngle) > 0.05) frame = requestAnimationFrame(paint);
+          else frame = 0;
+        };
+        const requestPaint = () => {
+          if (!frame) frame = requestAnimationFrame(paint);
+        };
+        const snap = () => {
+          targetAngle = Math.round(targetAngle / theta) * theta;
+          requestPaint();
+        };
+        const start = (event) => {
+          if (event.button !== undefined && event.button !== 0) return;
+          isDragging = true;
+          didDrag = false;
+          startX = event.clientX;
+          startY = event.clientY;
+          startAngle = targetAngle;
+          wheel.classList.add('is-dragging');
+          wheel.setPointerCapture?.(event.pointerId);
+        };
+        const move = (event) => {
+          if (!isDragging) return;
+          const dx = event.clientX - startX;
+          const dy = event.clientY - startY;
+          if (Math.abs(dx) > 4 && Math.abs(dx) > Math.abs(dy)) {
+            event.preventDefault();
+            didDrag = true;
+            targetAngle = startAngle + dx * 0.34;
+            currentAngle = targetAngle;
+            wrap.style.setProperty('--mini-rotate', `${currentAngle}deg`);
+            requestPaint();
+          }
+        };
+        const end = (event) => {
+          if (!isDragging) return;
+          isDragging = false;
+          wheel.classList.remove('is-dragging');
+          wheel.releasePointerCapture?.(event.pointerId);
+          if (didDrag) snap();
+        };
+        wheel.addEventListener('pointerdown', start);
+        wheel.addEventListener('pointermove', move);
+        wheel.addEventListener('pointerup', end);
+        wheel.addEventListener('pointercancel', end);
+        wheel.addEventListener('wheel', (event) => {
+          if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+          event.preventDefault();
+          targetAngle -= event.deltaX * 0.28;
+          requestPaint();
+          window.clearTimeout(wheel._miniWheelSnapTimer);
+          wheel._miniWheelSnapTimer = window.setTimeout(snap, 160);
+        }, { passive: false });
+        updateDepth();
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => wheel.classList.toggle('is-mini-visible', entry.isIntersecting));
+          }, { threshold: 0.18 });
+          observer.observe(wheel);
+        } else {
+          wheel.classList.add('is-mini-visible');
+        }
+        window.addEventListener('resize', () => { updateDepth(); requestPaint(); }, { passive: true });
+        paint();
+      });
+    })();
+  </script>
 </body>
 </html>

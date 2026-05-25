@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Projects & Other Projects – Luca Kosowski" description="Selected diplomatic, cultural, reporting, media, and website-development projects by Luca Kosowski." canonicalPath="/projects.html" ogTitle="Projects & Other Projects – Luca Kosowski" ogDescription="Selected diplomatic, cultural, reporting, media, and website-development projects by Luca Kosowski.">
@@ -38,7 +39,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="lead">Italian National Day celebrations at the Embassy of Italy in Kuala Lumpur.</p>
 
         <a class="video-container project-video-loop project-video-link" href="https://www.youtube.com/watch?v=hz1xPkvdhcI" target="_blank" rel="noopener noreferrer" data-video-loop-card data-video-id="hz1xPkvdhcI" data-source-start="0" data-source-end="15" data-fade-ms="650" aria-label="Open Italian National Day 2025 video on YouTube in a new tab">
-            <img src="media/project-previews/italian-national-day-2025-poster.jpg" alt="Italian National Day 2025 video preview poster" class="project-video-poster">
+            <Image src="/media/project-previews/italian-national-day-2025-poster.jpg" alt="Italian National Day 2025 video preview poster" width={1280} height={720} class="project-video-poster" loading="eager" decoding="async" />
             <video class="preview-video-frame project-video-frame" muted playsinline preload="metadata" poster="media/project-previews/italian-national-day-2025-poster.jpg">
                 <source src="media/project-previews/italian-national-day-2025-loop-1080.mp4" type="video/mp4">
             </video>
@@ -56,7 +57,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="lead">Celebrating the 78th Anniversary of the Italian Republic.</p>
 
         <a class="video-container project-video-loop project-video-link" href="https://www.youtube.com/watch?v=T7MQqKLdZvc" target="_blank" rel="noopener noreferrer" data-video-loop-card data-video-id="T7MQqKLdZvc" data-source-start="0" data-source-end="15" data-fade-ms="650" aria-label="Open Italian National Day 2024 video on YouTube in a new tab">
-            <img src="media/project-previews/italian-national-day-2024-poster.jpg" alt="Italian National Day 2024 video preview poster" class="project-video-poster">
+            <Image src="/media/project-previews/italian-national-day-2024-poster.jpg" alt="Italian National Day 2024 video preview poster" width={1920} height={1080} class="project-video-poster" loading="lazy" decoding="async" />
             <video class="preview-video-frame project-video-frame" muted playsinline preload="metadata" poster="media/project-previews/italian-national-day-2024-poster.jpg">
                 <source src="media/project-previews/italian-national-day-2024-loop-1080.mp4" type="video/mp4">
             </video>
@@ -107,31 +108,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         <p class="section-label">Other Projects</p>
         <h2>Other Projects</h2>
-        <a href="/website-development/"  style="display: block; text-decoration: none; color: inherit;"> 
-        <div class="project-card project-card--feature showcase-bridge">
+        <div class="project-card project-card--feature showcase-bridge" data-showcase-card-href="/website-development/" role="link" tabindex="0" aria-label="Open the website-development showcase">
           <div class="showcase-bridge__copy">
             <p class="project-meta">Website-development business</p>
             <h3>Website creation</h3>
             <p class="lead">If you find yourself in need of a new website, you might want to read this section.</p>
             <p>Here you will be able to find a series of templates and ready websites that can be adjusted to your style and your business. Click on this tab if you are in need of a new website or digital business card. </p>
-            
+            <p><a class="preview-link" href="/website-development/">Open the website-development showcase</a></p>
           </div>
           
           <div class="showcase-bridge__visual" aria-hidden="true">
-            <div class="showcase-thumb showcase-thumb--trsnparent_wheel-mini" data-trsnparent-mini-wheel aria-hidden="true">
-              <div class="mini-cylinder-wrap">
-                <figure class="mini-cylinder-item mini-cylinder-item--one" style="--mini-cylinder-angle: 0deg; --mini-cylinder-image: url('website-development/assets/site-previews/bizwholistic.jpg');"><img src="website-development/assets/site-previews/bizwholistic.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--two" style="--mini-cylinder-angle: 60deg; --mini-cylinder-image: url('website-development/assets/site-previews/verde-lunch-club.jpg');"><img src="website-development/assets/site-previews/verde-lunch-club.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--three" style="--mini-cylinder-angle: 120deg; --mini-cylinder-image: url('website-development/assets/site-previews/mila-yoga-testimonial.jpg');"><img src="website-development/assets/site-previews/mila-yoga-testimonial.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--four" style="--mini-cylinder-angle: 180deg; --mini-cylinder-image: url('website-development/assets/site-previews/mosaic-content-studio.jpg');"><img src="website-development/assets/site-previews/mosaic-content-studio.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--five" style="--mini-cylinder-angle: 240deg; --mini-cylinder-image: url('website-development/assets/site-previews/harbor-legal-translation.jpg');"><img src="website-development/assets/site-previews/harbor-legal-translation.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--six" style="--mini-cylinder-angle: 300deg; --mini-cylinder-image: url('website-development/assets/site-previews/city-lab-pop-up.jpg');"><img src="website-development/assets/site-previews/city-lab-pop-up.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
+            <div class="showcase-thumb showcase-thumb--trsnparent_wheel-mini showcase-thumb--scroll-mini" data-trsnparent-mini-wheel aria-hidden="true">
+              <div class="mini-cylinder-wrap mini-showcase-rail">
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/bizwholistic-mobile-v2.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/verde-lunch-club-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/mila-yoga-testimonial-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/mosaic-content-studio-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/harbor-legal-translation-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/city-lab-pop-up-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
               </div>
             </div>
           </div>
           
         </div>
-        </a>
       </section>
 
       <h2 class="project-group-title">Older Projects</h2>
@@ -154,7 +153,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="lead">A short documentary on perceptions of urban decay in Trento.</p>
 
         <a class="video-container project-video-loop project-video-link" href="https://www.youtube.com/watch?v=yUjjPUTrvt0&t=110s" target="_blank" rel="noopener noreferrer" data-video-loop-card data-video-id="yUjjPUTrvt0" data-source-start="110" data-source-end="133" data-fade-ms="650" aria-label="Open Perché ci siamo noi video on YouTube in a new tab">
-            <img src="media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" alt="Perché ci siamo noi video preview poster" class="project-video-poster">
+            <Image src="/media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" alt="Perché ci siamo noi video preview poster" width={1280} height={720} class="project-video-poster" loading="lazy" decoding="async" />
             <video class="preview-video-frame project-video-frame" muted playsinline preload="metadata" poster="media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg">
                 <source src="media/project-previews/perche-ci-siamo-noi-110-133-loop-1080.mp4" type="video/mp4">
             </video>

@@ -74,7 +74,8 @@ a:hover {
 
 a:focus-visible,
 button:focus-visible,
-summary:focus-visible {
+summary:focus-visible,
+[data-showcase-card-href]:focus-visible {
   outline: 3px solid rgba(11, 99, 206, 0.35);
   outline-offset: 4px;
   border-radius: 6px;
@@ -895,80 +896,159 @@ a.preview-card:focus-visible {
   }
 }
 
-/* Website preview transparent wheel teaser. */
-.showcase-thumb--trsnparent_wheel-mini {
+/* Lightweight premium mini cylinder for home/projects. */
+.showcase-thumb--trsnparent_wheel-mini,
+.showcase-thumb--scroll-mini {
+  --mini-cylinder-depth: 108px;
+  min-height: 255px;
   overflow: hidden;
-  perspective: 980px;
+  perspective: 1150px;
   transform-style: preserve-3d;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(191,156,255,0.18), transparent 13rem),
+    radial-gradient(circle at 86% 20%, rgba(95,195,226,0.14), transparent 13rem),
+    linear-gradient(180deg, rgba(255,238,206,0.18), rgba(222,237,249,0.28)),
+    #fff;
+  animation: none;
+  cursor: grab;
+  touch-action: pan-y;
   -webkit-mask-image: none;
   mask-image: none;
-  --mini-cylinder-depth: 138px;
 }
 
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap {
+.showcase-thumb--trsnparent_wheel-mini.is-dragging,
+.showcase-thumb--scroll-mini.is-dragging {
+  cursor: grabbing;
+}
+
+.showcase-thumb--trsnparent_wheel-mini::before,
+.showcase-thumb--scroll-mini::before {
+  inset: 11% 13% auto;
+  height: 44%;
+  z-index: 0;
+  opacity: 0.5;
+  border-radius: 999px 58% 999px 46%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.7) 0%, rgba(116,188,247,0.22) 48%, transparent 80%);
+  filter: blur(18px);
+  transform: none;
+  animation: none;
+}
+
+.showcase-thumb--trsnparent_wheel-mini::after,
+.showcase-thumb--scroll-mini::after {
+  inset: auto 18% 0.85rem;
+  height: 1.8rem;
+  z-index: 0;
+  opacity: 0.26;
+  background: radial-gradient(ellipse at center, rgba(31,42,58,0.22), transparent 72%);
+  filter: blur(14px);
+}
+
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
+.showcase-thumb--scroll-mini .mini-cylinder-wrap {
   position: absolute;
+  z-index: 1;
   left: 50%;
-  top: 52%;
-  width: min(56%, 210px);
-  height: 70%;
-  transform: translate(-50%, -54%) rotateY(0deg);
+  top: 51%;
+  width: clamp(86px, 25%, 112px);
+  height: auto;
+  aspect-ratio: 390 / 844;
+  transform: translate(-50%, -52%) rotateY(var(--mini-rotate, 0deg));
   transform-style: preserve-3d;
-  will-change: transform;
+  transition: transform 120ms ease-out;
+  animation: none;
+  overflow: visible;
 }
 
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item {
+.showcase-thumb--trsnparent_wheel-mini.is-mini-visible:not(:hover):not(.is-dragging) .mini-cylinder-wrap,
+.showcase-thumb--scroll-mini.is-mini-visible:not(:hover):not(.is-dragging) .mini-cylinder-wrap {
+  animation: miniCylinderNudge 6.8s ease-in-out infinite;
+}
+
+.showcase-thumb--trsnparent_wheel-mini.is-dragging .mini-cylinder-wrap,
+.showcase-thumb--scroll-mini.is-dragging .mini-cylinder-wrap {
+  transition: none;
+}
+
+@keyframes miniCylinderNudge {
+  0%, 72%, 100% { transform: translate(-50%, -52%) rotateY(var(--mini-rotate, 0deg)); }
+  78% { transform: translate(-50%, -52%) rotateY(calc(var(--mini-rotate, 0deg) - 5deg)); }
+  84% { transform: translate(-50%, -52%) rotateY(calc(var(--mini-rotate, 0deg) + 4deg)); }
+  90% { transform: translate(-50%, -52%) rotateY(calc(var(--mini-rotate, 0deg) - 2deg)); }
+}
+
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item,
+.showcase-thumb--scroll-mini .mini-cylinder-item {
   position: absolute;
   inset: 0;
   margin: 0;
   overflow: hidden;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.56);
-  background: #fff var(--mini-cylinder-image) top center / cover no-repeat;
+  border-radius: 20px;
+  border: 1px solid rgba(36,49,70,0.13);
+  background: #fff;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: rotateY(var(--mini-cylinder-angle)) translateZ(var(--mini-cylinder-depth));
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 10px 22px rgba(31,42,58,0.13), inset 0 1px 0 rgba(255,255,255,0.52);
+  opacity: 0.38;
 }
 
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item::before {
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(1) { --mini-cylinder-angle: 0deg; opacity: 1; }
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(2) { --mini-cylinder-angle: 60deg; opacity: 0.36; }
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(3) { --mini-cylinder-angle: 120deg; opacity: 0.20; }
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(4) { --mini-cylinder-angle: 180deg; opacity: 0.12; }
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(5) { --mini-cylinder-angle: 240deg; opacity: 0.20; }
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(6) { --mini-cylinder-angle: 300deg; opacity: 0.36; }
+
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item::before,
+.showcase-thumb--scroll-mini .mini-cylinder-item::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(3,8,18,0.16));
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent 42%, rgba(8,13,22,0.05));
 }
 
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item img {
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item img,
+.showcase-thumb--scroll-mini .mini-cylinder-item img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
   background: #fff;
+  pointer-events: none;
 }
 
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item--four,
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item--five,
-.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item--six {
-  opacity: 0.92;
-}
-
-.showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini {
+.showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini,
+.showcase-bridge__visual .showcase-thumb--scroll-mini {
+  --mini-cylinder-depth: 138px;
   width: min(100%, 24rem);
-  min-height: 22rem;
+  min-height: 23.5rem;
+  border-radius: 28px;
 }
 
-.preview-card--showcase:hover .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
-.preview-card--showcase:focus-within .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
-.showcase-bridge:hover .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
-.showcase-bridge:focus-within .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap {
-  animation: trsnparentMiniWheelOrbit 8s linear infinite;
+.showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
+.showcase-bridge__visual .showcase-thumb--scroll-mini .mini-cylinder-wrap {
+  width: clamp(138px, 42%, 178px);
 }
 
-@keyframes trsnparentMiniWheelOrbit {
-  to {
-    transform: translate(-50%, -54%) rotateY(-360deg);
+@media (max-width: 640px) {
+  .showcase-thumb--trsnparent_wheel-mini,
+  .showcase-thumb--scroll-mini {
+    --mini-cylinder-depth: 104px;
+    min-height: 258px;
+  }
+
+  .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
+  .showcase-thumb--scroll-mini .mini-cylinder-wrap {
+    width: clamp(88px, 27vw, 112px);
+  }
+
+  .showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini,
+  .showcase-bridge__visual .showcase-thumb--scroll-mini {
+    min-height: 21.5rem;
   }
 }
 

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Luca Kosowski – Digital Marketing, Legal Review & Diplomatic Coordination" description="Digital and marketing services, legal review, diplomatic coordination, and multilingual stakeholder communication profile for Luca Kosowski, based in Kuala Lumpur." canonicalPath="/" ogTitle="Luca Kosowski – Digital Marketing, Legal Review & Diplomatic Coordination" ogDescription="Digital and marketing services, legal review, diplomatic coordination, and multilingual stakeholder communication profile for Luca Kosowski, based in Kuala Lumpur.">
@@ -24,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <main>
     <section id="hero" class="hero-section">
       <div class="hero-content">
-        <img src="profile.jpg" alt="Luca Kosowski" class="profile-image">
+        <Image src="/profile.jpg" alt="Luca Kosowski" width={937} height={1020} class="profile-image" loading="eager" decoding="async" />
         <h1 class="hero-title">Luca Kosowski</h1>
         
         <p class="hero-lead">Multilingual professional based in Kuala Lumpur, currently providing Digital and Marketing Services for Bizwholistic Ltd. Formerly, legal operations, diplomatic project coordination, stakeholder liaison, and public-facing digital content.</p>
@@ -80,7 +81,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </summary>
           <div class="job-description">
             <ul>
-              <li><a href="projects.html#festa2025">Served as Project Manager and Executive for the Italian National Day in Kuala Lumpur.</a></li>
+              <li><a href="projects.html#festa2025" aria-label="View the Italian National Day 2025 project">Served as Project Manager and Executive for the Italian National Day in Kuala Lumpur.</a></li>
               <li>Acted as Liaison between the Embassy, sponsors, event agencies, Mandarin Oriental, and security officers.</li>
               <li>Instructed Embassy employees on duties and operational tasks.</li>
               <li>Planned the strategic seating and location of sponsors, ambassadors, diplomatic staff, and local political entities.</li>
@@ -152,7 +153,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2>Education</h2>
         <div class="experience-item education-item">
             <div class="education-logo" aria-hidden="true">
-                <img src="media/education-logos/dalarna-university-symbol.png" alt="" decoding="async">
+                <Image src="/media/education-logos/dalarna-university-symbol.png" alt="" width={320} height={320} decoding="async" loading="lazy" />
             </div>
             <div class="education-copy">
                 <h3 class="job-title">Master's Degree in African Studies</h3>
@@ -161,7 +162,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="experience-item education-item">
             <div class="education-logo" aria-hidden="true">
-                <img src="media/education-logos/unistranieri-perugia-symbol.png" alt="" decoding="async">
+                <Image src="/media/education-logos/unistranieri-perugia-symbol.png" alt="" width={320} height={320} decoding="async" loading="lazy" />
             </div>
             <div class="education-copy">
                 <h3 class="job-title">Master's Degree in International Relations and Development Cooperation</h3>
@@ -170,7 +171,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="experience-item education-item">
             <div class="education-logo" aria-hidden="true">
-                <img src="media/education-logos/university-trento-symbol.png" alt="" decoding="async">
+                <Image src="/media/education-logos/university-trento-symbol.png" alt="" width={320} height={320} decoding="async" loading="lazy" />
             </div>
             <div class="education-copy">
                 <h3 class="job-title">Bachelor's Degree in International Studies</h3>
@@ -230,7 +231,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="preview-grid">
           <a class="preview-card preview-card--video preview-card--clickable" href="projects.html#other-projects:~:text=Festa%20della%20Repubblica%202025">
             <div class="preview-video" data-video-loop-card data-video-id="hz1xPkvdhcI" data-source-start="0" data-source-end="15" data-fade-ms="650">
-              <img src="media/project-previews/italian-national-day-2025-poster.jpg" alt="Italian National Day 2025 video preview poster" class="preview-image preview-video-poster">
+              <Image src="/media/project-previews/italian-national-day-2025-poster.jpg" alt="Italian National Day 2025 video preview poster" width={1280} height={720} class="preview-image preview-video-poster" loading="lazy" decoding="async" />
               <video class="preview-video-frame" muted playsinline preload="metadata" poster="media/project-previews/italian-national-day-2025-poster.jpg" aria-label="Muted 0:00 to 0:15 loop preview of Italian National Day 2025">
                 <source src="media/project-previews/italian-national-day-2025-preview-720.mp4" type="video/mp4">
               </video>
@@ -243,7 +244,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </a>
           <a class="preview-card preview-card--video preview-card--clickable" href="projects.html#other-projects:~:text=and%20public%20understanding.-,Perch%C3%A9%20ci%20siamo%20noi,-Trento%2C%20Italy%20%7C%20July">
             <div class="preview-video" data-video-loop-card data-video-id="yUjjPUTrvt0" data-source-start="110" data-source-end="133" data-fade-ms="650">
-              <img src="media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" alt="Perché ci siamo noi video preview poster" class="preview-image preview-video-poster">
+              <Image src="/media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" alt="Perché ci siamo noi video preview poster" width={1280} height={720} class="preview-image preview-video-poster" loading="lazy" decoding="async" />
               <video class="preview-video-frame" muted playsinline preload="metadata" poster="media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" aria-label="Muted 1:50 to 2:13 loop preview of Perché ci siamo noi">
                 <source src="media/project-previews/perche-ci-siamo-noi-110-133-preview-720.mp4" type="video/mp4">
               </video>
@@ -254,25 +255,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="preview-link">View Project</span>
             </div>
           </a>
-          <a class="preview-card preview-card--showcase preview-card--clickable" href="website-development/">
-
-            <div class="showcase-thumb showcase-thumb--trsnparent_wheel-mini" data-trsnparent-mini-wheel aria-hidden="true">
-              <div class="mini-cylinder-wrap">
-                <figure class="mini-cylinder-item mini-cylinder-item--one" style="--mini-cylinder-angle: 0deg; --mini-cylinder-image: url('website-development/assets/site-previews/bizwholistic.jpg');"><img src="website-development/assets/site-previews/bizwholistic.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--two" style="--mini-cylinder-angle: 60deg; --mini-cylinder-image: url('website-development/assets/site-previews/verde-lunch-club.jpg');"><img src="website-development/assets/site-previews/verde-lunch-club.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--three" style="--mini-cylinder-angle: 120deg; --mini-cylinder-image: url('website-development/assets/site-previews/mila-yoga-testimonial.jpg');"><img src="website-development/assets/site-previews/mila-yoga-testimonial.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--four" style="--mini-cylinder-angle: 180deg; --mini-cylinder-image: url('website-development/assets/site-previews/mosaic-content-studio.jpg');"><img src="website-development/assets/site-previews/mosaic-content-studio.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--five" style="--mini-cylinder-angle: 240deg; --mini-cylinder-image: url('website-development/assets/site-previews/harbor-legal-translation.jpg');"><img src="website-development/assets/site-previews/harbor-legal-translation.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
-                <figure class="mini-cylinder-item mini-cylinder-item--six" style="--mini-cylinder-angle: 300deg; --mini-cylinder-image: url('website-development/assets/site-previews/city-lab-pop-up.jpg');"><img src="website-development/assets/site-previews/city-lab-pop-up.jpg" alt="" width="1440" height="980" loading="lazy" decoding="async"></figure>
+          <article class="preview-card preview-card--showcase preview-card--clickable" data-showcase-card-href="website-development/" role="link" tabindex="0" aria-label="Open the Website Development Project showcase">
+            <div class="showcase-thumb showcase-thumb--trsnparent_wheel-mini showcase-thumb--scroll-mini" data-trsnparent-mini-wheel aria-hidden="true">
+              <div class="mini-cylinder-wrap mini-showcase-rail">
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/bizwholistic-mobile-v2.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/verde-lunch-club-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/mila-yoga-testimonial-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/mosaic-content-studio-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/harbor-legal-translation-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
+                <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/city-lab-pop-up-mobile.jpg" alt="" width={390} height={844} loading="eager" decoding="async" /></figure>
               </div>
             </div>
 
             <div class="preview-content">
               <h3 class="preview-title">Website Development Project</h3>
               <p class="preview-description">A selection of websites</p>
-              <span class="preview-link">Click here if you're in need of a new website</span>
+              <a class="preview-link" href="website-development/">Click here if you're in need of a new website</a>
             </div>
-          </a>
+          </article>
         </div>
         <div style="text-align: center; margin-top: 2rem;">
             <a href="projects.html" class="cta-secondary">View All Projects</a>

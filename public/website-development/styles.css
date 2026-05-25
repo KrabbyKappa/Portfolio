@@ -1100,21 +1100,40 @@ p {
     padding-top: 4rem;
   }
 
+  .carousel-drag-hint {
+    display: none;
+  }
+
   .view-home {
-    min-height: 430px;
+    min-height: 460px;
+    overflow: hidden;
+    touch-action: none;
   }
 
   .cylinder-wrap {
-    width: min(70vw, 270px);
-    height: min(151vw, 584px);
+    width: clamp(174px, 50vw, 198px);
+    height: auto;
+    aspect-ratio: 390 / 844;
+  }
+
+  .cylinder-item {
+    background-image: var(--cylinder-mobile-image);
+  }
+
+  .cylinder-item img {
+    object-fit: contain;
   }
 
   .cylinder-item:not(.is-active) {
-    opacity: 0.08;
+    opacity: 0.3;
   }
 
   .cylinder-item:not(.is-active)::before {
     background: linear-gradient(180deg, rgba(230,235,242,0.64), rgba(8,13,22,0.34));
+  }
+
+  .carousel-centre-label {
+    margin-top: 0.85rem;
   }
 
   .cylinder-item__meta span {

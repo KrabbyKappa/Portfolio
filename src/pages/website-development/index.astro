@@ -9,7 +9,7 @@ const cylinderItems = [
     status: 'finished',
     href: 'https://bizwholistic.com/',
     image: '/website-development/assets/site-previews/bizwholistic.jpg',
-    mobileImage: '/website-development/assets/site-previews/mobile/bizwholistic-mobile.jpg',
+    mobileImage: '/website-development/assets/site-previews/mobile/bizwholistic-mobile-v2.jpg',
     summary: 'A live Astro business website with polished brand graphics and clear service routing.',
     external: true,
   },
@@ -90,7 +90,7 @@ const cylinderItems = [
                     </picture>
                     <span class="cylinder-item__shade" aria-hidden="true"></span>
                     <span class="cylinder-item__sr-meta">{item.name}: {item.summary}</span>
-                    {isFinished ? <span class="cylinder-open-affordance" aria-hidden="true">Open preview</span> : <span class="cylinder-status">In progress</span>}
+                    {isFinished ? <span class="cylinder-open-affordance" aria-hidden="true">{item.external ? 'Open website' : 'Open preview'}</span> : <span class="cylinder-status">In progress</span>}
                   </>
                 );
                 return isFinished ? (
@@ -102,7 +102,7 @@ const cylinderItems = [
                     href={item.href}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    style={`--cylinder-angle: ${angle}deg; --cylinder-image: url('${item.image}');`}
+                    style={`--cylinder-angle: ${angle}deg; --cylinder-image: url('${item.image}'); --cylinder-mobile-image: url('${item.mobileImage}');`}
                   >
                     {content}
                   </a>
@@ -113,7 +113,7 @@ const cylinderItems = [
                     data-cylinder-status="in-progress"
                     data-cylinder-index={index}
                     aria-label={`${item.name}, in progress`}
-                    style={`--cylinder-angle: ${angle}deg; --cylinder-image: url('${item.image}');`}
+                    style={`--cylinder-angle: ${angle}deg; --cylinder-image: url('${item.image}'); --cylinder-mobile-image: url('${item.mobileImage}');`}
                   >
                     {content}
                   </article>
@@ -379,7 +379,7 @@ const cylinderItems = [
       const layout = () => {
         const cardWidth = wrap.getBoundingClientRect().width + 42;
         const naturalRadius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count));
-        radius = window.innerWidth < 720 ? Math.min(naturalRadius, Math.round(window.innerWidth * 0.34)) : naturalRadius;
+        radius = naturalRadius;
         items.forEach((item, index) => {
           item.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
         });
@@ -553,7 +553,12 @@ const cylinderItems = [
         view?.releasePointerCapture?.(event.pointerId);
         view?.classList.remove('is-dragging');
         if (dragMoved) suppressClickUntil = performance.now() + 350;
-        magnetAngularVelocity = Math.max(-5.2, Math.min(5.2, dragAngularVelocity * 0.72));
+        if (window.innerWidth < 720) {
+          snap();
+          magnetAngularVelocity = 0;
+        } else {
+          magnetAngularVelocity = Math.max(-5.2, Math.min(5.2, dragAngularVelocity * 0.72));
+        }
       };
 
       view?.addEventListener('pointerenter', (event) => {
