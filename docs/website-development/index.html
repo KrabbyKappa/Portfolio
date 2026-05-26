@@ -226,8 +226,11 @@
         if (ctx) {
           let lavaWidth = 1;
           let lavaHeight = 1;
+          let lavaStableMobileWidth = 0;
+          let lavaStableMobileHeight = 0;
           let lastLavaFrame = 0;
-          const LAVA_FRAME_MS = 1000 / 22;
+          const LAVA_DESKTOP_FRAME_MS = 1000 / 22;
+          const LAVA_MOBILE_FRAME_MS = 1000 / 8;
           const colors = [
             ['rgba(79,150,232,0.31)', 'rgba(79,150,232,0.07)'],
             ['rgba(191,156,255,0.30)', 'rgba(191,156,255,0.06)'],
@@ -248,31 +251,51 @@
               rotation: randomBetween(-Math.PI, Math.PI),
             };
           };
+          const lavaDuration = () => lavaMobileQuery.matches ? randomBetween(22000, 42000) : randomBetween(1800, 3900);
           const blobs = colors.map((color, index) => ({
             color,
             start: makePoint(),
             current: makePoint(),
             target: makePoint(),
             startedAt: performance.now() - index * 260,
-            duration: randomBetween(1800, 3800),
+            duration: lavaDuration(),
           }));
           const retarget = (blob, now) => {
             blob.start = { ...blob.current };
             blob.target = makePoint();
             blob.startedAt = now;
-            blob.duration = randomBetween(1800, 3900);
+            blob.duration = lavaDuration();
           };
           const resizeLava = () => {
-            const width = Math.max(1, window.innerWidth);
-            const height = Math.max(1, window.innerHeight);
-            lavaWidth = Math.round(Math.min(520, Math.max(240, width / 3.6)));
-            lavaHeight = Math.round(lavaWidth * (height / width));
+            const viewportWidth = Math.max(1, window.innerWidth);
+            const viewportHeight = Math.max(1, window.innerHeight);
+            const isMobile = lavaMobileQuery.matches;
+            let width = viewportWidth;
+            let height = viewportHeight;
+
+            if (isMobile) {
+              const widthChanged = !lavaStableMobileWidth || Math.abs(viewportWidth - lavaStableMobileWidth) > 24;
+              if (!widthChanged) return false;
+              lavaStableMobileWidth = viewportWidth;
+              lavaStableMobileHeight = Math.max(lavaStableMobileHeight, viewportHeight, window.screen?.height || 0);
+              height = lavaStableMobileHeight;
+              width = lavaStableMobileWidth;
+            }
+
+            const nextWidth = Math.round(Math.min(520, Math.max(240, width / 3.6)));
+            const nextHeight = Math.round(nextWidth * (height / width));
+            const changed = lavaCanvas.width !== nextWidth || lavaCanvas.height !== nextHeight;
+            if (!changed) return false;
+            lavaWidth = nextWidth;
+            lavaHeight = nextHeight;
             lavaCanvas.width = lavaWidth;
             lavaCanvas.height = lavaHeight;
+            return true;
           };
-          const shouldAnimateLava = () => !lavaMotionQuery.matches && !lavaMobileQuery.matches && !document.hidden;
+          const shouldAnimateLava = () => !lavaMotionQuery.matches && !document.hidden;
           const drawLava = (now, force = false) => {
-            if (!force && now - lastLavaFrame < LAVA_FRAME_MS) {
+            const frameMs = lavaMobileQuery.matches ? LAVA_MOBILE_FRAME_MS : LAVA_DESKTOP_FRAME_MS;
+            if (!force && now - lastLavaFrame < frameMs) {
               if (shouldAnimateLava()) requestAnimationFrame(drawLava);
               return;
             }
@@ -311,6 +334,7 @@
               blob.current = { ...blob.start };
               blob.target = makePoint();
               blob.startedAt = now;
+              blob.duration = lavaDuration();
             });
           };
           resizeLava();
@@ -318,7 +342,7 @@
           resetLavaBlobs(initialLavaNow);
           drawLava(initialLavaNow, true);
           window.addEventListener('resize', () => {
-            resizeLava();
+            if (!resizeLava()) return;
             const now = performance.now();
             resetLavaBlobs(now);
             drawLava(now, true);
