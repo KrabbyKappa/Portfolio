@@ -409,9 +409,14 @@
       const HOVER_CENTER_LOCK_MAX_DISTANCE_PX = 48;
       const HOVER_CENTER_LOCK_SWITCH_DISTANCE_PX = 260;
       const DRAG_DEGREES_PER_PX = 0.26;
-      const MOBILE_DRAG_DEGREES_PER_PX = 0.38;
+      const MOBILE_DRAG_DEGREES_PER_PX = 0.28;
       const DRAG_CLICK_THRESHOLD_PX = 6;
-      const TOUCH_HORIZONTAL_INTENT_PX = 4;
+      const TOUCH_HORIZONTAL_INTENT_PX = 3;
+      const MOBILE_RELEASE_BASE_MULTIPLIER = 0.68;
+      const MOBILE_RELEASE_FAST_BOOST = 0.42;
+      const MOBILE_RELEASE_FAST_VELOCITY = 8;
+      const MOBILE_RELEASE_LIMIT = 8.4;
+      const MOBILE_INERTIA_DECAY = 0.968;
       const MANUAL_RESUME_DELAY_MS = 4200;
       const HINT_INITIAL_DELAY_MS = 1000;
       const HINT_REPEAT_DELAY_MS = 5000;
@@ -681,8 +686,10 @@
         if (dragMoved || stoppedMotionOnTouch) suppressClickUntil = performance.now() + 350;
         stoppedMotionOnTouch = false;
         const mobileRelease = window.innerWidth < 720;
-        const releaseMultiplier = mobileRelease ? 1.24 : 0.72;
-        const releaseLimit = mobileRelease ? 12.5 : 5.2;
+        const releaseMultiplier = mobileRelease
+          ? MOBILE_RELEASE_BASE_MULTIPLIER + Math.min(MOBILE_RELEASE_FAST_BOOST, Math.abs(dragAngularVelocity) / MOBILE_RELEASE_FAST_VELOCITY * MOBILE_RELEASE_FAST_BOOST)
+          : 0.72;
+        const releaseLimit = mobileRelease ? MOBILE_RELEASE_LIMIT : 5.2;
         magnetAngularVelocity = Math.max(-releaseLimit, Math.min(releaseLimit, dragAngularVelocity * releaseMultiplier));
       };
 
@@ -733,7 +740,7 @@
         const inertiaActive = !isDragging && !hoverActive && Math.abs(magnetAngularVelocity) > 0.015;
         if (inertiaActive) {
           targetAngle += magnetAngularVelocity * stepScale;
-          magnetAngularVelocity *= window.innerWidth < 720 ? 0.975 : 0.94;
+          magnetAngularVelocity *= window.innerWidth < 720 ? MOBILE_INERTIA_DECAY : 0.94;
         }
         const autoplayAllowed = !mobileCarouselQuery.matches && !reduceMotionQuery.matches && !isDragging && !hoverActive && !inertiaActive && now >= manualHoldUntil;
         if (autoplayAllowed) {
