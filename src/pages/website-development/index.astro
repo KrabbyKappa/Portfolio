@@ -359,8 +359,9 @@ const cylinderItems = [
       const HOVER_CENTER_LOCK_MAX_DISTANCE_PX = 48;
       const HOVER_CENTER_LOCK_SWITCH_DISTANCE_PX = 260;
       const DRAG_DEGREES_PER_PX = 0.26;
-      const MOBILE_DRAG_DEGREES_PER_PX = 0.32;
+      const MOBILE_DRAG_DEGREES_PER_PX = 0.38;
       const DRAG_CLICK_THRESHOLD_PX = 6;
+      const TOUCH_HORIZONTAL_INTENT_PX = 4;
       const MANUAL_RESUME_DELAY_MS = 4200;
       const HINT_INITIAL_DELAY_MS = 1000;
       const HINT_REPEAT_DELAY_MS = 5000;
@@ -385,6 +386,7 @@ const cylinderItems = [
       let dragPointerId = 0;
       let startY = 0;
       let dragMoved = false;
+      let stoppedMotionOnTouch = false;
       let lastDragX = 0;
       let lastDragTime = 0;
       let dragAngularVelocity = 0;
@@ -544,18 +546,23 @@ const cylinderItems = [
         if (!isTouchPointer) event.preventDefault();
         holdAutoplayBriefly();
         hideDragHint();
+        const hadWheelMotion = Math.abs(magnetAngularVelocity) > 0.03 || Math.abs(targetAngle - currentAngle) > 0.25;
         isDragging = true;
         dragIntent = isTouchPointer ? 'pending' : 'horizontal';
         dragPointerId = event.pointerId;
         dragMoved = false;
+        stoppedMotionOnTouch = isTouchPointer && hadWheelMotion;
+        if (stoppedMotionOnTouch) suppressClickUntil = performance.now() + 420;
         magnetAngularVelocity = 0;
         magnetLockedIndex = -1;
         dragAngularVelocity = 0;
+        targetAngle = currentAngle;
+        wrap.style.transform = `rotateY(${currentAngle}deg)`;
         startX = event.clientX;
         startY = event.clientY;
         lastDragX = event.clientX;
         lastDragTime = performance.now();
-        dragStartAngle = targetAngle;
+        dragStartAngle = currentAngle;
 
         const grabbedItem = items.reduce((closest, item) => {
           const rect = item.getBoundingClientRect();
@@ -590,7 +597,7 @@ const cylinderItems = [
               end(event);
               return;
             }
-            if (absX <= DRAG_CLICK_THRESHOLD_PX || absX <= absY) return;
+            if (absX <= TOUCH_HORIZONTAL_INTENT_PX || absX <= absY) return;
             dragIntent = 'horizontal';
             view?.setPointerCapture?.(event.pointerId);
             view?.classList.add('is-dragging');
@@ -621,7 +628,8 @@ const cylinderItems = [
         dragPointerId = 0;
         if (view?.hasPointerCapture?.(event.pointerId)) view.releasePointerCapture(event.pointerId);
         view?.classList.remove('is-dragging');
-        if (dragMoved) suppressClickUntil = performance.now() + 350;
+        if (dragMoved || stoppedMotionOnTouch) suppressClickUntil = performance.now() + 350;
+        stoppedMotionOnTouch = false;
         const mobileRelease = window.innerWidth < 720;
         const releaseMultiplier = mobileRelease ? 1.24 : 0.72;
         const releaseLimit = mobileRelease ? 12.5 : 5.2;
