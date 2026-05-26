@@ -242,7 +242,7 @@ const cylinderItems = [
             lavaCanvas.height = lavaHeight;
             return true;
           };
-          const shouldAnimateLava = () => !lavaMotionQuery.matches && !document.hidden;
+          const shouldAnimateLava = () => !lavaMotionQuery.matches && !lavaMobileQuery.matches && !document.hidden;
           const drawLava = (now, force = false) => {
             const frameMs = lavaMobileQuery.matches ? LAVA_MOBILE_FRAME_MS : LAVA_DESKTOP_FRAME_MS;
             if (!force && now - lastLavaFrame < frameMs) {
