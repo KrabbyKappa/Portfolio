@@ -255,16 +255,23 @@ const cylinderItems = [
             });
             if (shouldAnimateLava()) requestAnimationFrame(drawLava);
           };
-          resizeLava();
-          drawLava(performance.now(), true);
-          window.addEventListener('resize', () => {
-            resizeLava();
+          const resetLavaBlobs = (now = performance.now()) => {
             blobs.forEach((blob) => {
               blob.start = makePoint();
               blob.current = { ...blob.start };
               blob.target = makePoint();
-              blob.startedAt = performance.now();
+              blob.startedAt = now;
             });
+          };
+          resizeLava();
+          const initialLavaNow = performance.now();
+          resetLavaBlobs(initialLavaNow);
+          drawLava(initialLavaNow, true);
+          window.addEventListener('resize', () => {
+            resizeLava();
+            const now = performance.now();
+            resetLavaBlobs(now);
+            drawLava(now, true);
           }, { passive: true });
           document.addEventListener('visibilitychange', () => {
             if (!document.hidden && !lavaMotionQuery.matches) requestAnimationFrame(drawLava);
@@ -353,7 +360,6 @@ const cylinderItems = [
       let dragIntent = 'idle';
       let dragPointerId = 0;
       let startY = 0;
-      let lastTouchY = 0;
       let dragMoved = false;
       let lastDragX = 0;
       let lastDragTime = 0;
@@ -511,12 +517,11 @@ const cylinderItems = [
       const start = (event) => {
         if (event.button !== 0) return;
         const isTouchPointer = event.pointerType === 'touch';
-        if (isTouchPointer) event.preventDefault();
-        else event.preventDefault();
+        if (!isTouchPointer) event.preventDefault();
         holdAutoplayBriefly();
         hideDragHint();
         isDragging = true;
-        dragIntent = isTouchPointer ? 'touch' : 'horizontal';
+        dragIntent = isTouchPointer ? 'pending' : 'horizontal';
         dragPointerId = event.pointerId;
         dragMoved = false;
         magnetAngularVelocity = 0;
@@ -524,7 +529,6 @@ const cylinderItems = [
         dragAngularVelocity = 0;
         startX = event.clientX;
         startY = event.clientY;
-        lastTouchY = event.clientY;
         lastDragX = event.clientX;
         lastDragTime = performance.now();
         dragStartAngle = targetAngle;
@@ -540,8 +544,10 @@ const cylinderItems = [
         dragStartCenterX = grabbedItem?.centerX || event.clientX;
         dragGrabOffsetX = event.clientX - dragStartCenterX;
 
-        view?.setPointerCapture?.(event.pointerId);
-        view?.classList.add('is-dragging');
+        if (!isTouchPointer) {
+          view?.setPointerCapture?.(event.pointerId);
+          view?.classList.add('is-dragging');
+        }
       };
 
       const move = (event) => {
@@ -551,10 +557,22 @@ const cylinderItems = [
         }
         const deltaX = event.clientX - startX;
         if (event.pointerType === 'touch') {
+          const deltaY = event.clientY - startY;
+          if (dragIntent === 'pending') {
+            const absX = Math.abs(deltaX);
+            const absY = Math.abs(deltaY);
+            if (absY > DRAG_CLICK_THRESHOLD_PX && absY > absX) {
+              dragMoved = true;
+              end(event);
+              return;
+            }
+            if (absX <= DRAG_CLICK_THRESHOLD_PX || absX <= absY) return;
+            dragIntent = 'horizontal';
+            view?.setPointerCapture?.(event.pointerId);
+            view?.classList.add('is-dragging');
+          }
+          if (dragIntent !== 'horizontal') return;
           event.preventDefault();
-          const scrollDeltaY = lastTouchY - event.clientY;
-          if (Math.abs(scrollDeltaY) > 0.2) window.scrollBy(0, scrollDeltaY);
-          lastTouchY = event.clientY;
         } else {
           event.preventDefault();
         }
@@ -577,7 +595,7 @@ const cylinderItems = [
         isDragging = false;
         dragIntent = 'idle';
         dragPointerId = 0;
-        view?.releasePointerCapture?.(event.pointerId);
+        if (view?.hasPointerCapture?.(event.pointerId)) view.releasePointerCapture(event.pointerId);
         view?.classList.remove('is-dragging');
         if (dragMoved) suppressClickUntil = performance.now() + 350;
         const mobileRelease = window.innerWidth < 720;

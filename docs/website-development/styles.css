@@ -97,6 +97,13 @@ body::after {
 }
 
 
+a,
+button,
+summary,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
 a {
   color: var(--text);
   text-decoration: none;
