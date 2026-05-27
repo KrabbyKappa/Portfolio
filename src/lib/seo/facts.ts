@@ -3,7 +3,7 @@ import { assetUrl, canonicalUrl } from './url';
 
 export const personId = canonicalUrl('/#person');
 export const websiteId = canonicalUrl('/#website');
-export const serviceId = canonicalUrl('/website-development/#service');
+export const serviceId = 'https://websites.lucakosowski.com/#service';
 
 export const personFacts = {
   '@type': 'Person',

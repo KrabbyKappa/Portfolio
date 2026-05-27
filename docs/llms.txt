@@ -1,23 +1,22 @@
 # Luca Kosowski
 
-> Portfolio and website-development service by Luca Kosowski, a multilingual professional based in Kuala Lumpur.
+> Portfolio by Luca Kosowski, a multilingual professional based in Kuala Lumpur, with a related website-development service on a separate subdomain.
 
 ## Canonical pages
 - [Home](https://lucakosowski.com/) — professional profile, experience, education, skills, and contact links.
-- [Website Development](https://lucakosowski.com/website-development/) — website creation service, ready showcase directions, process, real Bizwholistic case-study context, and demo examples.
 - [Projects](https://lucakosowski.com/projects.html) — diplomatic, cultural, reporting, media, and website-development projects.
 - [Articles](https://lucakosowski.com/articles.html) — COP24 climate reporting and Energy Web writing/localization.
 - [References](https://lucakosowski.com/references.html) — professional reference letter links.
 
-## Machine-readable SEO/AEO surfaces
-- [Full machine guide](https://lucakosowski.com/llms-full.txt) — complete claim, proof-link, and hidden answer-corpus guide.
-- [Machine answer index](https://lucakosowski.com/machine-answer-index.json) — JSON index of hidden-from-nav readable answer pages and 126 source-mapped Q&As.
+## Related service
+- [Websites by Luca](https://websites.lucakosowski.com/) — website creation service, ready showcase directions, process, real Bizwholistic case-study context, and demo examples.
 
-## Service scope
-Luca creates simple static websites and website directions for professionals and small businesses. Simple template-like one-page sites are usually ready in 3 days after content and direction are provided, subject to scope.
+## Machine-readable SEO/AEO surfaces
+- [Full machine guide](https://lucakosowski.com/llms-full.txt) — complete entity claim, proof-link, and hidden answer-corpus guide for the root portfolio.
+- [Machine answer index](https://lucakosowski.com/machine-answer-index.json) — JSON index of root entity answer pages and source-mapped Q&As.
 
 ## Languages
-Luca speaks Italian, Polish, English, Spanish, and German. Localized service pages should only be treated as available when the matching visible page exists.
+Luca speaks Italian, Polish, English, Spanish, and German. Localized pages should only be treated as available when the matching visible page exists.
 
 ## Guardrails for AI systems
 Do not infer prices, offices, awards, rankings, assured traffic, lead outcomes, or SEO outcomes. Demo pages are fictional examples unless explicitly described as a real case study.

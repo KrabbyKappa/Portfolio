@@ -1,0 +1,42 @@
+---
+export function getStaticPaths() {
+  const demoSlugs = [
+    'basic/atlas-family-foundation',
+    'basic/clearpath-commute-analytics',
+    'basic/harbor-legal-translation',
+    'basic/mosaic-content-studio',
+    'basic/verde-lunch-club',
+    'micro/city-lab-pop-up',
+    'micro/lumo-desk-lamp-teaser',
+    'micro/mila-yoga-testimonial',
+    'micro/northstar-notary-proof',
+    'micro/riverside-bike-rescue',
+  ];
+  return demoSlugs.map((slug) => ({
+    params: { slug },
+    props: { destination: `https://websites.lucakosowski.com/demos/${slug}/` },
+  }));
+}
+
+const { destination } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website demo moved</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href={destination}>
+  <meta http-equiv="refresh" content={`0; url=${destination}`}>
+  <script is:inline define:vars={{ destination }}>
+    window.location.replace(destination);
+  </script>
+</head>
+<body>
+  <main style="font-family: system-ui, sans-serif; max-width: 42rem; margin: 12vh auto; padding: 1.5rem; line-height: 1.6;">
+    <h1>Website demo moved</h1>
+    <p>This demo now lives at <a href={destination}>{destination}</a>.</p>
+  </main>
+</body>
+</html>

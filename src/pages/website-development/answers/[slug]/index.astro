@@ -1,14 +1,32 @@
 ---
-import AnswerLayout from '../../../../layouts/AnswerLayout.astro';
 import { serviceAnswerClusters } from '../../../../data/seo/answerClusters';
 
 export function getStaticPaths() {
   return serviceAnswerClusters.map((cluster) => ({
     params: { slug: cluster.slug },
-    props: { cluster },
+    props: { destination: `https://websites.lucakosowski.com/answers/${cluster.slug}/` },
   }));
 }
 
-const { cluster } = Astro.props;
+const { destination } = Astro.props;
 ---
-<AnswerLayout cluster={cluster} />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website answer moved</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href={destination}>
+  <meta http-equiv="refresh" content={`0; url=${destination}`}>
+  <script is:inline define:vars={{ destination }}>
+    window.location.replace(destination);
+  </script>
+</head>
+<body>
+  <main style="font-family: system-ui, sans-serif; max-width: 42rem; margin: 12vh auto; padding: 1.5rem; line-height: 1.6;">
+    <h1>Website answer moved</h1>
+    <p>This website-development answer now lives at <a href={destination}>{destination}</a>.</p>
+  </main>
+</body>
+</html>
