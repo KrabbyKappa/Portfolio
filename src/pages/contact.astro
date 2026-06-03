@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Contact Luca Kosowski"
+  description="Contact Luca Kosowski directly for professional inquiries, references, collaborations, and website-development routing."
+  canonicalPath="/contact.html"
+  ogTitle="Contact Luca Kosowski"
+  ogDescription="Direct contact details for Luca Kosowski, with separate routing for professional inquiries and Websites by Luca website projects."
+>
+<header class="site-header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Luca Kosowski</a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav">
+        <a href="https://websites.lucakosowski.com/">Websites</a>
+        <a href="articles.html">Articles</a>
+        <a href="projects.html">Projects</a>
+        <a href="references.html">References</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="main-wrapper contact-page-wrapper">
+      <section class="page-hero contact-page-hero" aria-labelledby="contact-title">
+        <p class="section-label">Direct contact</p>
+        <h1 id="contact-title">Contact Luca Kosowski</h1>
+        <p class="lead">For professional inquiries, references, collaborations, or website work, start with a direct message. No form is required.</p>
+        <div class="hero-actions">
+          <a href="mailto:hello@lucakosowski.com" class="cta-primary">Email Luca</a>
+          <a href="https://websites.lucakosowski.com/contact/" class="cta-secondary">Website inquiry</a>
+        </div>
+      </section>
+
+      <section class="content-section contact-page-section" aria-labelledby="contact-options-title">
+        <h2 id="contact-options-title">Choose the right route</h2>
+        <div class="contact-page-grid">
+          <article class="project-card contact-route-card">
+            <p class="project-meta">Portfolio and professional inquiries</p>
+            <h3>Email or LinkedIn</h3>
+            <p>Use this route for references, collaborations, professional context, or general communication with Luca.</p>
+            <div class="contact-minimal-list">
+              <a href="mailto:hello@lucakosowski.com" class="contact-minimal-item">
+                <span class="contact-icon-small" aria-hidden="true">@</span>
+                <span>hello@lucakosowski.com</span>
+              </a>
+              <a href="https://www.linkedin.com/in/luca-kosowski/" target="_blank" rel="noopener noreferrer" class="contact-minimal-item">
+                <span class="contact-icon-small" aria-hidden="true">in</span>
+                <span>linkedin.com/in/luca-kosowski</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card contact-route-card">
+            <p class="project-meta">Website inquiries</p>
+            <h3>Websites by Luca</h3>
+            <p>If you need a simple website, digital business card, or small-business web presence, use the dedicated website-service contact page.</p>
+            <div class="contact-minimal-list">
+              <a href="https://websites.lucakosowski.com/contact/" class="contact-minimal-item">
+                <span class="contact-icon-small" aria-hidden="true">→</span>
+                <span>Open Websites by Luca contact</span>
+              </a>
+              <a href="https://websites.lucakosowski.com/" class="contact-minimal-item">
+                <span class="contact-icon-small" aria-hidden="true">↗</span>
+                <span>View website examples and templates</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section contact-page-section" aria-labelledby="phone-title">
+        <h2 id="phone-title">Phone</h2>
+        <p>Phone numbers are listed for direct context. Email is the cleanest first step for written details, links, and follow-up.</p>
+        <div class="contact-minimal-list">
+          <a href="tel:+601117721198" class="contact-minimal-item">
+            <span class="contact-icon-small" aria-hidden="true">MY</span>
+            <span>+60 11 1772 1198</span>
+          </a>
+          <a href="tel:+393711266484" class="contact-minimal-item">
+            <span class="contact-icon-small" aria-hidden="true">IT</span>
+            <span>+39 371 126 6484</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Luca Kosowski</p>
+  </footer>
+
+  <script is:inline>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const siteHeader = document.querySelector('.site-header');
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            siteHeader.classList.toggle('nav-open');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                siteHeader.classList.remove('nav-open');
+            });
+        });
+    }
+  </script>
+</BaseLayout>

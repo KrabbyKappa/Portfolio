@@ -5,10 +5,8 @@ export const seoSite = {
   defaultImage: '/profile.jpg',
   description: 'Luca Kosowski portfolio, diplomatic project work, articles, references, multilingual professional background, and related website-development service.',
   goatCounter: 'https://lucakosowski.goatcounter.com/count',
-  sameAs: [
-    'https://medium.com/@KappaK',
-    'https://www.youtube.com/@krabbykappa',
-  ],
+  // Keep Person.sameAs limited to live, on-brand profile URLs. Article URLs stay in proofLinks instead.
+  sameAs: [],
 } as const;
 
 export type RouteFamily = 'portfolio' | 'project' | 'article' | 'reference' | 'service' | 'demo';
@@ -50,6 +48,13 @@ export const seoRoutes: SeoRouteRecord[] = [
     title: 'References – Luca Kosowski',
     description: 'Professional reference letters for Luca Kosowski in English and Italian, with direct PDF access and contact context for recruiters and collaborators.',
     family: 'reference',
+    language: 'en',
+  },
+  {
+    path: '/contact.html',
+    title: 'Contact Luca Kosowski',
+    description: 'Direct contact details for Luca Kosowski, with routing for professional inquiries, references, collaborations, and website-development requests.',
+    family: 'portfolio',
     language: 'en',
   },
 ] as const;

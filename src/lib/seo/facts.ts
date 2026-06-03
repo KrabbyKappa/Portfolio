@@ -17,6 +17,14 @@ export const personFacts = {
     'Website creator',
   ],
   knowsLanguage: ['Italian', 'Polish', 'English', 'Spanish', 'German'],
+  knowsAbout: [
+    'Website creation',
+    'Digital marketing services',
+    'Diplomatic project coordination',
+    'Trust and safety operations',
+    'International relations',
+    'Multilingual communication',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Kuala Lumpur',

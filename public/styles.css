@@ -1261,6 +1261,28 @@ a.project-card {
   white-space: nowrap;
 }
 
+.contact-page-wrapper {
+  padding-top: calc(var(--spacing-3xl) + 1.5rem);
+}
+
+.contact-page-hero {
+  margin-top: 0;
+}
+
+.contact-page-section h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.contact-route-card {
+  height: 100%;
+}
+
 .site-footer {
   text-align: center;
   padding: 1.25rem 1rem;

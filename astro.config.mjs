@@ -7,6 +7,7 @@ const canonicalSitemapPages = [
   `${site}/projects.html`,
   `${site}/articles.html`,
   `${site}/references.html`,
+  `${site}/contact.html`,
 ];
 
 export default defineConfig({

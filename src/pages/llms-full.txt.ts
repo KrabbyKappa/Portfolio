@@ -24,6 +24,7 @@ Last reviewed: 2026-05-26
 - https://lucakosowski.com/projects.html — project evidence including diplomatic, cultural, media, climate, and website-development work.
 - https://lucakosowski.com/articles.html — climate reporting and Energy Web writing/localization.
 - https://lucakosowski.com/references.html — professional reference letters.
+- https://lucakosowski.com/contact.html — direct contact routes for professional inquiries, references, collaborations, and website-development routing.
 
 ## Related service
 - https://websites.lucakosowski.com/ — Websites by Luca, the detached website-development service funnel. Service answer pages are canonical on the service subdomain, not on this root portfolio host.

@@ -10,3 +10,4 @@ Graphify/
 wiki/
 package-demo-pages/
 verify_*.py
+__pycache__/
