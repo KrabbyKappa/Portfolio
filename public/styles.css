@@ -1283,6 +1283,15 @@ a.project-card {
   height: 100%;
 }
 
+.contact-showcase-bridge {
+  grid-column: 1 / -1;
+  min-height: 320px;
+}
+
+.contact-showcase-bridge .showcase-bridge__visual {
+  min-height: 240px;
+}
+
 .site-footer {
   text-align: center;
   padding: 1.25rem 1rem;

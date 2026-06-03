@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
@@ -29,7 +30,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <main>
     <div class="main-wrapper contact-page-wrapper">
       <section class="page-hero contact-page-hero" aria-labelledby="contact-title">
-        <p class="section-label">Direct contact</p>
         <h1 id="contact-title">Contact Luca Kosowski</h1>
         <p class="lead">For professional inquiries, references, collaborations, or website work, start with a direct message. No form is required.</p>
         <div class="hero-actions">
@@ -57,21 +57,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </article>
 
-          <article class="project-card contact-route-card">
-            <p class="project-meta">Website inquiries</p>
-            <h3>Websites by Luca</h3>
-            <p>If you need a simple website, digital business card, or small-business web presence, use the dedicated website-service contact page.</p>
-            <div class="contact-minimal-list">
-              <a href="https://websites.lucakosowski.com/contact/" class="contact-minimal-item">
-                <span class="contact-icon-small" aria-hidden="true">→</span>
-                <span>Open Websites by Luca contact</span>
-              </a>
-              <a href="https://websites.lucakosowski.com/" class="contact-minimal-item">
-                <span class="contact-icon-small" aria-hidden="true">↗</span>
-                <span>View website examples and templates</span>
-              </a>
+          <a class="project-card project-card--feature showcase-bridge contact-showcase-bridge" href="https://websites.lucakosowski.com/contact/">
+            <div class="showcase-bridge__copy">
+              <p class="project-meta">Website inquiries</p>
+              <h3>Websites by Luca</h3>
+              <p class="lead">If you need a simple website, digital business card, or small-business web presence, use the dedicated website-service contact page.</p>
+              <p>Here you will be able to find a series of templates and ready websites that can be adjusted to your style and your business.</p>
+              <p><span class="preview-link">Open Websites by Luca contact</span></p>
             </div>
-          </article>
+
+            <div class="showcase-bridge__visual" aria-hidden="true">
+              <div class="showcase-thumb showcase-thumb--trsnparent_wheel-mini showcase-thumb--scroll-mini" data-trsnparent-mini-wheel aria-hidden="true">
+                <div class="mini-cylinder-wrap mini-showcase-rail">
+                  <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/bizwholistic-mobile-v2.jpg" alt="" width={390} height={844} loading="lazy" decoding="async" fetchpriority="low" /></figure>
+                  <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/verde-lunch-club-mobile.jpg" alt="" width={390} height={844} loading="lazy" decoding="async" fetchpriority="low" /></figure>
+                  <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/mila-yoga-testimonial-mobile.jpg" alt="" width={390} height={844} loading="lazy" decoding="async" fetchpriority="low" /></figure>
+                  <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/mosaic-content-studio-mobile.jpg" alt="" width={390} height={844} loading="lazy" decoding="async" fetchpriority="low" /></figure>
+                  <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/harbor-legal-translation-mobile.jpg" alt="" width={390} height={844} loading="lazy" decoding="async" fetchpriority="low" /></figure>
+                  <figure class="mini-cylinder-item mini-showcase-slide"><Image src="/website-development/assets/site-previews/mobile/city-lab-pop-up-mobile.jpg" alt="" width={390} height={844} loading="lazy" decoding="async" fetchpriority="low" /></figure>
+                </div>
+              </div>
+            </div>
+          </a>
         </div>
       </section>
 
