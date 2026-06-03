@@ -65,13 +65,13 @@
             <h3>Email or LinkedIn</h3>
             <p>Use this route for references, collaborations, professional context, or general communication with Luca.</p>
             <div class="contact-minimal-list">
-              <a href="mailto:hello@lucakosowski.com" class="contact-minimal-item">
+              <a href="mailto:hello@lucakosowski.com" class="contact-minimal-item" aria-label="Email Luca at hello@lucakosowski.com">
                 <span class="contact-icon-small" aria-hidden="true">@</span>
-                <span>hello@lucakosowski.com</span>
+                <span>E-mail</span>
               </a>
-              <a href="https://www.linkedin.com/in/luca-kosowski/" target="_blank" rel="noopener noreferrer" class="contact-minimal-item">
+              <a href="https://www.linkedin.com/in/luca-kosowski/" target="_blank" rel="noopener noreferrer" class="contact-minimal-item" aria-label="Open Luca Kosowski on Linkedin">
                 <span class="contact-icon-small" aria-hidden="true">in</span>
-                <span>linkedin.com/in/luca-kosowski</span>
+                <span>Linkedin</span>
               </a>
             </div>
           </article>
@@ -107,20 +107,6 @@
         </div>
       </section>
 
-      <section class="content-section contact-page-section" aria-labelledby="phone-title">
-        <h2 id="phone-title">Phone</h2>
-        <p>Phone numbers are listed for direct context. Email is the cleanest first step for written details, links, and follow-up.</p>
-        <div class="contact-minimal-list">
-          <a href="tel:+601117721198" class="contact-minimal-item">
-            <span class="contact-icon-small" aria-hidden="true">MY</span>
-            <span>+60 11 1772 1198</span>
-          </a>
-          <a href="tel:+393711266484" class="contact-minimal-item">
-            <span class="contact-icon-small" aria-hidden="true">IT</span>
-            <span>+39 371 126 6484</span>
-          </a>
-        </div>
-      </section>
     </div>
   </main>
 
@@ -192,6 +178,10 @@
         let startAngle = 0;
         let didDrag = false;
         let frame = 0;
+        let isVisible = true;
+        let lastPaintTime = performance.now();
+        const parentInteractive = wheel.closest('a, [data-showcase-card-href]');
+        const AUTOSPIN_DEGREES_PER_MS = 360 / (12 * 60 * 1000);
 
         const updateDepth = () => {
           const width = wrap.offsetWidth || Number.parseFloat(getComputedStyle(wrap).width) || 150;
@@ -201,7 +191,11 @@
         };
 
         const normalize = (angle) => ((((angle % 360) + 540) % 360) - 180);
-        const paint = () => {
+        const shouldAutospin = () => !reduceMotion && isVisible && !isDragging && !wheel.matches(':hover') && !parentInteractive?.matches(':focus-within');
+        const paint = (now = performance.now()) => {
+          const delta = Math.min(80, Math.max(0, now - lastPaintTime));
+          lastPaintTime = now;
+          if (shouldAutospin()) targetAngle -= delta * AUTOSPIN_DEGREES_PER_MS;
           currentAngle += (targetAngle - currentAngle) * (reduceMotion ? 1 : 0.18);
           wrap.style.setProperty('--mini-rotate', `${currentAngle}deg`);
           items.forEach((item, index) => {
@@ -210,7 +204,7 @@
             item.style.opacity = String(0.18 + frontness * 0.82);
             item.style.zIndex = String(Math.round(frontness * 20));
           });
-          if (Math.abs(targetAngle - currentAngle) > 0.05) frame = requestAnimationFrame(paint);
+          if ((!reduceMotion && isVisible) || Math.abs(targetAngle - currentAngle) > 0.05) frame = requestAnimationFrame(paint);
           else frame = 0;
         };
         const requestPaint = () => {
@@ -290,7 +284,14 @@
         updateDepth();
         if ('IntersectionObserver' in window) {
           const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => wheel.classList.toggle('is-mini-visible', entry.isIntersecting));
+            entries.forEach((entry) => {
+              isVisible = entry.isIntersecting;
+              wheel.classList.toggle('is-mini-visible', isVisible);
+              if (isVisible) {
+                lastPaintTime = performance.now();
+                requestPaint();
+              }
+            });
           }, { threshold: 0.18 });
           observer.observe(wheel);
         } else {

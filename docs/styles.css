@@ -126,26 +126,42 @@ summary:focus-visible,
   color: var(--color-text-secondary);
   font-size: 0.94rem;
   font-weight: var(--font-weight-medium);
-  transition: color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+  transition: color var(--transition-fast), background-position var(--transition-base), text-shadow var(--transition-base);
 }
 
 .main-nav a[href="https://websites.lucakosowski.com/"] {
-  min-height: 1.85rem;
   display: inline-flex;
   align-items: center;
-  margin-block: -0.2rem;
-  padding: 0.18rem 0.58rem;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 999px;
-  background: var(--color-bg);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.70);
-  color: var(--color-accent);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(110deg, #08365f 0%, #17265f 24%, #075f6f 48%, #6f4214 70%, #0a3155 100%);
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  box-shadow: none;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   font-weight: var(--font-weight-bold);
+  animation: websitesTextFlow 28s ease-in-out infinite alternate;
 }
 
 .main-nav a:hover {
   color: var(--color-accent);
   text-decoration: none;
+}
+
+.main-nav a[href="https://websites.lucakosowski.com/"]:hover,
+.main-nav a[href="https://websites.lucakosowski.com/"]:focus-visible {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px rgba(11, 99, 206, 0.14);
+}
+
+@keyframes websitesTextFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .hero-section {
@@ -982,7 +998,7 @@ a.project-card {
 
 .showcase-thumb--trsnparent_wheel-mini.is-mini-visible:not(:hover):not(.is-dragging) .mini-cylinder-wrap,
 .showcase-thumb--scroll-mini.is-mini-visible:not(:hover):not(.is-dragging) .mini-cylinder-wrap {
-  animation: miniCylinderNudge 6.8s ease-in-out infinite;
+  animation: none;
 }
 
 .showcase-thumb--trsnparent_wheel-mini.is-dragging .mini-cylinder-wrap,
@@ -1241,13 +1257,14 @@ a.project-card {
 
 .contact-minimal-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-sm);
   color: var(--color-text-primary);
   text-decoration: none;
   padding: var(--spacing-xs) 0;
   transition: transform var(--transition-base), color var(--transition-base);
   width: fit-content;
+  font-weight: var(--font-weight-semibold);
 }
 
 .contact-minimal-item:hover {
@@ -1294,12 +1311,17 @@ a.project-card {
 }
 
 .contact-route-card {
-  height: 100%;
+  grid-column: 1 / -1;
+  min-height: calc(23.5rem + clamp(3rem, 8vw, 5.2rem) + 1rem);
+  padding: clamp(1.5rem, 4vw, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contact-showcase-bridge {
   grid-column: 1 / -1;
-  min-height: 320px;
+  min-height: calc(23.5rem + clamp(3rem, 8vw, 5.2rem) + 1rem);
 }
 
 .contact-showcase-bridge .showcase-bridge__visual {
@@ -1457,7 +1479,8 @@ a.project-card {
     min-height: auto;
     margin: 0;
     padding: 0.9rem 0.5rem;
-    border-radius: 14px;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .main-nav a:last-child {
@@ -1556,6 +1579,10 @@ a.project-card {
     width: 100%;
   }
 
+  .contact-route-card {
+    min-height: calc(clamp(680px, 93vh, 790px) + 1.55px);
+  }
+
   .phone-row {
     white-space: normal;
   }
@@ -1568,6 +1595,10 @@ a.project-card {
   /* LIFT experience section closer to hero CTA buttons */
   .main-wrapper {
     padding-top: 1rem;
+  }
+
+  .contact-page-wrapper {
+    padding-top: calc(var(--spacing-3xl) + 1.5rem);
   }
 
   .content-section {

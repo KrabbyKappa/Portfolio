@@ -497,6 +497,10 @@
         let startAngle = 0;
         let didDrag = false;
         let frame = 0;
+        let isVisible = true;
+        let lastPaintTime = performance.now();
+        const parentInteractive = wheel.closest('a, [data-showcase-card-href]');
+        const AUTOSPIN_DEGREES_PER_MS = 360 / (12 * 60 * 1000);
 
         const updateDepth = () => {
           const width = wrap.offsetWidth || Number.parseFloat(getComputedStyle(wrap).width) || 150;
@@ -506,7 +510,11 @@
         };
 
         const normalize = (angle) => ((((angle % 360) + 540) % 360) - 180);
-        const paint = () => {
+        const shouldAutospin = () => !reduceMotion && isVisible && !isDragging && !wheel.matches(':hover') && !parentInteractive?.matches(':focus-within');
+        const paint = (now = performance.now()) => {
+          const delta = Math.min(80, Math.max(0, now - lastPaintTime));
+          lastPaintTime = now;
+          if (shouldAutospin()) targetAngle -= delta * AUTOSPIN_DEGREES_PER_MS;
           currentAngle += (targetAngle - currentAngle) * (reduceMotion ? 1 : 0.18);
           wrap.style.setProperty('--mini-rotate', `${currentAngle}deg`);
           items.forEach((item, index) => {
@@ -515,7 +523,7 @@
             item.style.opacity = String(0.18 + frontness * 0.82);
             item.style.zIndex = String(Math.round(frontness * 20));
           });
-          if (Math.abs(targetAngle - currentAngle) > 0.05) frame = requestAnimationFrame(paint);
+          if ((!reduceMotion && isVisible) || Math.abs(targetAngle - currentAngle) > 0.05) frame = requestAnimationFrame(paint);
           else frame = 0;
         };
         const requestPaint = () => {
@@ -595,7 +603,14 @@
         updateDepth();
         if ('IntersectionObserver' in window) {
           const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => wheel.classList.toggle('is-mini-visible', entry.isIntersecting));
+            entries.forEach((entry) => {
+              isVisible = entry.isIntersecting;
+              wheel.classList.toggle('is-mini-visible', isVisible);
+              if (isVisible) {
+                lastPaintTime = performance.now();
+                requestPaint();
+              }
+            });
           }, { threshold: 0.18 });
           observer.observe(wheel);
         } else {
