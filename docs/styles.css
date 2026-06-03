@@ -126,7 +126,21 @@ summary:focus-visible,
   color: var(--color-text-secondary);
   font-size: 0.94rem;
   font-weight: var(--font-weight-medium);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.main-nav a[href="https://websites.lucakosowski.com/"] {
+  min-height: 1.85rem;
+  display: inline-flex;
+  align-items: center;
+  margin-block: -0.2rem;
+  padding: 0.18rem 0.58rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  background: var(--color-bg);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
 }
 
 .main-nav a:hover {
@@ -1436,6 +1450,14 @@ a.project-card {
     padding: 0.9rem 0.5rem;
     text-align: center;
     border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .main-nav a[href="https://websites.lucakosowski.com/"] {
+    justify-content: center;
+    min-height: auto;
+    margin: 0;
+    padding: 0.9rem 0.5rem;
+    border-radius: 14px;
   }
 
   .main-nav a:last-child {
