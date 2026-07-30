@@ -935,16 +935,12 @@ a.project-card {
 /* Lightweight premium mini cylinder for home/projects. */
 .showcase-thumb--trsnparent_wheel-mini,
 .showcase-thumb--scroll-mini {
-  --mini-cylinder-depth: 108px;
-  min-height: 255px;
+  --mini-cylinder-depth: 104px;
+  min-height: 238px;
   overflow: hidden;
-  perspective: 1150px;
+  perspective: 1800px;
   transform-style: preserve-3d;
-  background:
-    radial-gradient(circle at 18% 12%, rgba(191,156,255,0.18), transparent 13rem),
-    radial-gradient(circle at 86% 20%, rgba(95,195,226,0.14), transparent 13rem),
-    linear-gradient(180deg, rgba(255,238,206,0.18), rgba(222,237,249,0.28)),
-    #fff;
+  background: #fff;
   animation: none;
   cursor: grab;
   touch-action: pan-y;
@@ -985,11 +981,11 @@ a.project-card {
   position: absolute;
   z-index: 1;
   left: 50%;
-  top: 51%;
-  width: clamp(86px, 25%, 112px);
+  top: 50%;
+  width: clamp(145px, 57%, 190px);
   height: auto;
-  aspect-ratio: 390 / 844;
-  transform: translate(-50%, -52%) rotateY(var(--mini-rotate, 0deg));
+  aspect-ratio: 1440 / 980;
+  transform: translate(-50%, -50%) rotateY(var(--mini-rotate, 0deg));
   transform-style: preserve-3d;
   transition: transform 120ms ease-out;
   animation: none;
@@ -1007,10 +1003,10 @@ a.project-card {
 }
 
 @keyframes miniCylinderNudge {
-  0%, 72%, 100% { transform: translate(-50%, -52%) rotateY(var(--mini-rotate, 0deg)); }
-  78% { transform: translate(-50%, -52%) rotateY(calc(var(--mini-rotate, 0deg) - 5deg)); }
-  84% { transform: translate(-50%, -52%) rotateY(calc(var(--mini-rotate, 0deg) + 4deg)); }
-  90% { transform: translate(-50%, -52%) rotateY(calc(var(--mini-rotate, 0deg) - 2deg)); }
+  0%, 72%, 100% { transform: translate(-50%, -50%) rotateY(var(--mini-rotate, 0deg)); }
+  78% { transform: translate(-50%, -50%) rotateY(calc(var(--mini-rotate, 0deg) - 5deg)); }
+  84% { transform: translate(-50%, -50%) rotateY(calc(var(--mini-rotate, 0deg) + 4deg)); }
+  90% { transform: translate(-50%, -50%) rotateY(calc(var(--mini-rotate, 0deg) - 2deg)); }
 }
 
 .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item,
@@ -1019,14 +1015,14 @@ a.project-card {
   inset: 0;
   margin: 0;
   overflow: hidden;
-  border-radius: 20px;
-  border: 1px solid rgba(36,49,70,0.13);
+  border-radius: clamp(12px, 1.5vw, 18px);
+  border: 1px solid rgba(54, 87, 214, 0.32);
   background: #fff;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: rotateY(var(--mini-cylinder-angle)) translateZ(var(--mini-cylinder-depth));
-  box-shadow: 0 10px 22px rgba(31,42,58,0.13), inset 0 1px 0 rgba(255,255,255,0.52);
-  opacity: 0.38;
+  box-shadow: 0 18px 34px rgba(31, 42, 58, 0.2), inset 0 1px 0 rgba(255,255,255,0.48);
+  opacity: 0.34;
 }
 
 .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item:nth-child(1) { --mini-cylinder-angle: 0deg; opacity: 1; }
@@ -1051,40 +1047,70 @@ a.project-card {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   object-position: top center;
   background: #fff;
   pointer-events: none;
 }
 
+.showcase-thumb--trsnparent_wheel-mini .mini-cylinder-item picture,
+.showcase-thumb--scroll-mini .mini-cylinder-item picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-thumb[data-passive-mini-wheel] {
+  background: #3657d6;
+  cursor: default;
+  pointer-events: none;
+  touch-action: auto;
+}
+
+.showcase-thumb[data-passive-mini-wheel]::before,
+.showcase-thumb[data-passive-mini-wheel]::after {
+  content: none;
+}
+
 .showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini,
 .showcase-bridge__visual .showcase-thumb--scroll-mini {
-  --mini-cylinder-depth: 138px;
+  --mini-cylinder-depth: 150px;
   width: min(100%, 24rem);
-  min-height: 23.5rem;
+  min-height: 19rem;
   border-radius: 28px;
 }
 
 .showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
 .showcase-bridge__visual .showcase-thumb--scroll-mini .mini-cylinder-wrap {
-  width: clamp(138px, 42%, 178px);
+  width: clamp(210px, 72%, 285px);
 }
 
 @media (max-width: 640px) {
   .showcase-thumb--trsnparent_wheel-mini,
   .showcase-thumb--scroll-mini {
-    --mini-cylinder-depth: 104px;
-    min-height: 258px;
+    --mini-cylinder-depth: 92px;
+    min-height: 224px;
   }
 
   .showcase-thumb--trsnparent_wheel-mini .mini-cylinder-wrap,
   .showcase-thumb--scroll-mini .mini-cylinder-wrap {
-    width: clamp(88px, 27vw, 112px);
+    width: clamp(150px, 52vw, 210px);
   }
 
   .showcase-bridge__visual .showcase-thumb--trsnparent_wheel-mini,
   .showcase-bridge__visual .showcase-thumb--scroll-mini {
-    min-height: 21.5rem;
+    min-height: 17rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .showcase-thumb[data-passive-mini-wheel] .mini-cylinder-wrap {
+    width: clamp(72px, 23vw, 94px);
+    aspect-ratio: 390 / 844;
+  }
+
+  .showcase-thumb[data-passive-mini-wheel] .mini-cylinder-item img {
+    object-fit: contain;
   }
 }
 

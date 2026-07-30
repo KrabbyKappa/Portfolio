@@ -1,18 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import englishReferencePreview from '../assets/reference-letter-english-preview.jpg';
+import italianReferencePreview from '../assets/reference-letter-italian-preview.jpg';
 ---
 <BaseLayout title="References – Luca Kosowski" description="Professional reference letters for Luca Kosowski in English and Italian, with direct PDF access and contact context for recruiters and collaborators." canonicalPath="/references.html" ogTitle="References – Luca Kosowski" ogDescription="Professional reference letters for Luca Kosowski in English and Italian, with direct PDF access and contact context for recruiters and collaborators.">
 <header class="site-header">
     <div class="header-content">
       <a href="index.html" class="logo">Luca Kosowski</a>
-      <button class="menu-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <nav class="main-nav">
+        <a href="index.html" class="nav-mobile-only">Home</a>
         <a href="https://websites.lucakosowski.com/">Websites</a>
-        <a href="articles.html">Articles</a>
+        <a href="articles.html" class="nav-desktop-only">Articles</a>
         <a href="projects.html">Projects</a>
         <a href="references.html">References</a>
         <a href="contact.html">Contact</a>
@@ -23,61 +22,82 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <main>
     <div class="main-wrapper">
 
-      <section id="references" class="content-section">
-        <p class="section-label">References</p>
+      <section class="page-hero references-page-hero">
         <h1>Professional References</h1>
-        <p class="lead">Letters of recommendation of the Italian Ambassador of Italy to Malaysia attesting to my professional experience and character.</p>
+        <p class="lead">Letters of recommendation from the Ambassador of Italy to Malaysia, attesting to my professional experience and character.</p>
+      </section>
 
-        <div class="preview-grid">
+      <section id="references" class="reference-preview-grid" aria-label="Reference letters">
+        <article class="reference-document" data-reference-document="english" data-expanded="false">
+          <button class="reference-document-button" type="button" data-reference-toggle aria-expanded="false" aria-label="Enlarge the English reference letter">
+            <Image src={englishReferencePreview} width={1224} height={1684} format="webp" alt="Preview of the English reference letter" loading="eager" decoding="async" />
+            <span class="reference-document-title">Reference Letter</span>
+          </button>
+          <a href="Reference_Letter_English.pdf" target="_blank" rel="noopener noreferrer" class="reference-pdf-link">Open PDF</a>
+        </article>
 
-          <!-- English Letter -->
-          <div class="project-card">
-            <h3 style="margin-bottom: 0.5rem;">Reference Letter (English)</h3>
-            <p class="project-meta" style="margin-bottom: 1rem;">PDF Document</p>
-            <p>A formal letter of recommendation detailing my professional contributions, work ethic, and achievements.</p>
-            <div style="margin-top: 1.5rem;">
-                <a href="Reference_Letter_English.pdf" target="_blank" class="cta-secondary">View / Download PDF</a>
-            </div>
-          </div>
-
-          <!-- Italian Letter -->
-          <div class="project-card">
-            <h3 style="margin-bottom: 0.5rem;">Lettera di Referenze (Italiano)</h3>
-            <p class="project-meta" style="margin-bottom: 1rem;">Documento PDF</p>
-            <p>Lettera di referenze formale che attesta il mio percorso professionale, le competenze acquisite e i risultati ottenuti.</p>
-            <div style="margin-top: 1.5rem;">
-                <a href="Reference_Letter_Italian.pdf" target="_blank" class="cta-secondary">Visualizza / Scarica PDF</a>
-            </div>
-          </div>
-
-        </div>
+        <article class="reference-document" data-reference-document="italian" data-expanded="false">
+          <button class="reference-document-button" type="button" data-reference-toggle aria-expanded="false" aria-label="Ingrandisci la lettera di referenze">
+            <Image src={italianReferencePreview} width={1224} height={1684} format="webp" alt="Anteprima della lettera di referenze in italiano" loading="eager" decoding="async" />
+            <span class="reference-document-title">Lettera di Referenze</span>
+          </button>
+          <a href="Reference_Letter_Italian.pdf" target="_blank" rel="noopener noreferrer" class="reference-pdf-link">Apri PDF</a>
+        </article>
       </section>
 
     </div>
   </main>
 
   <footer class="site-footer">
-    <p>Luca Kosowski</p>
+    <nav class="footer-links" aria-label="Contact and website links">
+      <a href="mailto:hello@lucakosowski.com">Email</a>
+      <a href="https://www.linkedin.com/in/luca-kosowski/">LinkedIn</a>
+      <a href="https://websites.lucakosowski.com/">Website Development</a>
+    </nav>
   </footer>
 
   <!-- Scripts -->
   <script is:inline>
-    // Mobile Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const siteHeader = document.querySelector('.site-header');
-    const navLinks = document.querySelectorAll('.main-nav a');
+    const referenceGrid = document.querySelector('.reference-preview-grid');
+    const referenceDocuments = referenceGrid
+      ? Array.from(referenceGrid.querySelectorAll('[data-reference-document]'))
+      : [];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            siteHeader.classList.toggle('nav-open');
-        });
+    referenceDocuments.forEach((documentCard) => {
+      const toggle = documentCard.querySelector('[data-reference-toggle]');
+      toggle?.addEventListener('click', async () => {
+        const wasExpanded = documentCard.dataset.expanded === 'true';
+        const firstRects = new Map(referenceDocuments.map((item) => [item, item.getBoundingClientRect()]));
 
-        // Close menu when a link is clicked
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                siteHeader.classList.remove('nav-open');
-            });
+        referenceDocuments.forEach((item) => {
+          const isExpanded = item === documentCard && !wasExpanded;
+          item.dataset.expanded = String(isExpanded);
+          item.querySelector('[data-reference-toggle]')?.setAttribute('aria-expanded', String(isExpanded));
         });
-    }
+        referenceGrid.dataset.expandedReference = wasExpanded ? '' : documentCard.dataset.referenceDocument;
+
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        if (reducedMotion.matches) return;
+
+        referenceDocuments.forEach((item) => {
+          const first = firstRects.get(item);
+          const last = item.getBoundingClientRect();
+          const deltaX = first.left - last.left;
+          const deltaY = first.top - last.top;
+          const scaleX = first.width / last.width;
+          const scaleY = first.height / last.height;
+
+          item.animate(
+            [
+              { transform: `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})` },
+              { transform: 'translate(0, 0) scale(1, 1)' },
+            ],
+            { duration: 680, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+          );
+        });
+      });
+    });
+
   </script>
 </BaseLayout>
