@@ -2,7 +2,7 @@ export const seoSite = {
   name: 'Luca Kosowski',
   canonicalDomain: 'https://lucakosowski.com',
   defaultLanguage: 'en',
-  defaultImage: '/profile.jpg',
+  defaultImage: '/social-preview.png',
   description: 'Luca Kosowski portfolio, diplomatic project work, articles, references, multilingual professional background, and related website-development service.',
   goatCounter: 'https://lucakosowski.goatcounter.com/count',
   // Keep Person.sameAs limited to live, on-brand profile URLs. Article URLs stay in proofLinks instead.
