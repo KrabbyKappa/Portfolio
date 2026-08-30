@@ -9,6 +9,10 @@
   --font-primary: Inter, ui-sans-serif, system-ui, sans-serif;
   --lk-header-text: rgba(21, 27, 36, .78);
   --lk-header-accent: #174f91;
+  /* Layout controls: adjust these values to tune the landing-page rhythm. */
+  --hero-min-height: 72svh;
+  --section-padding-block: clamp(5.5rem, 6.5vw, 6rem);
+  --responsive-header-font-size: .95rem;
 }
 
 html {
@@ -35,6 +39,9 @@ body {
 
 body::before,
 body::after { content: none; }
+
+/* Keep Astro's development overlay from covering the fixed mobile navbar. */
+astro-dev-toolbar { display: none !important; }
 
 h1,
 h2,
@@ -66,7 +73,7 @@ summary:focus-visible,
 .site-header {
   position: fixed;
   inset: 22px auto auto 50%;
-  z-index: 100;
+  z-index: 1000;
   width: min(calc(100% - 48px), 940px);
   height: 52px;
   padding: 0;
@@ -122,6 +129,8 @@ summary:focus-visible,
 
 .main-nav a,
 .main-nav a[href="https://websites.lucakosowski.com/"] {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   padding: .35rem 0;
   border: 0;
@@ -135,6 +144,8 @@ summary:focus-visible,
   font-weight: 550;
   text-decoration: none;
   animation: none;
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 
 .main-nav a:hover,
@@ -150,7 +161,7 @@ main { padding: 0; }
 
 .hero-section {
   display: grid;
-  min-height: 100svh;
+  min-height: var(--hero-min-height);
   padding: clamp(8rem, 12vh, 10rem) var(--lk-gutter) clamp(5rem, 8vh, 7rem);
   align-content: center;
   background: var(--lk-paper);
@@ -266,7 +277,7 @@ main { padding: 0; }
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 7.5rem var(--lk-gutter);
+  padding: var(--section-padding-block) var(--lk-gutter);
   border: 0;
   border-radius: 0;
   background: var(--lk-paper);
@@ -289,16 +300,14 @@ main { padding: 0; }
 
 #experience > h2,
 #education > h2,
-#projects > h2,
-#skills > h2 {
+#projects > h2 {
   grid-column: 1 / 13;
   grid-row: auto;
   margin-bottom: 2.25rem;
 }
 
 #projects > .project-gallery,
-#projects > .section-action,
-#skills > .skills-matrix {
+#projects > .section-action {
   grid-column: 1 / 13;
 }
 
@@ -485,6 +494,12 @@ details[open] > .job-summary {
 
 details[open] > .job-summary::after { content: '−'; }
 
+.job-summary .job-title,
+.job-summary .job-meta {
+  margin: 0;
+  align-self: center;
+}
+
 .job-title {
   color: var(--lk-ink);
   font-size: 1.45rem;
@@ -506,6 +521,8 @@ details[open] > .job-summary::after { content: '−'; }
   justify-self: end;
   text-align: right;
 }
+.job-date { display: inline; }
+.job-date-separator { display: inline; }
 
 .job-description {
   max-width: 50rem;
@@ -560,7 +577,7 @@ details[open] > .job-description {
 }
 .education-logo--perugia { --education-logo-scale: 1.03; }
 .education-logo--trento {
-  --education-logo-scale: 1.24;
+  --education-logo-scale: .92;
   --education-logo-x: 4px;
 }
 
@@ -605,12 +622,140 @@ details[open] > .job-description {
   line-height: 1.35;
 }
 
+/* Skills: one index, one detail field. */
+#skills > .skills-split { grid-column: 1 / 13; }
+.skills-mobile-accordion { display: none; }
+.skills-mobile-title { display: none; }
+
+.skills-split {
+  --skills-title-size: 4.7rem;
+  --skills-heading-row: calc(var(--skills-title-size) * .96 + 2.25rem);
+  --skills-row-height: calc(clamp(1.15rem, 1.8vw, 1.35rem) * 1.3 + 1.6rem + 1px);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--lk-gap);
+  grid-column: 1 / 13;
+  align-items: start;
+}
+
+.skills-index-column {
+  grid-column: 1 / 5;
+}
+.skills-index-column h2 {
+  margin: 0 0 2.25rem;
+  color: #fff;
+  font-size: var(--skills-title-size);
+  font-weight: 600;
+  line-height: .96;
+}
+
+.skills-index {
+  display: grid;
+  align-content: start;
+  grid-auto-rows: var(--skills-row-height);
+}
+
+.skills-index__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: .8rem 2rem .8rem 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .38);
+  border-radius: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .62);
+  font: inherit;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  height: var(--skills-row-height);
+  min-height: 0;
+  transition: color 320ms cubic-bezier(.22, 1, .36, 1), font-size 320ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.skills-index__item:last-child { border-bottom: 1px solid rgba(255, 255, 255, .38); }
+.skills-index__item:hover,
+.skills-index__item:focus-visible,
+.skills-index__item[aria-selected="true"] {
+  color: #fff;
+}
+
+.skills-index__item[aria-selected="true"] { font-size: clamp(1.15rem, 1.8vw, 1.35rem); }
+
+.skills-details {
+  display: grid;
+  grid-column: 6 / 13;
+  min-width: 0;
+  min-height: calc(var(--skills-heading-row) + (5 * var(--skills-row-height)));
+  padding-top: 0;
+}
+
+.skills-detail {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-rows: var(--skills-heading-row) auto;
+  opacity: 0;
+  visibility: hidden;
+  filter: blur(7px);
+  transform: translateY(.35rem);
+  pointer-events: none;
+  will-change: opacity, filter, transform;
+  transition: opacity 500ms cubic-bezier(.22, 1, .36, 1), filter 500ms cubic-bezier(.22, 1, .36, 1), transform 500ms cubic-bezier(.22, 1, .36, 1), visibility 0s linear 500ms;
+}
+
+.skills-detail.is-active {
+  opacity: 1;
+  visibility: visible;
+  filter: blur(0);
+  transform: none;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.skills-detail h3 {
+  align-self: end;
+  margin: 0 0 2.25rem;
+  color: #fff;
+  font-size: clamp(1.8rem, 2.8vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+@media (min-width: 769px) {
+  .skills-detail h3 { white-space: nowrap; }
+}
+
+.skills-detail ul {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills-detail li {
+  min-height: var(--skills-row-height);
+  padding: .8rem 0;
+  border-top: 1px solid rgba(255, 255, 255, .38);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.skills-detail li:last-child { border-bottom: 1px solid rgba(255, 255, 255, .38); }
+
+.skills-detail[hidden] { display: none; }
+
 #skills {
   background: var(--lk-blue);
   color: #fff;
 }
-
-#skills > h2 { color: #fff; }
 
 .preview-grid {
   display: grid;
@@ -1280,6 +1425,7 @@ details[open] > .job-description {
 .reference-document {
   position: relative;
   min-width: 0;
+  scroll-margin-top: 6rem;
   transform-origin: top left;
 }
 
@@ -1318,6 +1464,8 @@ details[open] > .job-description {
   border: 1px solid rgba(54, 87, 214, .14);
   border-radius: .7rem;
   background: #fff;
+  transform-origin: center;
+  transition: transform 360ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .reference-document-title {
@@ -1336,6 +1484,11 @@ details[open] > .job-description {
   transform: translateY(-4px);
 }
 
+.reference-document-button:hover img,
+.reference-document-button:focus-visible img {
+  transform: scale(1.025);
+}
+
 .reference-document-button:focus-visible {
   outline: 3px solid var(--lk-blue);
   outline-offset: 5px;
@@ -1343,7 +1496,10 @@ details[open] > .job-description {
 }
 
 .reference-preview-grid[data-expanded-reference]:not([data-expanded-reference=""]) .reference-document {
+  grid-column: 1 / -1;
   order: 2;
+  width: calc((100% - clamp(1.5rem, 3vw, 3.5rem)) / 2);
+  justify-self: center;
 }
 
 .reference-preview-grid[data-expanded-reference]:not([data-expanded-reference=""]) .reference-document[data-expanded="true"] {
@@ -1363,13 +1519,15 @@ details[open] > .job-description {
   max-height: 0;
   margin: 0 auto;
   overflow: hidden;
-  border-bottom: 2px solid transparent;
+  border-bottom: 0;
   opacity: 0;
   color: var(--lk-blue);
   font-weight: 600;
-  text-decoration: none;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
   transform: translateY(-.5rem);
-  transition: max-height 320ms ease, margin 320ms ease, opacity 240ms ease, transform 320ms ease, border-color 180ms ease;
+  transition: max-height 320ms ease, margin 320ms ease, opacity 240ms ease, transform 320ms ease, text-decoration-color 180ms ease;
 }
 
 .reference-document[data-expanded="true"] .reference-pdf-link {
@@ -1381,7 +1539,7 @@ details[open] > .job-description {
 
 .reference-pdf-link:hover,
 .reference-pdf-link:focus-visible {
-  border-bottom-color: currentColor;
+  text-decoration-color: currentColor;
 }
 
 .contact-page-hero h1 { max-width: 10ch; }
@@ -1574,6 +1732,7 @@ details[open] > .job-description {
 .contact-route--website .showcase-bridge__visual { margin-top: 2.5rem; }
 
 .site-footer {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: auto 1fr;
@@ -1607,6 +1766,15 @@ details[open] > .job-description {
 .footer-links a:focus-visible { border-bottom-color: currentColor; }
 
 .site-footer a { color: #fff; }
+
+.site-footer--blue::after {
+  content: '';
+  position: absolute;
+  inset: 100% 0 auto;
+  height: 100vh;
+  background: var(--lk-blue);
+  pointer-events: none;
+}
 
 @keyframes lk-title-enter {
   from { opacity: 0; transform: translateY(44px); filter: blur(5px); }
@@ -1694,11 +1862,24 @@ details[open] > .job-description {
   :root { --lk-gap: 20px; --lk-gutter: 28px; }
   .hero-title { font-size: 5.5rem; }
   .content-section > h2 { font-size: 3.7rem; }
+  .skills-split {
+    --skills-title-size: 3.7rem;
+    --skills-heading-row: calc(var(--skills-title-size) * .96 + 2.25rem);
+  }
   .page-hero h1 { font-size: 4.8rem; }
 }
 
 @media (max-width: 768px) {
-  :root { --lk-gap: 16px; --lk-gutter: 20px; }
+  :root {
+    --lk-gap: 16px;
+    --lk-gutter: 20px;
+    --hero-min-height: auto;
+    --section-padding-block: 3.5rem;
+  }
+  .skills-split {
+    --skills-title-size: 3.2rem;
+    --skills-heading-row: calc(var(--skills-title-size) * .96 + 2.5rem);
+  }
 
   body { padding-bottom: 88px; }
 
@@ -1742,11 +1923,18 @@ details[open] > .job-description {
   }
 
   .main-nav a,
-  .main-nav a[href="https://websites.lucakosowski.com/"] { flex: 0 0 auto; font-size: .68rem; }
+  .main-nav a[href="https://websites.lucakosowski.com/"] {
+    flex: 0 0 auto;
+    font-size: clamp(.82rem, 2.6vw, var(--responsive-header-font-size));
+  }
 
-  .hero-section { min-height: auto; padding: 5.5rem var(--lk-gutter) 7rem; }
+  .hero-section { min-height: var(--hero-min-height); padding: 3rem var(--lk-gutter) 1rem; }
+  .profile-image {
+    aspect-ratio: 5 / 4;
+    object-position: center 22%;
+  }
   .hero-content { display: block; }
-  .profile-image { width: min(100%, 340px); aspect-ratio: 4 / 5; margin-bottom: 2rem; }
+  .profile-image { width: min(100%, 340px); margin-bottom: 2rem; }
   .hero-title { font-size: 3.7rem; line-height: .96; }
   .hero-lead { margin-top: 1.25rem; font-size: 1.08rem; }
   .hero-actions { gap: 1.3rem; margin-top: 1.5rem; }
@@ -1759,7 +1947,8 @@ details[open] > .job-description {
   .content-section,
   .page-hero { display: block; padding: 5.5rem var(--lk-gutter); }
 
-  .content-section > h2 { margin-bottom: 2.5rem; font-size: 3.2rem; }
+  .content-section > h2,
+  .skills-index-column h2 { margin-bottom: 2.5rem; font-size: 3.2rem; }
   .section-intro { margin-bottom: 3rem; font-size: 1.08rem; }
 
   details.experience-item { --role-pill-radius: 22px !important; }
@@ -1771,6 +1960,8 @@ details[open] > .job-description {
     text-align: left;
     white-space: normal;
   }
+  .job-date { display: block; }
+  .job-date-separator { display: none; }
   .job-summary::after { grid-column: 2; grid-row: 1; }
   .job-description { padding-top: 1.5rem; }
 
@@ -1780,6 +1971,118 @@ details[open] > .job-description {
   .skills-matrix,
   .preview-grid,
   .contact-page-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+
+  .skills-split { display: none; }
+  .skills-mobile-title {
+    display: block;
+    margin: 0 0 2.5rem;
+    color: #fff;
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: .96;
+  }
+  .content-section > .skills-mobile-title { color: #fff; }
+  .skills-mobile-accordion { display: grid; gap: .75rem; }
+  .skills-index-column,
+  .skills-details { grid-column: 1; }
+  .skills-details { padding-top: 0; }
+  .skills-index {
+    gap: .75rem;
+    grid-auto-rows: auto;
+  }
+  .skills-index__item,
+  .skills-index__item:last-child {
+    height: auto;
+    min-height: 3.7rem;
+    padding: .9rem 1.15rem;
+    border: 1px solid rgba(255, 255, 255, .38);
+    border-radius: 22px;
+    background: transparent;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    transition: border-color 220ms cubic-bezier(.22, 1, .36, 1), color 220ms cubic-bezier(.22, 1, .36, 1);
+  }
+  .skills-index__item:hover,
+  .skills-index__item:focus-visible,
+  .skills-index__item[aria-selected="true"] {
+    background: transparent;
+    color: #fff;
+    border-color: #fff;
+  }
+  .skills-index__item[aria-selected="true"] { font-size: 1.05rem; }
+
+  .skill-accordion-item {
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, .38);
+    border-radius: 22px;
+    background: transparent;
+    color: #fff;
+    overflow: hidden;
+    transition: border-color 220ms cubic-bezier(.22, 1, .36, 1);
+  }
+  .skill-accordion-item[open] { border-color: #fff; }
+  .skill-accordion-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.7rem;
+    padding: .9rem 1.15rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .skill-accordion-summary::-webkit-details-marker { display: none; }
+  .skill-accordion-summary::after {
+    content: '+';
+    flex: 0 0 auto;
+    margin-left: 1rem;
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .skill-accordion-item[open] > .skill-accordion-summary::after { content: '−'; }
+  .skill-accordion-summary h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .skill-accordion-content {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 1.15rem;
+    opacity: 0;
+    transition: max-height 360ms cubic-bezier(.16, 1, .3, 1), padding-bottom 360ms cubic-bezier(.16, 1, .3, 1), opacity 220ms cubic-bezier(.16, 1, .3, 1);
+  }
+  .skill-accordion-item[open] > .skill-accordion-content {
+    max-height: 30rem;
+    padding-bottom: .75rem;
+    opacity: 1;
+  }
+  .skill-accordion-item[data-skill-state="opening"] > .skill-accordion-content {
+    transition-duration: 360ms, 360ms, 220ms;
+  }
+  .skill-accordion-item[data-skill-state="closing"] > .skill-accordion-content {
+    transition-duration: 420ms, 420ms, 280ms;
+  }
+  .skill-accordion-item[data-skill-state="closed"] > .skill-accordion-content {
+    transition-duration: 420ms, 420ms, 280ms;
+  }
+  .skill-accordion-item:not([open]) > .skill-accordion-content {
+    max-height: 0;
+    padding-bottom: 0;
+    opacity: 0;
+  }
+  .skill-accordion-content ul { margin: 0; padding: 0; list-style: none; }
+  .skill-accordion-content li {
+    padding: .8rem 0;
+    color: #fff;
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
 
   .education-item {
     grid-template-columns: 78px minmax(0, 1fr);
@@ -1893,6 +2196,10 @@ details[open] > .job-description {
     width: 100%;
   }
 
+  .reference-preview-grid[data-expanded-reference]:not([data-expanded-reference=""]) .reference-document {
+    width: 100%;
+  }
+
   .contact-route-list { width: 100%; }
   .contact-route__body { max-width: none; }
 
@@ -1945,7 +2252,7 @@ details[open] > .job-description {
   .header-content { padding-inline: 10px; }
   .main-nav { gap: .45rem; }
   .main-nav a,
-  .main-nav a[href="https://websites.lucakosowski.com/"] { font-size: .58rem; }
+  .main-nav a[href="https://websites.lucakosowski.com/"] { font-size: clamp(.82rem, 2.6vw, var(--responsive-header-font-size)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

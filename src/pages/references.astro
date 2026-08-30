@@ -48,7 +48,7 @@ import italianReferencePreview from '../assets/reference-letter-italian-preview.
     </div>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer site-footer--blue">
     <nav class="footer-links" aria-label="Contact and website links">
       <a href="mailto:hello@lucakosowski.com">Email</a>
       <a href="https://www.linkedin.com/in/luca-kosowski/">LinkedIn</a>
@@ -77,7 +77,13 @@ import italianReferencePreview from '../assets/reference-letter-italian-preview.
         });
         referenceGrid.dataset.expandedReference = wasExpanded ? '' : documentCard.dataset.referenceDocument;
 
-        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        referenceGrid.getBoundingClientRect();
+        if (!wasExpanded) {
+          documentCard.scrollIntoView({
+            block: 'start',
+            behavior: reducedMotion.matches ? 'instant' : 'smooth',
+          });
+        }
         if (reducedMotion.matches) return;
 
         referenceDocuments.forEach((item) => {
@@ -88,13 +94,15 @@ import italianReferencePreview from '../assets/reference-letter-italian-preview.
           const scaleX = first.width / last.width;
           const scaleY = first.height / last.height;
 
-          item.animate(
+          item.getAnimations().forEach((animation) => animation.cancel());
+          const animation = item.animate(
             [
               { transform: `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})` },
               { transform: 'translate(0, 0) scale(1, 1)' },
             ],
-            { duration: 680, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+            { duration: 680, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'both' },
           );
+          animation.finished.then(() => animation.cancel()).catch(() => {});
         });
       });
     });

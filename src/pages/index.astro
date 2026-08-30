@@ -51,7 +51,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
           <summary class="job-summary">
             <h3 class="job-title">Digital and Marketing Services</h3>
-            <p class="job-meta">Bizwholistic Ltd. · Contract | Jan 2026 - Present</p>
+            <p class="job-meta">Bizwholistic Ltd. · Contract <span class="job-date"><span class="job-date-separator">| </span>Jan 2026 - Present</span></p>
           </summary>
           <div class="job-description">
             <ul>
@@ -63,7 +63,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
           <summary class="job-summary">
             <h3 class="job-title">Italian Legal Advisor,<br />Operations Administrator</h3>
-            <p class="job-meta">Concentrix, Kuala Lumpur | November 2024 - December 2025</p>
+            <p class="job-meta">Concentrix, Kuala Lumpur <span class="job-date"><span class="job-date-separator">| </span>November 2024 - December 2025</span></p>
           </summary>
           <div class="job-description">
             <ul>
@@ -84,7 +84,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
           <summary class="job-summary">
             <h3 class="job-title">External Consultant</h3>
-            <p class="job-meta">Italian Embassy, Kuala Lumpur | April - July 2025</p>
+            <p class="job-meta">Italian Embassy, Kuala Lumpur <span class="job-date"><span class="job-date-separator">| </span>April - July 2025</span></p>
           </summary>
           <div class="job-description">
             <ul>
@@ -101,7 +101,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
             <summary class="job-summary">
                 <h3 class="job-title">External Consultant</h3>
-                <p class="job-meta">Italian Embassy, Kuala Lumpur | February - July 2024</p>
+                <p class="job-meta">Italian Embassy, Kuala Lumpur <span class="job-date"><span class="job-date-separator">| </span>February - July 2024</span></p>
             </summary>
             <div class="job-description">
               <ul>
@@ -116,7 +116,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
             <summary class="job-summary">
                 <h3 class="job-title">Intern</h3>
-                <p class="job-meta">Italian Embassy, Kuala Lumpur | September - December 2023</p>
+                <p class="job-meta">Italian Embassy, Kuala Lumpur <span class="job-date"><span class="job-date-separator">| </span>September - December 2023</span></p>
             </summary>
             <div class="job-description">
                 <ul>
@@ -132,7 +132,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
             <summary class="job-summary">
                 <h3 class="job-title">Brand Ambassador</h3>
-                <p class="job-meta">Energy Web Foundation, Zug, Switzerland | August 2021 - October 2022</p>
+                <p class="job-meta">Energy Web Foundation, Zug, Switzerland <span class="job-date"><span class="job-date-separator">| </span>August 2021 - October 2022</span></p>
             </summary>
             <div class="job-description">
               <ul>
@@ -145,7 +145,7 @@ import profileImage from '../assets/profile.jpg';
         <details class="experience-item">
             <summary class="job-summary">
                 <h3 class="job-title">Freelance Journalist</h3>
-                <p class="job-meta">Viração Educomunicação, Trento, Italy | October 2018 - December 2019</p>
+                <p class="job-meta">Viração Educomunicação, Trento, Italy <span class="job-date"><span class="job-date-separator">| </span>October 2018 - December 2019</span></p>
             </summary>
             <div class="job-description">
                 <ul>
@@ -190,55 +190,60 @@ import profileImage from '../assets/profile.jpg';
       </section>
 
       <section id="skills" class="content-section">
-        <h2>Skills</h2>
-        <div class="skills-matrix">
-            <div class="skill-category">
-                <h3>Diplomacy & Policy</h3>
-                <ul>
-                    <li>Government Liaison</li>
-                    <li>Protocol Management</li>
-                    <li>Political Analysis</li>
-                    <li>Stakeholder Engagement</li>
-                </ul>
+        <div class="skills-split" data-skills-tabs>
+          <div class="skills-index-column">
+            <h2>Skills</h2>
+            <div class="skills-index" role="tablist" aria-label="Skill categories" aria-orientation="vertical">
+              <button id="skill-tab-diplomacy" class="skills-index__item" type="button" role="tab" aria-selected="true" aria-controls="skill-panel-diplomacy" tabindex="0">Diplomacy &amp; Policy</button>
+              <button id="skill-tab-digital" class="skills-index__item" type="button" role="tab" aria-selected="false" aria-controls="skill-panel-digital" tabindex="-1">Digital Skills</button>
+              <button id="skill-tab-communication" class="skills-index__item" type="button" role="tab" aria-selected="false" aria-controls="skill-panel-communication" tabindex="-1">Communication &amp; Management</button>
+              <button id="skill-tab-languages" class="skills-index__item" type="button" role="tab" aria-selected="false" aria-controls="skill-panel-languages" tabindex="-1">Languages</button>
             </div>
-            <div class="skill-category">
-                <h3>Digital, Web & Trust</h3>
-                <ul>
-                    <li>Content Moderation Policy</li>
-                    <li>Static HTML/CSS websites</li>
-                    <li>Astro static sites</li>
-                    <li>Basic SEO metadata</li>
-                    <li>Prompt engineering</li>
-                    <li>Blockchain Fundamentals</li>
-                </ul>
+          </div>
+          <div class="skills-details">
+            <div id="skill-panel-diplomacy" class="skills-detail is-active" role="tabpanel" aria-labelledby="skill-tab-diplomacy" tabindex="0">
+              <h3>Diplomacy &amp; Policy</h3>
+              <ul><li>Government Liaison</li><li>Protocol Management</li><li>Political Analysis</li><li>Stakeholder Engagement</li></ul>
             </div>
-            <div class="skill-category">
-                <h3>Communication & Management</h3>
-                <ul>
-                    <li>Project Management</li>
-                    <li>Event Management</li>
-                    <li>Cross-Cultural Communication</li>
-                    <li>Copywriting & Storytelling</li>
-                    <li>Team Leadership</li>
-                </ul>
+            <div id="skill-panel-digital" class="skills-detail" role="tabpanel" aria-labelledby="skill-tab-digital" tabindex="0" hidden>
+              <h3>Digital Skills</h3>
+              <ul><li>Content Moderation Policy</li><li>Static HTML/CSS websites</li><li>Astro static sites</li><li>Basic SEO metadata</li><li>Blockchain Fundamentals</li></ul>
             </div>
-            <div class="skill-category">
-                <h3>Languages</h3>
-                <ul>
-                    <li>Italian - Native</li>
-                    <li>Polish - Native</li>
-                    <li>English - Fluent</li>
-                    <li>Spanish - Proficient</li>
-                    <li>German - Intermediate</li>
-                </ul>
+            <div id="skill-panel-communication" class="skills-detail" role="tabpanel" aria-labelledby="skill-tab-communication" tabindex="0" hidden>
+              <h3>Communication &amp; Management</h3>
+              <ul><li>Project Management</li><li>Event Management</li><li>Cross-Cultural Communication</li><li>Copywriting &amp; Storytelling</li><li>Team Leadership</li></ul>
             </div>
+            <div id="skill-panel-languages" class="skills-detail" role="tabpanel" aria-labelledby="skill-tab-languages" tabindex="0" hidden>
+              <h3>Languages</h3>
+              <ul><li>Italian - Native</li><li>Polish - Native</li><li>English - Fluent</li><li>Spanish - Proficient</li><li>German - Intermediate</li></ul>
+            </div>
+          </div>
+        </div>
+        <h2 class="skills-mobile-title">Skills</h2>
+        <div class="skills-mobile-accordion" aria-label="Skill categories">
+          <details class="skill-accordion-item" name="skill-groups" open>
+            <summary class="skill-accordion-summary"><h3>Diplomacy &amp; Policy</h3></summary>
+            <div class="skill-accordion-content"><ul><li>Government Liaison</li><li>Protocol Management</li><li>Political Analysis</li><li>Stakeholder Engagement</li></ul></div>
+          </details>
+          <details class="skill-accordion-item" name="skill-groups">
+            <summary class="skill-accordion-summary"><h3>Digital Skills</h3></summary>
+            <div class="skill-accordion-content"><ul><li>Content Moderation Policy</li><li>Static HTML/CSS websites</li><li>Astro static sites</li><li>Basic SEO metadata</li><li>Blockchain Fundamentals</li></ul></div>
+          </details>
+          <details class="skill-accordion-item" name="skill-groups">
+            <summary class="skill-accordion-summary"><h3>Communication &amp; Management</h3></summary>
+            <div class="skill-accordion-content"><ul><li>Project Management</li><li>Event Management</li><li>Cross-Cultural Communication</li><li>Copywriting &amp; Storytelling</li><li>Team Leadership</li></ul></div>
+          </details>
+          <details class="skill-accordion-item" name="skill-groups">
+            <summary class="skill-accordion-summary"><h3>Languages</h3></summary>
+            <div class="skill-accordion-content"><ul><li>Italian - Native</li><li>Polish - Native</li><li>English - Fluent</li><li>Spanish - Proficient</li><li>German - Intermediate</li></ul></div>
+          </details>
         </div>
       </section>
 
       <section id="projects" class="content-section">
         <h2>Projects</h2>
         <div class="project-gallery">
-          <a class="preview-card preview-card--video preview-card--clickable" href="projects.html#other-projects:~:text=Festa%20della%20Repubblica%202025">
+          <a class="preview-card preview-card--video preview-card--clickable" href="projects.html#other-projects">
             <div class="preview-video" data-video-loop-card data-video-id="hz1xPkvdhcI" data-source-start="0" data-source-end="15" data-fade-ms="650">
               <Image src="/media/project-previews/italian-national-day-2025-poster.jpg" alt="Italian National Day 2025 video preview poster" width={1280} height={720} class="preview-image preview-video-poster" loading="lazy" decoding="async" />
               <video class="preview-video-frame" muted playsinline preload="metadata" poster="media/project-previews/italian-national-day-2025-poster.jpg" aria-label="Muted 0:00 to 0:15 loop preview of Italian National Day 2025">
@@ -251,7 +256,7 @@ import profileImage from '../assets/profile.jpg';
               <span class="preview-link">View Project</span>
             </div>
           </a>
-          <a class="preview-card preview-card--video preview-card--clickable" href="projects.html#other-projects:~:text=and%20public%20understanding.-,Perch%C3%A9%20ci%20siamo%20noi,-Trento%2C%20Italy%20%7C%20July">
+          <a class="preview-card preview-card--video preview-card--clickable" href="projects.html#other-projects">
             <div class="preview-video" data-video-loop-card data-video-id="yUjjPUTrvt0" data-source-start="110" data-source-end="133" data-fade-ms="650">
               <Image src="/media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" alt="Perché ci siamo noi video preview poster" width={1280} height={720} class="preview-image preview-video-poster" loading="lazy" decoding="async" />
               <video class="preview-video-frame" muted playsinline preload="metadata" poster="media/project-previews/perche-ci-siamo-noi-110-133-poster.jpg" aria-label="Muted 1:50 to 2:13 loop preview of Perché ci siamo noi">
@@ -317,9 +322,60 @@ import profileImage from '../assets/profile.jpg';
       </section>
 
     </div>
+    <script>
+      const skills = document.querySelector('[data-skills-tabs]');
+      if (skills) {
+        const tabs = [...skills.querySelectorAll('[role="tab"]')];
+        const panels = [...skills.querySelectorAll('[role="tabpanel"]')];
+        const transitionDuration = 500;
+        let transitionToken = 0;
+        const selectSkill = (tab, focus = false) => {
+          const nextPanel = panels.find((panel) => panel.id === tab.getAttribute('aria-controls'));
+          if (!nextPanel) return;
+          const previousPanel = panels.find((panel) => panel.classList.contains('is-active'));
+          const token = ++transitionToken;
+          tabs.forEach((item) => {
+            const active = item === tab;
+            item.setAttribute('aria-selected', active);
+            item.tabIndex = active ? 0 : -1;
+          });
+          panels.forEach((panel) => {
+            const active = panel === nextPanel;
+            panel.setAttribute('aria-hidden', String(!active));
+            if (active) {
+              panel.hidden = false;
+              panel.classList.remove('is-active');
+            } else if (panel === previousPanel) {
+              panel.hidden = false;
+              panel.classList.remove('is-active');
+              window.setTimeout(() => {
+                if (token === transitionToken && !panel.classList.contains('is-active')) panel.hidden = true;
+              }, transitionDuration);
+            } else {
+              panel.hidden = true;
+            }
+          });
+          window.requestAnimationFrame(() => {
+            if (token === transitionToken) nextPanel.classList.add('is-active');
+          });
+          if (focus) tab.focus();
+        };
+        tabs.forEach((tab, index) => {
+          tab.addEventListener('mouseenter', () => selectSkill(tab));
+          tab.addEventListener('focus', () => selectSkill(tab));
+          tab.addEventListener('click', () => selectSkill(tab));
+          tab.addEventListener('keydown', (event) => {
+            if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowDown' || event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            selectSkill(tabs[next], true);
+          });
+        });
+      }
+    </script>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer site-footer--blue">
     <nav class="footer-links" aria-label="Contact and website links">
       <a href="mailto:hello@lucakosowski.com">Email</a>
       <a href="https://www.linkedin.com/in/luca-kosowski/">LinkedIn</a>
@@ -329,6 +385,98 @@ import profileImage from '../assets/profile.jpg';
 
   <!-- Scripts -->
   <script is:inline>
+    // Skills disclosures: keep the native details semantics while animating both directions.
+    (() => {
+      const items = [...document.querySelectorAll('.skill-accordion-item')];
+      if (!items.length) return;
+      const openDuration = 360;
+      const closeDuration = 420;
+      const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      const contentFor = (item) => item.querySelector('.skill-accordion-content');
+      const stop = (item) => {
+        if (item._skillTimer) window.clearTimeout(item._skillTimer);
+        item._skillToken = (item._skillToken || 0) + 1;
+      };
+      const close = (item) => {
+        const content = contentFor(item);
+        if ((!item.open && item.dataset.skillState !== 'closing') || !content) return;
+        stop(item);
+        const token = item._skillToken;
+        if (reduceMotion) {
+          item.open = false;
+          item.dataset.skillState = 'closed';
+          return;
+        }
+        content.style.maxHeight = `${content.getBoundingClientRect().height}px`;
+        content.style.paddingBottom = getComputedStyle(content).paddingBottom;
+        content.style.opacity = getComputedStyle(content).opacity;
+        content.getBoundingClientRect();
+        item.dataset.skillState = 'closing';
+        requestAnimationFrame(() => {
+          if (token !== item._skillToken) return;
+          content.style.maxHeight = '0px';
+          content.style.paddingBottom = '0px';
+          content.style.opacity = '0';
+        });
+        item._skillTimer = window.setTimeout(() => {
+          if (token !== item._skillToken) return;
+          item.open = false;
+          content.style.maxHeight = '0px';
+          content.style.paddingBottom = '0px';
+          content.style.opacity = '0';
+          item.dataset.skillState = 'closed';
+        }, closeDuration);
+      };
+      const open = (item) => {
+        const content = contentFor(item);
+        if (!content) return;
+        stop(item);
+        const token = item._skillToken;
+        item.open = true;
+        item.dataset.skillState = 'opening';
+        if (reduceMotion) {
+          content.style.removeProperty('max-height');
+          content.style.removeProperty('padding-bottom');
+          content.style.removeProperty('opacity');
+          item.dataset.skillState = 'open';
+          return;
+        }
+        const currentHeight = content.getBoundingClientRect().height;
+        content.style.maxHeight = `${currentHeight}px`;
+        content.style.paddingBottom = getComputedStyle(content).paddingBottom;
+        content.style.opacity = getComputedStyle(content).opacity;
+        content.getBoundingClientRect();
+        requestAnimationFrame(() => {
+          if (token !== item._skillToken) return;
+          content.style.maxHeight = `${content.scrollHeight}px`;
+          content.style.paddingBottom = '.75rem';
+          content.style.opacity = '1';
+        });
+        item._skillTimer = window.setTimeout(() => {
+          if (token !== item._skillToken) return;
+          content.style.maxHeight = `${content.scrollHeight}px`;
+          content.style.paddingBottom = '.75rem';
+          content.style.opacity = '1';
+          item.dataset.skillState = 'open';
+        }, openDuration);
+      };
+      items.forEach((item) => {
+        item.querySelector('summary')?.addEventListener('click', (event) => {
+          event.preventDefault();
+          const content = contentFor(item);
+          if (!content) return;
+          if (item.dataset.skillState === 'closing') {
+            open(item);
+          } else if (item.open) {
+            close(item);
+          } else {
+            items.filter((other) => other !== item).forEach(close);
+            open(item);
+          }
+        });
+      });
+    })();
+
     // Mobile Quality of Life: Close details when clicking outside links
     document.querySelectorAll('details').forEach((detail) => {
       detail.addEventListener('click', (e) => {
