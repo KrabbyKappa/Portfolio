@@ -1771,7 +1771,7 @@ details[open] > .job-description {
   content: '';
   position: absolute;
   inset: 100% 0 auto;
-  height: 100vh;
+  height: 2rem;
   background: var(--lk-blue);
   pointer-events: none;
 }
