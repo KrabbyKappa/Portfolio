@@ -362,94 +362,63 @@
 
   
   <script>
-    // Skills disclosures: keep the native details semantics while animating both directions.
+    // Skills disclosures: one short, reversible native-details animation.
     (() => {
       const items = [...document.querySelectorAll('.skill-accordion-item')];
       if (!items.length) return;
-      const openDuration = 360;
-      const closeDuration = 420;
+      const openDuration = 180;
+      const closeDuration = 160;
       const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
       const contentFor = (item) => item.querySelector('.skill-accordion-content');
-      const stop = (item) => {
-        if (item._skillTimer) window.clearTimeout(item._skillTimer);
-        item._skillToken = (item._skillToken || 0) + 1;
-      };
-      const close = (item) => {
+      const animateDisclosure = (item, expand) => {
         const content = contentFor(item);
-        if ((!item.open && item.dataset.skillState !== 'closing') || !content) return;
-        stop(item);
-        const token = item._skillToken;
+        if (!content || (!expand && !item.open)) return;
+
+        const currentHeight = item.open ? content.getBoundingClientRect().height : 0;
+        const currentStyle = getComputedStyle(content);
+        const currentPadding = item.open ? currentStyle.paddingBottom : '0px';
+        const currentOpacity = item.open ? currentStyle.opacity : '0';
+        item._skillAnimation?.cancel();
+
         if (reduceMotion) {
-          item.open = false;
-          item.dataset.skillState = 'closed';
+          item.open = expand;
           return;
         }
-        content.style.maxHeight = `${content.getBoundingClientRect().height}px`;
-        content.style.paddingBottom = getComputedStyle(content).paddingBottom;
-        content.style.opacity = getComputedStyle(content).opacity;
-        content.getBoundingClientRect();
-        item.dataset.skillState = 'closing';
-        requestAnimationFrame(() => {
-          if (token !== item._skillToken) return;
-          content.style.maxHeight = '0px';
-          content.style.paddingBottom = '0px';
-          content.style.opacity = '0';
-        });
-        item._skillTimer = window.setTimeout(() => {
-          if (token !== item._skillToken) return;
-          item.open = false;
-          content.style.maxHeight = '0px';
-          content.style.paddingBottom = '0px';
-          content.style.opacity = '0';
-          item.dataset.skillState = 'closed';
-        }, closeDuration);
-      };
-      const open = (item) => {
-        const content = contentFor(item);
-        if (!content) return;
-        stop(item);
-        const token = item._skillToken;
+
         item.open = true;
-        item.dataset.skillState = 'opening';
-        if (reduceMotion) {
-          content.style.removeProperty('max-height');
-          content.style.removeProperty('padding-bottom');
-          content.style.removeProperty('opacity');
-          item.dataset.skillState = 'open';
-          return;
-        }
-        const currentHeight = content.getBoundingClientRect().height;
-        content.style.maxHeight = `${currentHeight}px`;
-        content.style.paddingBottom = getComputedStyle(content).paddingBottom;
-        content.style.opacity = getComputedStyle(content).opacity;
-        content.getBoundingClientRect();
-        requestAnimationFrame(() => {
-          if (token !== item._skillToken) return;
-          content.style.maxHeight = `${content.scrollHeight}px`;
-          content.style.paddingBottom = '.75rem';
-          content.style.opacity = '1';
+        const targetHeight = content.scrollHeight;
+        const animation = content.animate([
+          { height: `${currentHeight}px`, paddingBottom: currentPadding, opacity: currentOpacity },
+          {
+            height: expand ? `${targetHeight}px` : '0px',
+            paddingBottom: expand ? '.75rem' : '0px',
+            opacity: expand ? 1 : 0,
+          },
+        ], {
+          duration: expand ? openDuration : closeDuration,
+          easing: 'cubic-bezier(.4, 0, .2, 1)',
+          fill: 'both',
         });
-        item._skillTimer = window.setTimeout(() => {
-          if (token !== item._skillToken) return;
-          content.style.maxHeight = `${content.scrollHeight}px`;
-          content.style.paddingBottom = '.75rem';
-          content.style.opacity = '1';
-          item.dataset.skillState = 'open';
-        }, openDuration);
+
+        item._skillAnimation = animation;
+        item._skillExpanding = expand;
+        animation.onfinish = () => {
+          if (item._skillAnimation !== animation) return;
+          if (!expand) item.open = false;
+          item._skillAnimation = null;
+          animation.cancel();
+        };
       };
       items.forEach((item) => {
         item.querySelector('summary')?.addEventListener('click', (event) => {
           event.preventDefault();
-          const content = contentFor(item);
-          if (!content) return;
-          if (item.dataset.skillState === 'closing') {
-            open(item);
-          } else if (item.open) {
-            close(item);
-          } else {
-            items.filter((other) => other !== item).forEach(close);
-            open(item);
+          const expand = item._skillAnimation ? !item._skillExpanding : !item.open;
+          if (expand) {
+            items
+              .filter((other) => other !== item)
+              .forEach((other) => animateDisclosure(other, false));
           }
+          animateDisclosure(item, expand);
         });
       });
     })();
