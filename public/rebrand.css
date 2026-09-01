@@ -2129,6 +2129,19 @@ details[open] > .job-description {
   .page-hero h1 { max-width: none; font-size: 3.7rem; }
   .page-hero .lead { margin-top: 2rem; font-size: 1.08rem; }
 
+  .contact-page-hero {
+    --contact-responsive-actions-gap: 3.5rem;
+  }
+
+  .contact-page-hero .hero-actions {
+    margin-top: var(--contact-responsive-actions-gap);
+  }
+
+  .references-page-hero {
+    --references-responsive-content-gap: 4rem;
+    padding-bottom: var(--references-responsive-content-gap);
+  }
+
   .publication-section,
   .project-evidence,
   .project-era,
@@ -2169,9 +2182,20 @@ details[open] > .job-description {
     min-height: clamp(20rem, 72vw, 27rem);
   }
 
-  .reference-preview-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  .reference-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(.5rem, 3vw, 1rem);
+    padding-top: 0;
+  }
   .reference-preview-grid[data-expanded-reference]:not([data-expanded-reference=""]) .reference-document[data-expanded="true"] {
     width: 100%;
+  }
+
+  .reference-document[data-expanded="true"] .reference-document-button img {
+    width: 120%;
+    max-width: none;
+    margin-left: -10%;
   }
 
   .reference-preview-grid[data-expanded-reference]:not([data-expanded-reference=""]) .reference-document {
